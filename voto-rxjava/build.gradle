@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
+apply from: '../gradle-config/quality.gradle'
+
+dependencies {
+    def rxjavaDependencies = rootProject.ext.rxjavaDependencies
+    def rxjavaTestDependencies = rootProject.ext.rxjavaTestDependencies
+    compile project(':voto')
+    compile rxjavaDependencies.adapterRxjava
+    testCompile rxjavaTestDependencies.junit
+}
+
+// Upload artifact to bintray repo
+ext {
+    artifact = 'voto.sdk.rxjava'
+    description = 'Uses RxJava for accessing the VOTO API'
+}
+// Upload artifact to bintray repo
+apply from: '../gradle-config/bintray-upload.gradle'

@@ -1,0 +1,51 @@
+{
+  "status": 200,
+  "code": 1001,
+  "data": {
+    "subscribers": [
+      {
+        "id": "373648",
+        "receive_sms": "0",
+        "receive_voice": "1",
+        "receive_data": "0",
+        "receive_ussd": "0",
+        "phone": "233264164182",
+        "active": "1",
+        "start_date": "2014-09-10",
+        "language_id": "200247",
+        "is_test_subscriber": "0",
+        "group_ids": "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, 204137",
+        "properties": {
+          "name": "Kodjo Antwi",
+          "location": "Ejisu",
+          "comments": "Out flying kites"
+        }
+      },
+      {
+        "id": "376089",
+        "receive_sms": "1",
+        "receive_voice": "0",
+        "receive_data": "0",
+        "receive_ussd": "0",
+        "phone": "233230762734",
+        "active": "0",
+        "start_date": "2014-03-17",
+        "language_id": "200247",
+        "is_test_subscriber": "0",
+        "group_ids": "201409",
+        "properties": {
+          "name": "Ekua",
+          "location": "",
+          "comments": ""
+        }
+      }
+    ]
+  },
+  "message": "Subscribers fetched successfully",
+  "more_info": "",
+  "pagination": {
+    "nextURL": "https://go.votomobile.org/api/v1/subscribers?limit=2&page_after=376089",
+    "previousURL": null
+  },
+  "url": "https://go.votomobile.org/api/v1/subscribers?limit=2"
+}

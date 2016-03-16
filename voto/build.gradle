@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply from: '../gradle-config/quality.gradle'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    def sdkDependencies = rootProject.ext.sdkDependencies
+    def sdkTestDependencies = rootProject.ext.sdkTestDependencies
+
+    compile(sdkDependencies.retrofit) {
+        exclude module: 'gson'
+    }
+
+    compile sdkDependencies.converterGson
+    compile sdkDependencies.okhttp
+    compile sdkDependencies.okhttpUrlConnection
+    compile sdkDependencies.loggingInterceptor
+    testCompile sdkTestDependencies.junit
+}

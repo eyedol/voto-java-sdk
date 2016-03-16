@@ -1,0 +1,12 @@
+// Upload artifact to bintray repo
+publish {
+    groupId = 'com.addhen'
+    artifactId = artifact
+    publishVersion = project.parent.version
+    desc = description
+    licences = ['Apache-2.0']
+    website = 'https://github.com/eyedol/voto-java-sdk'
+    autoPublish = true
+    bintrayUser = 'eyedol'
+    bintrayKey = 'password'
+}

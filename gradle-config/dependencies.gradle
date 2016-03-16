@@ -1,0 +1,41 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+
+    // Library version #s
+    gsonVersion = '2.6.2'
+    rxJavaVersion = '1.1.1'
+    retrofitVersion = '2.0.0-beta4'
+    okhttpVersion = '3.2.0'
+
+    // Testing version #s
+    jUnitVersion = '4.12'
+
+    sdkDependencies = [
+            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            converterGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okhttp             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            okhttpUrlConnection: "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}",
+            loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
+    ]
+
+    sdkTestDependencies = [
+            junit: "junit:junit:${jUnitVersion}",
+    ]
+
+    rxjavaDependencies = [
+            adapterRxjava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+    ]
+
+    rxjavaTestDependencies = [
+            junit: "junit:junit:${jUnitVersion}",
+    ]
+
+    syncTestDependencies = [
+            junit: "junit:junit:${jUnitVersion}",
+    ]
+}

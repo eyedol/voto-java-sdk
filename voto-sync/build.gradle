@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
+apply from: '../gradle-config/quality.gradle'
+
+dependencies {
+    
+    def syncTestDependencies = rootProject.ext.syncTestDependencies
+
+    compile project(':voto-common')
+    testCompile syncTestDependencies.junit
+}
+
+ext {
+    artifact = 'voto.sdk.sync'
+    description = 'Provides access to the VOTO API synchronously'
+}
+// Upload artifact to bintray repo
+apply from: '../gradle-config/bintray-upload.gradle'

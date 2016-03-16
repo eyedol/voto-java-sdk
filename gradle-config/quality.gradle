@@ -1,0 +1,14 @@
+apply plugin: 'checkstyle'
+
+// Add checkstyle
+check.dependsOn 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    configFile = rootProject.file('gradle-config/config/checkstyle/checkstyle.xml')
+    configProperties.checkstyleSuppressionsPath =
+            file("${project.rootDir}/gradle-config/config/checkstyle/suppressions.xml").absolutePath
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+}

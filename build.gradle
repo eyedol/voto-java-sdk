@@ -1,0 +1,32 @@
+apply from: 'gradle-config/dependencies.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+
+
+task wrapper(type: Wrapper) {
+    description 'Creates the gradle wrapper.'
+    gradleVersion '2.12'
+}
+
+allprojects {
+    version '1.0.0'
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+}
