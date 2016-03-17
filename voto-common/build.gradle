@@ -2,8 +2,15 @@ apply plugin: 'java'
 apply from: '../gradle-config/quality.gradle'
 
 dependencies {
-    def sdkTestDependencies = rootProject.ext.sdkTestDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
     compile project(':voto')
 
-    testCompile sdkTestDependencies.junit
+    // Use test resources and test classes from voto module
+    testCompile files(project(':voto').sourceSets.test.output)
+
+    testCompile commonTestDependencies.junit
+
+    testCompile(commonTestDependencies.retrofitRxJavaMock) {
+        exclude module: 'rxjava'
+    }
 }

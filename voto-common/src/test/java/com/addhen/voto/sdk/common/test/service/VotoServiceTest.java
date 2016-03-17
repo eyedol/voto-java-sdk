@@ -16,7 +16,9 @@
 
 package com.addhen.voto.sdk.common.test.service;
 
+import com.addhen.voto.sdk.common.service.VotoService;
 import com.addhen.voto.sdk.common.test.BaseTestCase;
+import com.addhen.voto.sdk.common.test.service.mock.BehaviorDelegate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +30,7 @@ import java.io.IOException;
  */
 public class VotoServiceTest extends BaseTestCase {
 
+    BehaviorDelegate<VotoService> mVotoServiceBehaviorDelegate;
     @Before
     public void setUp() throws Exception {
         super.setUp();

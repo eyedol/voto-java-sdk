@@ -59,10 +59,6 @@ public abstract class BaseApiBuilder<B, A> {
 
     public abstract A build();
 
-    protected String getBaseUrl() {
-        return Constants.VotoEndpoints.VOTO_API_ENDPOINT + "/" + mApiVersion + "/";
-    }
-
 
     @SuppressWarnings("unchecked")
     public B withApiVersion(String apiVersion) {
@@ -94,16 +90,20 @@ public abstract class BaseApiBuilder<B, A> {
         return (B) this;
     }
 
-    private void initDefaultOkHttpClient() {
-        mOkHttpClientBuilder.connectTimeout(10, TimeUnit.SECONDS);
-        mOkHttpClientBuilder.writeTimeout(10, TimeUnit.SECONDS);
-        mOkHttpClientBuilder.readTimeout(10, TimeUnit.SECONDS);
-        mOkHttpClientBuilder.cookieJar(CookieJar.NO_COOKIES);
+    protected String getBaseUrl() {
+        return Constants.VotoEndpoints.VOTO_API_ENDPOINT + "/" + mApiVersion + "/";
     }
 
     protected void initDefaultRetrofit() {
         mRetrofitBuilder.client(mOkHttpClientBuilder.build());
         mRetrofitBuilder.baseUrl(getBaseUrl());
+    }
+
+    private void initDefaultOkHttpClient() {
+        mOkHttpClientBuilder.connectTimeout(10, TimeUnit.SECONDS);
+        mOkHttpClientBuilder.writeTimeout(10, TimeUnit.SECONDS);
+        mOkHttpClientBuilder.readTimeout(10, TimeUnit.SECONDS);
+        mOkHttpClientBuilder.cookieJar(CookieJar.NO_COOKIES);
     }
 
     private void initializeGson() {
