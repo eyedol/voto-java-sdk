@@ -2,5 +2,8 @@ apply plugin: 'java'
 apply from: '../gradle-config/quality.gradle'
 
 dependencies {
+    def sdkTestDependencies = rootProject.ext.sdkTestDependencies
     compile project(':voto')
+
+    testCompile sdkTestDependencies.junit
 }

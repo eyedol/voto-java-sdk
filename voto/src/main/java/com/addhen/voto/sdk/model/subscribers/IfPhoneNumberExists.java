@@ -14,16 +14,27 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.model;
+package com.addhen.voto.sdk.model.subscribers;
 
 /**
- * The Active status of the subscriber
- *
  * @author Henry Addo
  */
-public enum Status {
-    /** 1 indicates active **/
-    ACTIVE,
-    /** 0 indicates inactive **/
-    INACTIVE;
+public enum IfPhoneNumberExists {
+    /** Skip if phone number exists **/
+    SKIP("skip"),
+    /** Create duplicate if phone number exists **/
+    CREATE_DUPLICATE("create_duplicate"),
+    /** Add to group only if phone number exists **/
+    ADD_TO_GROUP_ONLY("add_to_group_only");
+
+    private final String value;
+
+    IfPhoneNumberExists(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

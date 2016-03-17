@@ -14,29 +14,26 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.model;
+package com.addhen.voto.sdk.model.subscribers;
+
+import com.addhen.voto.sdk.model.BaseResponse;
 
 import java.util.List;
 
 /**
- * Lists subscribers
+ * Response returned from the API as a results of creating a new subscriber
  *
  * @author Henry Addo
  */
-public class ListSubscribersResponse extends BaseResponse {
+public class CreateBulkSubscribersResponse extends BaseResponse {
 
-    /** The to fetch the URL **/
-    public String url;
-
-    /** The pagination property **/
-    public Pagination pagination;
-
-    /** The returned subscribers list **/
+    /** The data returned as a result of creating a subscriber */
     public Data data;
 
+    /** The data response */
     public class Data {
 
-        /** List of subscribers **/
-        public List<Subscriber> subscribers;
+        /** The id of the newly created subscriber **/
+        public List<Long> id;
     }
 }

@@ -24,6 +24,9 @@ public final class Constants {
     /** The default date format. It's yyyy-MM-dd **/
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
+    /** Default pagination limit value **/
+    public static final int PAGINATION_LIMIT = 10;
+
     private Constants() {
         // No instantiation is allowed
     }
@@ -35,5 +38,8 @@ public final class Constants {
 
         /** The version number of the API endpoint **/
         public static final String VOTO_API_ENDPOINT_VERSION = "v1";
+
+        /** The subscribers endpoint **/
+        public static final String SUBSCRIBERS = "subscribers";
     }
 }

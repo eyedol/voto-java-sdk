@@ -14,9 +14,9 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.test.model;
+package com.addhen.voto.sdk.test.model.subscribers;
 
-import com.addhen.voto.sdk.model.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 
 import org.junit.Before;

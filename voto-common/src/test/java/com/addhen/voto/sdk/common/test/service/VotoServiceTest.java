@@ -14,23 +14,19 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.test.model;
+package com.addhen.voto.sdk.common.test.service;
 
-import com.addhen.voto.sdk.model.CreateSubscriberResponse;
-import com.addhen.voto.sdk.test.BaseTestCase;
+import com.addhen.voto.sdk.common.test.BaseTestCase;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.addhen.voto.sdk.test.TestHelper.getResource;
-import static junit.framework.TestCase.assertNotNull;
-
 /**
  * @author Henry Addo
  */
-public class CreateSubscriberResponseTest extends BaseTestCase {
+public class VotoServiceTest extends BaseTestCase {
 
     @Before
     public void setUp() throws Exception {
@@ -38,12 +34,7 @@ public class CreateSubscriberResponseTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyDeserializeCreateSubscriberResponse() throws IOException {
-        final String formJson = getResource("json/subscriber/create_subscriber_response.json");
-        final CreateSubscriberResponse createSubscriberResponse = mGson
-                .fromJson(formJson, CreateSubscriberResponse.class);
-        assertNotNull(createSubscriberResponse);
+    public void votoservice() throws IOException {
 
-        // TODO: Assert the various fields
     }
 }

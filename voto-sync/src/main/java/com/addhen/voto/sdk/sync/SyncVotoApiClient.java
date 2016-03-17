@@ -16,15 +16,21 @@
 package com.addhen.voto.sdk.sync;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
+import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.Util.StringUtils;
 import com.addhen.voto.sdk.common.service.VotoService;
-import com.addhen.voto.sdk.model.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
+import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 
 import java.io.IOException;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.http.QueryMap;
 
 /**
  * @author Henry Addo
@@ -32,6 +38,8 @@ import retrofit2.Retrofit;
 public class SyncVotoApiClient {
 
     private VotoService mSyncSubscribersService;
+
+    private int limit = Constants.PAGINATION_LIMIT;
 
     public SyncVotoApiClient(VotoService syncSubscribersService) {
         mSyncSubscribersService = syncSubscribersService;
@@ -47,6 +55,40 @@ public class SyncVotoApiClient {
                 optionalFields
         );
         return createSubscriber.execute().body();
+    }
+
+    public CreateBulkSubscribersResponse createBulkSubscribers(String phoneNumbers,
+            IfPhoneNumberExists ifPhoneNumberExists,
+            @QueryMap Map<String, String> optionalFields) throws IOException {
+        if (StringUtils.isEmpty(phoneNumbers)) {
+            throw new IllegalArgumentException("phoneNumbers is required");
+        }
+
+        Call<CreateBulkSubscribersResponse> createBulkSubscribers = mSyncSubscribersService
+                .createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
+        return createBulkSubscribers.execute().body();
+    }
+
+    public ListSubscribersResponse listSubscribers(int limit) throws IOException {
+        if (limit > 0) {
+            this.limit = limit;
+        }
+        Call<ListSubscribersResponse> listSubscribers = mSyncSubscribersService
+                .listSubscribers(limit);
+        return listSubscribers.execute().body();
+    }
+
+    public CreateSubscriberResponse modifySubscriberDetails(Long id,
+            Map<String, String> optionalFields) throws IOException {
+        Call<CreateSubscriberResponse> modifySubscriber = mSyncSubscribersService
+                .modifySubscriberDetails(id, optionalFields);
+        return modifySubscriber.execute().body();
+    }
+
+    public DeleteSubscriberResponse deleteSubscriber(Long id) throws IOException {
+        Call<DeleteSubscriberResponse> deleteSubscriber = mSyncSubscribersService
+                .deleteSubscriber(id);
+        return deleteSubscriber.execute().body();
     }
 
     public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {

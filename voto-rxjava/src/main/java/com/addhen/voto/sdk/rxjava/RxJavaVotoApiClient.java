@@ -16,15 +16,20 @@
 package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
+import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.Util.StringUtils;
-import com.addhen.voto.sdk.model.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
+import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.rxjava.service.RxJavaVotoService;
 
-import java.io.IOException;
 import java.util.Map;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -34,12 +39,14 @@ public class RxJavaVotoApiClient {
 
     private RxJavaVotoService mRxJavaVotoService;
 
+    private int limit = Constants.PAGINATION_LIMIT;
+
     public RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
         mRxJavaVotoService = rxJavaVotoService;
     }
 
     public Observable<CreateSubscriberResponse> createSubscriber(String phone,
-            Map<String, String> optionalFields) throws IOException {
+            Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(phone)) {
             throw new IllegalArgumentException("phone is required and shouldn't be null or empty");
         }
@@ -48,6 +55,40 @@ public class RxJavaVotoApiClient {
                 optionalFields
         );
         return createSubscriber;
+    }
+
+    public Observable<CreateBulkSubscribersResponse> createBulkSubscribers(String phoneNumbers,
+            IfPhoneNumberExists ifPhoneNumberExists,
+            @QueryMap Map<String, String> optionalFields) {
+        if (StringUtils.isEmpty(phoneNumbers)) {
+            throw new IllegalArgumentException("phoneNumbers is required");
+        }
+
+        Observable<CreateBulkSubscribersResponse> createBulkSubscribers = mRxJavaVotoService
+                .createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
+        return createBulkSubscribers;
+    }
+
+    public Observable<ListSubscribersResponse> listSubscribers(int limit) {
+        if (limit > 0) {
+            this.limit = limit;
+        }
+        Observable<ListSubscribersResponse> listSubscribers = mRxJavaVotoService
+                .listSubscribers(limit);
+        return listSubscribers;
+    }
+
+    public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
+            Map<String, String> optionalFields) {
+        Observable<CreateSubscriberResponse> modifySubscriber = mRxJavaVotoService
+                .modifySubscriberDetails(id, optionalFields);
+        return modifySubscriber;
+    }
+
+    public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {
+        Observable<DeleteSubscriberResponse> deleteSubscriber = mRxJavaVotoService
+                .deleteSubscriber(id);
+        return deleteSubscriber;
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {

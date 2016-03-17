@@ -14,9 +14,11 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.model;
+package com.addhen.voto.sdk.model.subscribers;
 
 import com.google.gson.annotations.SerializedName;
+
+import com.addhen.voto.sdk.model.Model;
 
 import java.util.Date;
 

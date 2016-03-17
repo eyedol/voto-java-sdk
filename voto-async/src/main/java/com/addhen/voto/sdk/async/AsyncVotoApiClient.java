@@ -16,9 +16,14 @@
 package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
+import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.Util.StringUtils;
 import com.addhen.voto.sdk.common.service.VotoService;
-import com.addhen.voto.sdk.model.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
+import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,6 +31,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
+import retrofit2.http.QueryMap;
 
 /**
  * @author Henry Addo
@@ -33,6 +39,8 @@ import retrofit2.Retrofit;
 public class AsyncVotoApiClient {
 
     private VotoService mSyncSubscribersService;
+
+    private int limit = Constants.PAGINATION_LIMIT;
 
     public AsyncVotoApiClient(VotoService syncSubscribersService) {
         mSyncSubscribersService = syncSubscribersService;
@@ -49,6 +57,41 @@ public class AsyncVotoApiClient {
                 optionalFields
         );
         createSubscriber.enqueue(callback);
+    }
+
+    public void createBulkSubscribers(String phoneNumbers,
+            IfPhoneNumberExists ifPhoneNumberExists,
+            @QueryMap Map<String, String> optionalFields,
+            Callback<CreateBulkSubscribersResponse> callback) {
+        if (StringUtils.isEmpty(phoneNumbers)) {
+            throw new IllegalArgumentException("phoneNumbers is required");
+        }
+
+        Call<CreateBulkSubscribersResponse> createBulkSubscribers = mSyncSubscribersService
+                .createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
+        createBulkSubscribers.enqueue(callback);
+    }
+
+    public void listSubscribers(int limit, Callback<ListSubscribersResponse> callback) {
+        if (limit > 0) {
+            this.limit = limit;
+        }
+        Call<ListSubscribersResponse> listSubscribers = mSyncSubscribersService
+                .listSubscribers(limit);
+        listSubscribers.enqueue(callback);
+    }
+
+    public void modifySubscriberDetails(Long id, Map<String, String> optionalFields,
+            Callback<CreateSubscriberResponse> callback) {
+        Call<CreateSubscriberResponse> modifySubscriber = mSyncSubscribersService
+                .modifySubscriberDetails(id, optionalFields);
+        modifySubscriber.enqueue(callback);
+    }
+
+    public void deleteSubscriber(Long id, Callback<DeleteSubscriberResponse> callback) {
+        Call<DeleteSubscriberResponse> deleteSubscriber = mSyncSubscribersService
+                .deleteSubscriber(id);
+        deleteSubscriber.enqueue(callback);
     }
 
     public static class Builder extends BaseApiBuilder<Builder, AsyncVotoApiClient> {
