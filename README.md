@@ -50,14 +50,14 @@ SyncVotoApiClient syncVotoApilient = new SyncVotoApiClient.Builder(<api_key>)
 	.build();
 ```
 - Asynchronous:
-```
+```java
 AsyncVotoApiClient asyncVotoClient = new AsyncVotoApiClient.Builder(<api_key>)
 	.withLogLevel(HttpLoggingInterceptor.Level.BODY)
 	.build();
 ```
 
 - RxJava:
-```
+```java
 RxJavaVotoApiClient rxVotoClient = new RxJavaVotoApiClient.Builder(<api_key>)
 	.withLogLevel(HttpLoggingInterceptor.Level.BODY)
 	.build();
