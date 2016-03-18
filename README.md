@@ -3,10 +3,11 @@
 VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easiy to use. The goal of this SDK is to ease 
 VOTO API integration into both Android and Java applications.
 
-It comes with three independent modules for accessing the API:
-- Synchronous module;
-- Asynchronous module.
-- RxJava module.
+It comes with three independent modules:
+
+- Synchronous module; Access the API synchronously
+- Asynchronous module; Access the API asynchronously
+- RxJava module; Access the API using RxJava
 
 ###<a name="Setup">**Setup**
 Add gradle dependency:
@@ -38,10 +39,10 @@ dependencies {
     compile 'com.addhen:voto.sdk.rxjava:0.1.0'
 }
 ```
-###Usage
-###GET DATA FROM VOTO API
+### Usage
+#### GET Data From VOTO API
 
-#### Build API Client
+##### Build API Client
 - Synchronous:
 ```java
 SyncVotoApiClient syncVotoApilient = new SyncVotoApiClient.Builder(<api_key>)
@@ -62,10 +63,8 @@ RxJavaVotoApiClient rxVotoClient = new RxJavaVotoApiClient.Builder(<api_key>)
 	.build();
 ```
 
-#### Execute API Request
+##### Execute API Request
 - Synchronous:
-```java
-```
 - Asynchronous:
 - RxJava:
 
