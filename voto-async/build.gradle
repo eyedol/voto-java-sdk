@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
 apply from: '../gradle-config/quality.gradle'
+apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 
 dependencies {

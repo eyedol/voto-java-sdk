@@ -80,7 +80,6 @@ public class VotoServiceTest extends BaseTestCase {
                 .createBulkSubscribers("", null, null);
         CreateBulkSubscribersResponse response = call.execute().body();
         assertNotNull(response);
-        System.out.println(response);
         assertEquals(200, (int) response.status);
         assertEquals("Subscriber(s) Created Successfully", response.message);
         assertEquals(5, response.data.size());
