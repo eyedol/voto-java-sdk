@@ -1,3 +1,5 @@
+https://travis-ci.org/eyedol/voto-java-sdk.svg?branch=master
+
 ### VOTO JAVA SDK
 
 VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easiy to use. The goal of this SDK is to ease 
