@@ -25,6 +25,10 @@ import retrofit2.Response;
 /** Factory methods for creating {@link Call} instances which immediately respond or fail. */
 public final class Calls {
 
+    private Calls() {
+        throw new AssertionError("No instances.");
+    }
+
     public static <T> Call<T> response(T successValue) {
         return response(Response.success(successValue));
     }
@@ -105,9 +109,5 @@ public final class Calls {
                 return new Request.Builder().url("http://localhost").build();
             }
         };
-    }
-
-    private Calls() {
-        throw new AssertionError("No instances.");
     }
 }

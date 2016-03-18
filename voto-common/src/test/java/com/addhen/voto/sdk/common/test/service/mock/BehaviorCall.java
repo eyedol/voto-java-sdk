@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-final class BehaviorCall<T> implements Call<T> {
+public final class BehaviorCall<T> implements Call<T> {
 
     final NetworkBehavior behavior;
 
@@ -37,9 +37,9 @@ final class BehaviorCall<T> implements Call<T> {
 
     final Call<T> delegate;
 
-    private volatile Future<?> task;
-
     volatile boolean canceled;
+
+    private volatile Future<?> task;
 
     private volatile boolean executed;
 

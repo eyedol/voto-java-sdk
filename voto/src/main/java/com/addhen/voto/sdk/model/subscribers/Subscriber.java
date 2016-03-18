@@ -62,6 +62,19 @@ public class Subscriber extends Model {
     /** The custom properties of the subscriber **/
     public Properties properties;
 
+    public Subscriber(String receiveSMS, String receiveVoice, String receiveData, String phone,
+            Date startDate, String isTestSubscriber, String groupIds, Status status,
+            Properties properties) {
+        this.receiveSMS = receiveSMS;
+        this.receiveVoice = receiveVoice;
+        this.receiveData = receiveData;
+        this.phone = phone;
+        this.startDate = startDate;
+        this.isTestSubscriber = isTestSubscriber;
+        this.groupIds = groupIds;
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Subscriber{"
@@ -76,19 +89,6 @@ public class Subscriber extends Model {
                 + ", status=" + status
                 + ", properties=" + properties
                 + '}';
-    }
-
-    public Subscriber(String receiveSMS, String receiveVoice, String receiveData, String phone,
-            Date startDate, String isTestSubscriber, String groupIds, Status status,
-            Properties properties) {
-        this.receiveSMS = receiveSMS;
-        this.receiveVoice = receiveVoice;
-        this.receiveData = receiveData;
-        this.phone = phone;
-        this.startDate = startDate;
-        this.isTestSubscriber = isTestSubscriber;
-        this.groupIds = groupIds;
-        this.status = status;
     }
 
     public class Properties {

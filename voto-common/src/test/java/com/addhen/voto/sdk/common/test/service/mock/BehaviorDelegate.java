@@ -66,8 +66,7 @@ public class BehaviorDelegate<T> {
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class[]{service},
                 new InvocationHandler() {
                     @Override
-                    public Object invoke(Object proxy, Method method, Object[] args)
-                            throws Throwable {
+                    public Object invoke(Object proxy, Method method, Object[] args) {
                         Type returnType = method.getGenericReturnType();
                         Annotation[] methodAnnotations = method.getAnnotations();
                         CallAdapter<?> callAdapter = retrofit

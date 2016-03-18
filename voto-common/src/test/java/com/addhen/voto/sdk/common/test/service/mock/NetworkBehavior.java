@@ -44,15 +44,18 @@ public final class NetworkBehavior {
 
     private static final int DEFAULT_FAILURE_PERCENT = 3; // 3% of network calls will fail.
 
-    /** Applies {@link NetworkBehavior} to instances of {@code T}. */
-    public interface Adapter<T> {
+    private final Random random;
 
-        /**
-         * Apply {@code behavior} to {@code value} so that it exhibits the configured network
-         * behavior
-         * traits when interacted with.
-         */
-        T applyBehavior(NetworkBehavior behavior, T value);
+    private volatile long delayMs = DEFAULT_DELAY_MS;
+
+    private volatile int variancePercent = DEFAULT_VARIANCE_PERCENT;
+
+    private volatile int failurePercent = DEFAULT_FAILURE_PERCENT;
+
+    private volatile Throwable failureException = new IOException("Mock failure!");
+
+    private NetworkBehavior(Random random) {
+        this.random = random;
     }
 
     /** Create an instance with default behavior. */
@@ -69,20 +72,6 @@ public final class NetworkBehavior {
             throw new NullPointerException("random == null");
         }
         return new NetworkBehavior(random);
-    }
-
-    private final Random random;
-
-    private volatile long delayMs = DEFAULT_DELAY_MS;
-
-    private volatile int variancePercent = DEFAULT_VARIANCE_PERCENT;
-
-    private volatile int failurePercent = DEFAULT_FAILURE_PERCENT;
-
-    private volatile Throwable failureException = new IOException("Mock failure!");
-
-    private NetworkBehavior(Random random) {
-        this.random = random;
     }
 
     /** Set the network round trip delay. */
@@ -158,5 +147,16 @@ public final class NetworkBehavior {
         float delayPercent = lowerBound + (random.nextFloat() * bound); // 0.8 + (rnd * 0.4)
         long callDelayMs = (long) (delayMs * delayPercent);
         return MILLISECONDS.convert(callDelayMs, unit);
+    }
+
+    /** Applies {@link NetworkBehavior} to instances of {@code T}. */
+    public interface Adapter<T> {
+
+        /**
+         * Apply {@code behavior} to {@code value} so that it exhibits the configured network
+         * behavior
+         * traits when interacted with.
+         */
+        T applyBehavior(NetworkBehavior behavior, T value);
     }
 }

@@ -49,7 +49,7 @@ public class MockVotoService implements VotoService {
 
     private final BehaviorDelegate<VotoService> mDelegate;
 
-    NetworkBehavior mNetworkBehavior;
+    private NetworkBehavior mNetworkBehavior;
 
     private Gson mGson;
 
