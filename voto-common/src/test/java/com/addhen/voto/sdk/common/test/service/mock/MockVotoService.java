@@ -29,7 +29,6 @@ import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit.mock.NetworkBehavior;
@@ -74,7 +73,7 @@ public class MockVotoService implements VotoService {
         CreateSubscriberResponse createSubscriberResponse = mGson
                 .fromJson(createResponseJson, CreateSubscriberResponse.class);
         return mDelegate.returningResponse(createSubscriberResponse)
-                .createSubscriber("", new HashMap<>());
+                .createSubscriber("", null);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class MockVotoService implements VotoService {
         CreateBulkSubscribersResponse createBulkSubscribersResponse = mGson
                 .fromJson(createResponseJson, CreateBulkSubscribersResponse.class);
         return mDelegate.returningResponse(createBulkSubscribersResponse)
-                .createBulkSubscribers("", null, new HashMap<>());
+                .createBulkSubscribers("", null, null);
     }
 
     @Override
