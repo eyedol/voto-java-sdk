@@ -1,4 +1,11 @@
 {
-  “status”: 200, ”message”: ”Subscriber(s) Created Successfully”, ”data”:{[181, 182, 183, 184, 185]
-}
+  "status": 200,
+  "message": "Subscriber(s) Created Successfully",
+  "data": [
+    181,
+    182,
+    183,
+    184,
+    185
+  ]
 }

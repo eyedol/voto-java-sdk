@@ -26,4 +26,12 @@ public class Pagination {
 
     /** The previous URL **/
     public String previousURL;
+
+    @Override
+    public String toString() {
+        return "Pagination{"
+                + "nextURL='" + nextURL + '\''
+                + ", previousURL='" + previousURL + '\''
+                + '}';
+    }
 }

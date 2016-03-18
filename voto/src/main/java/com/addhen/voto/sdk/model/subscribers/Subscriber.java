@@ -62,6 +62,22 @@ public class Subscriber extends Model {
     /** The custom properties of the subscriber **/
     public Properties properties;
 
+    @Override
+    public String toString() {
+        return "Subscriber{"
+                + "receiveSMS='" + receiveSMS + '\''
+                + ", receiveVoice='" + receiveVoice + '\''
+                + ", receiveData='" + receiveData + '\''
+                + ", receiveUSSD='" + receiveUSSD + '\''
+                + ", phone='" + phone + '\''
+                + ", startDate=" + startDate
+                + ", isTestSubscriber='" + isTestSubscriber + '\''
+                + ", groupIds='" + groupIds + '\''
+                + ", status=" + status
+                + ", properties=" + properties
+                + '}';
+    }
+
     public Subscriber(String receiveSMS, String receiveVoice, String receiveData, String phone,
             Date startDate, String isTestSubscriber, String groupIds, Status status,
             Properties properties) {
@@ -85,5 +101,14 @@ public class Subscriber extends Model {
 
         /** The comment property **/
         public String comment;
+
+        @Override
+        public String toString() {
+            return "Properties{"
+                    + "name='" + name + '\''
+                    + ", location='" + location + '\''
+                    + ", comment='" + comment + '\''
+                    + '}';
+        }
     }
 }

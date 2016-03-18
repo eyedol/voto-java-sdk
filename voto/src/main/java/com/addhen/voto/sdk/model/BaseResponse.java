@@ -27,13 +27,14 @@ public abstract class BaseResponse {
     /** The status code of the request **/
     public Integer status;
 
-    /** The code from the API response **/
-    public Integer code;
-
     /** Message from the API response **/
     public String message;
 
-    /** More info **/
-    public String moreInfo;
-
+    @Override
+    public String toString() {
+        return "BaseResponse{"
+                + "status=" + status
+                + ", message='" + message + '\''
+                + '}';
+    }
 }

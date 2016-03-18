@@ -28,6 +28,14 @@ public class SubscriberDetailsResponse extends BaseResponse {
     /** The returned subscribers list **/
     public Data data;
 
+    @Override
+    public String toString() {
+        return "SubscriberDetailsResponse{"
+                + super.toString()
+                + "data=" + data
+                + '}';
+    }
+
     public class Data {
 
         /** List of subscribers **/

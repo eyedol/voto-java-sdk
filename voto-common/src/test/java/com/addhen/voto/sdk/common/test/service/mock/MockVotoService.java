@@ -53,7 +53,7 @@ public class MockVotoService implements VotoService {
 
     private Gson mGson;
 
-    private MockVotoService(BehaviorDelegate<VotoService> delegate) {
+    public MockVotoService(BehaviorDelegate<VotoService> delegate) {
         mDelegate = delegate;
         mGson = new GsonBuilder()
                 .setDateFormat(Constants.DATE_FORMAT)

@@ -28,12 +28,13 @@ import java.util.List;
 public class CreateBulkSubscribersResponse extends BaseResponse {
 
     /** The data returned as a result of creating a subscriber */
-    public Data data;
+    public List<Long> data;
 
-    /** The data response */
-    public class Data {
-
-        /** The id of the newly created subscriber **/
-        public List<Long> id;
+    @Override
+    public String toString() {
+        return "CreateBulkSubscribersResponse{"
+                + super.toString()
+                + "data=" + data
+                + '}';
     }
 }

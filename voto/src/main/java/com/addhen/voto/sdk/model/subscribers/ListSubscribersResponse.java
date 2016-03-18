@@ -28,6 +28,12 @@ import java.util.List;
  */
 public class ListSubscribersResponse extends BaseResponse {
 
+    /** The code from the API response **/
+    public Integer code;
+
+    /** More info **/
+    public String moreInfo;
+
     /** The to fetch the URL **/
     public String url;
 
@@ -36,6 +42,17 @@ public class ListSubscribersResponse extends BaseResponse {
 
     /** The returned subscribers list **/
     public Data data;
+
+    @Override
+    public String toString() {
+        return "ListSubscribersResponse{"
+                + super.toString()
+                + "moreInfo='" + moreInfo + '\''
+                + ", url='" + url + '\''
+                + ", pagination=" + pagination
+                + ", data=" + data
+                + '}';
+    }
 
     public class Data {
 

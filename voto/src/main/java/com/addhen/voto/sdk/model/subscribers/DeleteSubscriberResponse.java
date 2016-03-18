@@ -23,4 +23,8 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class DeleteSubscriberResponse extends BaseResponse {
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

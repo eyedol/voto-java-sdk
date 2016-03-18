@@ -19,25 +19,71 @@ package com.addhen.voto.sdk.common.test.service;
 import com.addhen.voto.sdk.common.service.VotoService;
 import com.addhen.voto.sdk.common.test.BaseTestCase;
 import com.addhen.voto.sdk.common.test.service.mock.BehaviorDelegate;
+import com.addhen.voto.sdk.common.test.service.mock.MockRetrofit;
+import com.addhen.voto.sdk.common.test.service.mock.MockVotoService;
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
+import retrofit.mock.NetworkBehavior;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+
 /**
  * @author Henry Addo
  */
 public class VotoServiceTest extends BaseTestCase {
 
-    BehaviorDelegate<VotoService> mVotoServiceBehaviorDelegate;
+    private MockVotoService mMockVotoService;
+
     @Before
     public void setUp() throws Exception {
         super.setUp();
+        // Create a very simple Retrofit adapter which points the GitHub API.
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://www.demo.com")
+                .build();
+
+        // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
+        NetworkBehavior behavior = NetworkBehavior.create();
+        MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
+                .networkBehavior(behavior)
+                .build();
+
+        BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
+                .create(VotoService.class);
+        mMockVotoService = new MockVotoService(votoServiceBehaviorDelegate);
     }
 
     @Test
-    public void votoservice() throws IOException {
+    public void shouldSuccessfullyCreateSubscriber() throws IOException {
+        assertNotNull(mMockVotoService);
+        Call<CreateSubscriberResponse> call = mMockVotoService
+                .createSubscriber("", null);
+        CreateSubscriberResponse createSubscriberResponse = call.execute().body();
+        assertNotNull(createSubscriberResponse);
+        assertNotNull(createSubscriberResponse.data);
+        assertEquals(430l, (long) createSubscriberResponse.data.id);
+    }
 
+    @Test
+    public void shouldSuccessfullyCreateBulkSubscribers() throws IOException {
+        assertNotNull(mMockVotoService);
+        Call<CreateBulkSubscribersResponse> call = mMockVotoService
+                .createBulkSubscribers("", null, null);
+        CreateBulkSubscribersResponse response = call.execute().body();
+        assertNotNull(response);
+        System.out.println(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Subscriber(s) Created Successfully", response.message);
+        assertEquals(5, response.data.size());
+        assertEquals(181, (long) response.data.get(0));
     }
 }
