@@ -103,7 +103,16 @@ public class MockVotoService implements VotoService {
     @Override
     public Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        return null;
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/create_subscriber_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CreateSubscriberResponse createSubscriberResponse = mGson
+                .fromJson(responseJson, CreateSubscriberResponse.class);
+        return mDelegate.returningResponse(createSubscriberResponse)
+                .createSubscriber("", null);
     }
 
     @Override
