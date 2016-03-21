@@ -1,0 +1,25 @@
+{
+  "status": 200,
+  "message": "Subscriber Details",
+  "data": {
+    "subscriber": {
+      "id": "33105",
+      "receive_sms": "1",
+      "receive_voice": "1",
+      "receive_data": "0",
+      "receive_ussd": "0",
+      "phone": "255754280903",
+      "active": "1",
+      "start_date": "2015-11-13",
+      "language_id": "200715",
+      "is_test_subscriber": "0",
+      "group_ids": "31,32",
+      "properties": {
+        "name_of_custom_property": "value",
+        "name": "Firstname Othernames",
+        "location": "Someplace",
+        "comments": "This is a comment"
+      }
+    }
+  }
+}

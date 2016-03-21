@@ -42,6 +42,8 @@ import static com.addhen.voto.sdk.test.TestHelper.getResource;
 
 
 /**
+ * Mocked {@link VotoService} responses for testing
+ *
  * @author Henry Addo
  */
 public class MockVotoService implements VotoService {
@@ -97,7 +99,15 @@ public class MockVotoService implements VotoService {
 
     @Override
     public Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
-        return null;
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/subscriber.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ListSubscribersResponse listSubscribersResponse = mGson
+                .fromJson(responseJson, ListSubscribersResponse.class);
+        return mDelegate.returningResponse(listSubscribersResponse).listSubscribers(10);
     }
 
     @Override
@@ -105,7 +115,7 @@ public class MockVotoService implements VotoService {
             @QueryMap Map<String, String> optionalFields) {
         String responseJson = null;
         try {
-            responseJson = getResource("json/subscriber/create_subscriber_response.json");
+            responseJson = getResource("json/subscriber/modify_subscriber_response.json");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,6 +127,14 @@ public class MockVotoService implements VotoService {
 
     @Override
     public Call<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id) {
-        return null;
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/delete_subscriber_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DeleteSubscriberResponse deleteSubscriberResponse = mGson
+                .fromJson(responseJson, DeleteSubscriberResponse.class);
+        return mDelegate.returningResponse(deleteSubscriberResponse).deleteSubscriber(1l);
     }
 }
