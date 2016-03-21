@@ -126,8 +126,8 @@ public class VotoServiceTest extends BaseTestCase {
         assertEquals("0", response.data.subscribers.get(0).receiveUssd);
         assertEquals("233264164182", response.data.subscribers.get(0).phone);
         assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
-        assertEquals("Wed Sep 10 00:00:00 GMT 2014",
-                response.data.subscribers.get(0).startDate.toString());
+        String date = formatShowingDate(response.data.subscribers.get(0).startDate);
+        assertEquals("2014-09-10", date);
         assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
         assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);
         assertEquals(
