@@ -16,8 +16,6 @@
 
 package com.addhen.voto.sdk.model.subscribers;
 
-import com.google.gson.annotations.SerializedName;
-
 import com.addhen.voto.sdk.model.Model;
 
 import java.util.Date;
@@ -46,7 +44,6 @@ public class Subscriber extends Model {
     public String phone;
 
     /** The subscribers start date **/
-    @SerializedName("start_date")
     public Date startDate;
 
     /** Determines if it's a test subscriber **/
@@ -56,14 +53,17 @@ public class Subscriber extends Model {
     public String groupIds;
 
     /** The active statue of the subscriber **/
-    @SerializedName("active")
     public Status status;
+
+    /** The language id the subscriber speaks or interested in **/
+    public Long languageId;
 
     /** The custom properties of the subscriber **/
     public Properties properties;
 
     public Subscriber(String receiveSMS, String receiveVoice, String receiveData, String phone,
             Date startDate, String isTestSubscriber, String groupIds, Status status,
+            Long languageId,
             Properties properties) {
         this.receiveSMS = receiveSMS;
         this.receiveVoice = receiveVoice;
@@ -73,6 +73,8 @@ public class Subscriber extends Model {
         this.isTestSubscriber = isTestSubscriber;
         this.groupIds = groupIds;
         this.status = status;
+        this.languageId = languageId;
+        this.properties = properties;
     }
 
     @Override
@@ -87,6 +89,7 @@ public class Subscriber extends Model {
                 + ", isTestSubscriber='" + isTestSubscriber + '\''
                 + ", groupIds='" + groupIds + '\''
                 + ", status=" + status
+                + ", languageId=" + languageId
                 + ", properties=" + properties
                 + '}';
     }

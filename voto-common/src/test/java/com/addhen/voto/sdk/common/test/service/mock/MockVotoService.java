@@ -101,7 +101,7 @@ public class MockVotoService implements VotoService {
     public Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
         String responseJson = null;
         try {
-            responseJson = getResource("json/subscriber/subscriber.json");
+            responseJson = getResource("json/subscriber/list_subscribers_response.json");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -39,7 +39,7 @@ public class ListSubscribersResponseTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeserializeListSubscribersResponse() throws IOException {
-        final String formJson = getResource("json/subscriber/subscribers.json");
+        final String formJson = getResource("json/subscriber/list_subscribers_response.json");
         final ListSubscribersResponse listSubscribersResponse = mGson
                 .fromJson(formJson, ListSubscribersResponse.class);
         assertNotNull(listSubscribersResponse);

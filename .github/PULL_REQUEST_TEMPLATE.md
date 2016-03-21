@@ -1,5 +1,11 @@
-This pull request makes the following changes:
+Fixes eyedol/voto-java-sdk # .
 
-Fixes eyedol/voto-java-sdk/#
+This `PR` makes the following changes:
 
-ping @eyedol/voto-java-sdk
+-
+
+-
+
+-
+ 
+Ping @eyedol
