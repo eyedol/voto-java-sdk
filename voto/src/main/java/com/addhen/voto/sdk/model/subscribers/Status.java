@@ -16,6 +16,8 @@
 
 package com.addhen.voto.sdk.model.subscribers;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * The Active status of the subscriber
  *
@@ -23,7 +25,9 @@ package com.addhen.voto.sdk.model.subscribers;
  */
 public enum Status {
     /** 1 indicates active **/
+    @SerializedName("1")
     ACTIVE,
     /** 0 indicates inactive **/
+    @SerializedName("0")
     INACTIVE;
 }

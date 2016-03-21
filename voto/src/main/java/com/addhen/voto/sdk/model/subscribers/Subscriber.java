@@ -16,6 +16,8 @@
 
 package com.addhen.voto.sdk.model.subscribers;
 
+import com.google.gson.annotations.SerializedName;
+
 import com.addhen.voto.sdk.model.Model;
 
 import java.util.Date;
@@ -29,7 +31,7 @@ import java.util.Date;
 public class Subscriber extends Model {
 
     /** Whether the subscriber received the SMS. 1 for success, 0 for failure **/
-    public String receiveSMS;
+    public String receiveSms;
 
     /** Whether the subscriber received the voice. 1 for success, 0 for fialure **/
     public String receiveVoice;
@@ -38,7 +40,7 @@ public class Subscriber extends Model {
     public String receiveData;
 
     /** The received Ussd **/
-    public String receiveUSSD;
+    public String receiveUssd;
 
     /** The phone number of the subscriber **/
     public String phone;
@@ -53,6 +55,7 @@ public class Subscriber extends Model {
     public String groupIds;
 
     /** The active statue of the subscriber **/
+    @SerializedName("active")
     public Status status;
 
     /** The language id the subscriber speaks or interested in **/
@@ -65,7 +68,7 @@ public class Subscriber extends Model {
             Date startDate, String isTestSubscriber, String groupIds, Status status,
             Long languageId,
             Properties properties) {
-        this.receiveSMS = receiveSMS;
+        this.receiveSms = receiveSMS;
         this.receiveVoice = receiveVoice;
         this.receiveData = receiveData;
         this.phone = phone;
@@ -80,10 +83,11 @@ public class Subscriber extends Model {
     @Override
     public String toString() {
         return "Subscriber{"
-                + "receiveSMS='" + receiveSMS + '\''
+                + "id=" + super.id
+                + ", receiveSms='" + receiveSms + '\''
                 + ", receiveVoice='" + receiveVoice + '\''
                 + ", receiveData='" + receiveData + '\''
-                + ", receiveUSSD='" + receiveUSSD + '\''
+                + ", receiveUssd='" + receiveUssd + '\''
                 + ", phone='" + phone + '\''
                 + ", startDate=" + startDate
                 + ", isTestSubscriber='" + isTestSubscriber + '\''
@@ -103,14 +107,14 @@ public class Subscriber extends Model {
         public String location;
 
         /** The comment property **/
-        public String comment;
+        public String comments;
 
         @Override
         public String toString() {
             return "Properties{"
                     + "name='" + name + '\''
                     + ", location='" + location + '\''
-                    + ", comment='" + comment + '\''
+                    + ", comments='" + comments + '\''
                     + '}';
         }
     }

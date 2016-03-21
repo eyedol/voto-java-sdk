@@ -16,15 +16,19 @@
 
 package com.addhen.voto.sdk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Henry Addo
  */
 public class Pagination {
 
     /** The next URL **/
+    @SerializedName("nextURL")
     public String nextURL;
 
     /** The previous URL **/
+    @SerializedName("previousURL")
     public String previousURL;
 
     @Override

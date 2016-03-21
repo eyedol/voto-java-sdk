@@ -117,22 +117,25 @@ public class VotoServiceTest extends BaseTestCase {
         assertNull(response.pagination.previousURL);
         assertNotNull(response.data.subscribers);
         assertEquals(2, response.data.subscribers.size());
+        assertNotNull(response.data.subscribers.get(0));
         assertEquals(373648l, (long) response.data.subscribers.get(0).id);
-        assertEquals("0", response.data.subscribers.get(0).receiveSMS);
+        System.out.println(response.data.subscribers.get(0));
+        assertEquals("0", response.data.subscribers.get(0).receiveSms);
         assertEquals("1", response.data.subscribers.get(0).receiveVoice);
         assertEquals("0", response.data.subscribers.get(0).receiveData);
-        assertEquals("0", response.data.subscribers.get(0).receiveUSSD);
+        assertEquals("0", response.data.subscribers.get(0).receiveUssd);
         assertEquals("233264164182", response.data.subscribers.get(0).phone);
         assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
-        assertEquals("2014-09-10", response.data.subscribers.get(0).startDate);
+        assertEquals("Wed Sep 10 00:00:00 GMT 2014",
+                response.data.subscribers.get(0).startDate.toString());
         assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
-        assertEquals(0, response.data.subscribers.get(0).isTestSubscriber);
+        assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);
         assertEquals(
                 "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, 204137",
                 response.data.subscribers.get(0).groupIds);
         assertNotNull(response.data.subscribers.get(0).properties);
         assertEquals("Kodjo Antwi", response.data.subscribers.get(0).properties.name);
         assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
-        assertEquals("Out flying kites", response.data.subscribers.get(0).properties.comment);
+        assertEquals("Out flying kites", response.data.subscribers.get(0).properties.comments);
     }
 }
