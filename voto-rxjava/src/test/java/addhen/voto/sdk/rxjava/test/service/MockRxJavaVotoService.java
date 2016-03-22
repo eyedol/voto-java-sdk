@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package addhen.voto.sdk.rxjava.test.service.mock;
+package addhen.voto.sdk.rxjava.test.service;
 
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -56,22 +56,29 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
             @Field("phone_numbers") String phone,
             @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) {
-        return null;
+        CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
+                .deserializeCreateBulkSubscriberResponse();
+
+        return Observable.just(createBulkSubscribersResponse);
     }
 
     @Override
     public Observable<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
-        return null;
+        ListSubscribersResponse listSubscribersResponse = mGsonDeserializer.listSubscribers();
+        return Observable.just(listSubscribersResponse);
     }
 
     @Override
     public Observable<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        return null;
+        CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
+                .modifySubscriberDetails();
+        return Observable.just(createSubscriberResponse);
     }
 
     @Override
     public Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id) {
-        return null;
+        DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer.deleteSubscriber();
+        return Observable.just(deleteSubscriberResponse);
     }
 }

@@ -18,7 +18,10 @@ package com.addhen.voto.sdk.test;
 
 import com.google.gson.Gson;
 
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 
 import java.io.IOException;
 
@@ -47,4 +50,45 @@ public final class GsonDeserializer {
     }
 
 
+    public CreateBulkSubscribersResponse deserializeCreateBulkSubscriberResponse() {
+        String createBulkSubscribersResponse = null;
+        try {
+            createBulkSubscribersResponse = getResource(
+                    "json/subscriber/create_bulk_subscribers_response.json");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(createBulkSubscribersResponse, CreateBulkSubscribersResponse.class);
+    }
+
+    public ListSubscribersResponse listSubscribers() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/list_subscribers_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, ListSubscribersResponse.class);
+    }
+
+    public CreateSubscriberResponse modifySubscriberDetails() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/modify_subscriber_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, CreateSubscriberResponse.class);
+    }
+
+    public DeleteSubscriberResponse deleteSubscriber() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/delete_subscriber_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, DeleteSubscriberResponse.class);
+    }
 }
