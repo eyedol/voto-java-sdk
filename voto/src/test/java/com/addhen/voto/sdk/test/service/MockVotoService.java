@@ -14,29 +14,30 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.common.test.service.mock;
+package com.addhen.voto.sdk.test.service;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.addhen.voto.sdk.Constants;
-import com.addhen.voto.sdk.common.service.VotoService;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.service.VotoService;
+import com.addhen.voto.sdk.test.GsonDeserializer;
 
 import java.io.IOException;
 import java.util.Map;
 
-import retrofit.mock.NetworkBehavior;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.mock.BehaviorDelegate;
 
 import static com.addhen.voto.sdk.test.TestHelper.getResource;
 
@@ -50,12 +51,14 @@ public class MockVotoService implements VotoService {
 
     private final BehaviorDelegate<VotoService> mDelegate;
 
-    private NetworkBehavior mNetworkBehavior;
-
     private Gson mGson;
 
-    public MockVotoService(BehaviorDelegate<VotoService> delegate) {
+    private GsonDeserializer mGsonDeserializer;
+
+    public MockVotoService(BehaviorDelegate<VotoService> delegate,
+            GsonDeserializer gsonDeserializer) {
         mDelegate = delegate;
+        mGsonDeserializer = gsonDeserializer;
         mGson = new GsonBuilder()
                 .setDateFormat(Constants.DATE_FORMAT)
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -72,8 +75,8 @@ public class MockVotoService implements VotoService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        CreateSubscriberResponse createSubscriberResponse = mGson
-                .fromJson(createResponseJson, CreateSubscriberResponse.class);
+        CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
+                .deserializeCreateSubscriberResponse();
         return mDelegate.returningResponse(createSubscriberResponse)
                 .createSubscriber("", null);
     }

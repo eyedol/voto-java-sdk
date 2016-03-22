@@ -35,13 +35,13 @@ import rx.Observable;
 /**
  * @author Henry Addo
  */
-public class RxJavaVotoApiClient {
+public final class RxJavaVotoApiClient {
 
     private RxJavaVotoService mRxJavaVotoService;
 
     private int limit = Constants.PAGINATION_LIMIT;
 
-    public RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
+    private RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
         mRxJavaVotoService = rxJavaVotoService;
     }
 

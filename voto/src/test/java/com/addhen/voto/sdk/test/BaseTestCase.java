@@ -26,6 +26,9 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * All unit test cases have to inherit from this. This is to make it easier to
  * annotate every class with RunWith annotation
@@ -43,5 +46,10 @@ public abstract class BaseTestCase {
                 .setDateFormat(Constants.DATE_FORMAT)
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
+    }
+
+    protected static String formatShowingDate(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
     }
 }

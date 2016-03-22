@@ -17,4 +17,5 @@ dependencies {
     compile sdkDependencies.okhttpUrlConnection
     compile sdkDependencies.loggingInterceptor
     testCompile sdkTestDependencies.junit
+    testCompile sdkTestDependencies.retrofitMock
 }

@@ -1,5 +1,4 @@
 include ':voto'
-include ':voto-common'
-include ':voto-rxjava'
 include ':voto-async'
 include ':voto-sync'
+include ':voto-rxjava'

@@ -7,7 +7,7 @@ dependencies {
 
     def syncTestDependencies = rootProject.ext.syncTestDependencies
 
-    compile project(':voto-common')
+    compile project(':voto')
     testCompile syncTestDependencies.junit
 }
 

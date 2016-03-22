@@ -14,27 +14,27 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.common.test.service;
+package com.addhen.voto.sdk.test.service;
 
-import com.addhen.voto.sdk.common.service.VotoService;
-import com.addhen.voto.sdk.common.test.BaseTestCase;
-import com.addhen.voto.sdk.common.test.service.mock.BehaviorDelegate;
-import com.addhen.voto.sdk.common.test.service.mock.MockRetrofit;
-import com.addhen.voto.sdk.common.test.service.mock.MockVotoService;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.Status;
+import com.addhen.voto.sdk.service.VotoService;
+import com.addhen.voto.sdk.test.BaseTestCase;
+import com.addhen.voto.sdk.test.GsonDeserializer;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import retrofit.mock.NetworkBehavior;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.mock.BehaviorDelegate;
+import retrofit2.mock.MockRetrofit;
+import retrofit2.mock.NetworkBehavior;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
@@ -61,9 +61,11 @@ public class VotoServiceTest extends BaseTestCase {
                 .networkBehavior(behavior)
                 .build();
 
+        GsonDeserializer gsonDeserializer = new GsonDeserializer(mGson);
+
         BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
                 .create(VotoService.class);
-        mMockVotoService = new MockVotoService(votoServiceBehaviorDelegate);
+        mMockVotoService = new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
     }
 
     @Test
@@ -126,7 +128,7 @@ public class VotoServiceTest extends BaseTestCase {
         assertEquals("0", response.data.subscribers.get(0).receiveUssd);
         assertEquals("233264164182", response.data.subscribers.get(0).phone);
         assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
-        String date = formatShowingDate(response.data.subscribers.get(0).startDate);
+        String date = BaseTestCase.formatShowingDate(response.data.subscribers.get(0).startDate);
         assertEquals("2014-09-10", date);
         assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
         assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);

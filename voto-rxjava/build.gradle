@@ -8,6 +8,7 @@ dependencies {
     def rxjavaTestDependencies = rootProject.ext.rxjavaTestDependencies
     compile project(':voto')
     compile rxjavaDependencies.adapterRxjava
+    testCompile files(project(':voto').sourceSets.test.output)
     testCompile rxjavaTestDependencies.junit
 }
 

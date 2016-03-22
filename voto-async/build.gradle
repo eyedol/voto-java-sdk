@@ -5,7 +5,7 @@ apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 
 dependencies {
-    compile project(':voto-common')
+    compile project(':voto')
     testCompile 'junit:junit:4.12'
 }
 

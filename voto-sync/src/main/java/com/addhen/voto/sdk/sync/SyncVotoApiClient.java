@@ -18,7 +18,7 @@ package com.addhen.voto.sdk.sync;
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.Util.StringUtils;
-import com.addhen.voto.sdk.common.service.VotoService;
+import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
