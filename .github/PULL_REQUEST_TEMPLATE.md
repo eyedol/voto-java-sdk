@@ -1,11 +1,7 @@
-Fixes eyedol/voto-java-sdk # .
+Fixes # 
 
 This `PR` makes the following changes:
+- 
 
--
 
--
-
--
- 
 Ping @eyedol
