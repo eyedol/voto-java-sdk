@@ -19,7 +19,8 @@ apply plugin: 'jacoco'
 jacocoTestReport {
     reports {
         xml.enabled true
-        html.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
     }
 }
 
