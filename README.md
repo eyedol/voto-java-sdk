@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/eyedol/voto-java-sdk.svg?branch=master)](https://travis-ci.org/eyedol/voto-java-sdk)
+[![Build Status](https://travis-ci.org/eyedol/voto-java-sdk.svg?branch=master)](https://travis-ci.org/eyedol/voto-java-sdk) [![codecov.io](https://codecov.io/github/eyedol/voto-java-sdk/coverage.svg?branch=master)](https://codecov.io/github/github/eyedol/voto-java-sdk?branch=master)
 
 ### VOTO JAVA SDK
 

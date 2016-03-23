@@ -11,3 +11,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 script: ./gradlew clean build
+
+# Upload code coverage report to codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
