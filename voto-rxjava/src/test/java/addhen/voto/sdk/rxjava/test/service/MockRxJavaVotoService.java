@@ -58,7 +58,6 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
             @QueryMap Map<String, String> optionalFields) {
         CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
                 .deserializeCreateBulkSubscriberResponse();
-
         return Observable.just(createBulkSubscribersResponse);
     }
 

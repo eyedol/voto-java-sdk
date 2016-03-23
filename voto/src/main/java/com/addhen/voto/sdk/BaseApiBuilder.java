@@ -49,6 +49,9 @@ public abstract class BaseApiBuilder<B, A> {
     protected Gson mGson;
 
     public BaseApiBuilder(String apiKey) {
+        if (StringUtils.isEmpty(apiKey)) {
+            throw new IllegalArgumentException("apiKey shouldn't be null or empty.");
+        }
         mApiKey = apiKey;
         mOkHttpClientBuilder = new OkHttpClient.Builder();
         initializeGson();
@@ -63,7 +66,7 @@ public abstract class BaseApiBuilder<B, A> {
     @SuppressWarnings("unchecked")
     public B withApiVersion(String apiVersion) {
         if (StringUtils.isEmpty(apiVersion)) {
-            throw new IllegalArgumentException("apiVersion shouldn't be null or empty");
+            throw new IllegalArgumentException("apiVersion shouldn't be null or empty.");
         }
 
         mApiVersion = apiVersion;
