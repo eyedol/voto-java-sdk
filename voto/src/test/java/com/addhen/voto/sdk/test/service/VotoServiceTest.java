@@ -29,6 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -56,7 +57,7 @@ public class VotoServiceTest extends BaseTestCase {
                 .build();
 
         // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
-        NetworkBehavior behavior = NetworkBehavior.create();
+        NetworkBehavior behavior = NetworkBehavior.create(new Random(2847));
         MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
                 .networkBehavior(behavior)
                 .build();
