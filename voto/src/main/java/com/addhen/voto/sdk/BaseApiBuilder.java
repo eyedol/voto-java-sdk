@@ -20,7 +20,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.addhen.voto.sdk.Util.StringUtils;
+import com.addhen.voto.sdk.util.StringUtils;
 
 import java.util.concurrent.TimeUnit;
 

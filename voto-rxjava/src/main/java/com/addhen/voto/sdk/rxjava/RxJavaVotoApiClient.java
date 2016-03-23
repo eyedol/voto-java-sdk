@@ -17,12 +17,13 @@ package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
-import com.addhen.voto.sdk.Util.StringUtils;
+import com.addhen.voto.sdk.util.StringUtils;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.rxjava.service.RxJavaVotoService;
 
 import java.util.Map;
@@ -76,9 +77,9 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
         return listSubscribers;
     }
 
-    public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
+    public Observable<SubscriberDetailsResponse> modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) {
-        Observable<CreateSubscriberResponse> modifySubscriber = mRxJavaVotoService
+        Observable<SubscriberDetailsResponse> modifySubscriber = mRxJavaVotoService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber;
     }

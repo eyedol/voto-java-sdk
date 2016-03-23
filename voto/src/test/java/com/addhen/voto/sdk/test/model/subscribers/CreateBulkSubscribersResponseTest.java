@@ -16,7 +16,7 @@
 
 package com.addhen.voto.sdk.test.model.subscribers;
 
-import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 
 import org.junit.Before;
@@ -30,7 +30,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Henry Addo
  */
-public class CreateSubscriberResponseTest extends BaseTestCase {
+public class CreateBulkSubscribersResponseTest extends BaseTestCase {
 
     @Before
     public void setUp() throws Exception {
@@ -39,21 +39,22 @@ public class CreateSubscriberResponseTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeserializeCreateSubscriberResponse() throws IOException {
-        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
-                .deserializeCreateSubscriberResponse();
-        assertNotNull(createSubscriberResponse);
-        assertNotNull(createSubscriberResponse);
-        assertNotNull(createSubscriberResponse.data);
-        assertEquals(430l, (long) createSubscriberResponse.data.id);
+        final CreateBulkSubscribersResponse response = mGsonDeserializer
+                .deserializeCreateBulkSubscriberResponse();
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Subscriber(s) Created Successfully", response.message);
+        assertEquals(5, response.data.size());
+        assertEquals(181, (long) response.data.get(0));
     }
 
     @Test
     public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
-                .deserializeCreateSubscriberResponse();
-        final String toString = createSubscriberResponse.toString();
+        final CreateBulkSubscribersResponse response = mGsonDeserializer
+                .deserializeCreateBulkSubscriberResponse();
+        final String toString = response.toString();
         assertEquals(
-                "CreateSubscriberResponse{BaseResponse{status=200, message='Subscriber Created'}data=Data{id=430}}",
+                "CreateBulkSubscribersResponse{BaseResponse{status=200, message='Subscriber(s) Created Successfully'}data=[181, 182, 183, 184, 185]}",
                 toString
         );
     }

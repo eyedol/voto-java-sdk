@@ -26,10 +26,10 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.test.GsonDeserializer;
 
-import java.io.IOException;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -38,8 +38,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.mock.BehaviorDelegate;
-
-import static com.addhen.voto.sdk.test.TestHelper.getResource;
 
 
 /**
@@ -68,17 +66,10 @@ public class MockVotoService implements VotoService {
     @Override
     public Call<CreateSubscriberResponse> createSubscriber(@Field("phone") String phone,
             @QueryMap Map<String, String> optionalFields) {
-        String createResponseJson = null;
-        try {
-            createResponseJson = getResource(
-                    "json/subscriber/create_subscriber_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .deserializeCreateSubscriberResponse();
         return mDelegate.returningResponse(createSubscriberResponse)
-                .createSubscriber("", null);
+                .createSubscriber(phone, optionalFields);
     }
 
     @Override
@@ -87,57 +78,31 @@ public class MockVotoService implements VotoService {
             @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) {
 
-        String createResponseJson = null;
-        try {
-            createResponseJson = getResource(
-                    "json/subscriber/create_bulk_subscribers_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        CreateBulkSubscribersResponse createBulkSubscribersResponse = mGson
-                .fromJson(createResponseJson, CreateBulkSubscribersResponse.class);
+        final CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
+                .deserializeCreateBulkSubscriberResponse();
         return mDelegate.returningResponse(createBulkSubscribersResponse)
-                .createBulkSubscribers("", null, null);
+                .createBulkSubscribers(phone, ifPhoneNumberExists, optionalFields);
     }
 
     @Override
     public Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/list_subscribers_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ListSubscribersResponse listSubscribersResponse = mGson
-                .fromJson(responseJson, ListSubscribersResponse.class);
-        return mDelegate.returningResponse(listSubscribersResponse).listSubscribers(10);
+        final ListSubscribersResponse listSubscribersResponse = mGsonDeserializer.listSubscribers();
+        return mDelegate.returningResponse(listSubscribersResponse).listSubscribers(limit);
     }
 
     @Override
-    public Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
+    public Call<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/modify_subscriber_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        CreateSubscriberResponse createSubscriberResponse = mGson
-                .fromJson(responseJson, CreateSubscriberResponse.class);
+        SubscriberDetailsResponse createSubscriberResponse = mGsonDeserializer
+                .modifySubscriberDetails();
         return mDelegate.returningResponse(createSubscriberResponse)
-                .createSubscriber("", null);
+                .modifySubscriberDetails(id, optionalFields);
     }
 
     @Override
     public Call<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id) {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/delete_subscriber_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        DeleteSubscriberResponse deleteSubscriberResponse = mGson
-                .fromJson(responseJson, DeleteSubscriberResponse.class);
+        final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer
+                .deleteSubscriber();
         return mDelegate.returningResponse(deleteSubscriberResponse).deleteSubscriber(1l);
     }
 }

@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public interface RxJavaVotoService {
     );
 
     @PUT(VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Observable<CreateSubscriberResponse> modifySubscriberDetails(
+    Observable<SubscriberDetailsResponse> modifySubscriberDetails(
             @Path("id") Long id,
             @QueryMap Map<String, String> optionalFields
     );

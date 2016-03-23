@@ -64,13 +64,15 @@ public class Subscriber extends Model {
     /** The custom properties of the subscriber **/
     public Properties properties;
 
-    public Subscriber(String receiveSMS, String receiveVoice, String receiveData, String phone,
-            Date startDate, String isTestSubscriber, String groupIds, Status status,
-            Long languageId,
-            Properties properties) {
+    public Subscriber(Long id, String receiveSMS, String receiveVoice, String receiveData,
+            String receiveUssd,
+            String phone, Date startDate, String isTestSubscriber, String groupIds, Status status,
+            Long languageId, Properties properties) {
+        this.id = id;
         this.receiveSms = receiveSMS;
         this.receiveVoice = receiveVoice;
         this.receiveData = receiveData;
+        this.receiveUssd = receiveUssd;
         this.phone = phone;
         this.startDate = startDate;
         this.isTestSubscriber = isTestSubscriber;
@@ -98,7 +100,7 @@ public class Subscriber extends Model {
                 + '}';
     }
 
-    public class Properties {
+    public static class Properties {
 
         /** The name property **/
         public String name;

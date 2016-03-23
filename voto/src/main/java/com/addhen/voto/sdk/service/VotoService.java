@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public interface VotoService {
     Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit);
 
     @PUT(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
+    Call<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields);
 
     @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")

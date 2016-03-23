@@ -17,12 +17,13 @@ package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
-import com.addhen.voto.sdk.Util.StringUtils;
+import com.addhen.voto.sdk.util.StringUtils;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
 
 import java.io.IOException;
@@ -80,8 +81,8 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
     }
 
     public void modifySubscriberDetails(Long id, Map<String, String> optionalFields,
-            Callback<CreateSubscriberResponse> callback) {
-        Call<CreateSubscriberResponse> modifySubscriber = mSyncSubscribersService
+            Callback<SubscriberDetailsResponse> callback) {
+        Call<SubscriberDetailsResponse> modifySubscriber = mSyncSubscribersService
                 .modifySubscriberDetails(id, optionalFields);
         modifySubscriber.enqueue(callback);
     }

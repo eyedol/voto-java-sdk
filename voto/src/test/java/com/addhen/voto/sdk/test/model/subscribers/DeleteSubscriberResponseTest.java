@@ -16,7 +16,7 @@
 
 package com.addhen.voto.sdk.test.model.subscribers;
 
-import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
+import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 
 import org.junit.Before;
@@ -24,13 +24,13 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 /**
  * @author Henry Addo
  */
-public class CreateSubscriberResponseTest extends BaseTestCase {
+public class DeleteSubscriberResponseTest extends BaseTestCase {
 
     @Before
     public void setUp() throws Exception {
@@ -38,22 +38,19 @@ public class CreateSubscriberResponseTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyDeserializeCreateSubscriberResponse() throws IOException {
-        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
-                .deserializeCreateSubscriberResponse();
-        assertNotNull(createSubscriberResponse);
-        assertNotNull(createSubscriberResponse);
-        assertNotNull(createSubscriberResponse.data);
-        assertEquals(430l, (long) createSubscriberResponse.data.id);
+    public void shouldSuccessfullyDeleteSubscriber() throws IOException {
+        final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Successfully deleted subscriber", response.message);
     }
 
     @Test
     public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
-                .deserializeCreateSubscriberResponse();
-        final String toString = createSubscriberResponse.toString();
+        final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
+        final String toString = response.toString();
         assertEquals(
-                "CreateSubscriberResponse{BaseResponse{status=200, message='Subscriber Created'}data=Data{id=430}}",
+                "BaseResponse{status=200, message='Successfully deleted subscriber'}",
                 toString
         );
     }

@@ -17,12 +17,13 @@ package com.addhen.voto.sdk.sync;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
-import com.addhen.voto.sdk.Util.StringUtils;
+import com.addhen.voto.sdk.util.StringUtils;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
 
 import java.io.IOException;
@@ -76,9 +77,9 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
         return listSubscribers.execute().body();
     }
 
-    public CreateSubscriberResponse modifySubscriberDetails(Long id,
+    public SubscriberDetailsResponse modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) throws IOException {
-        Call<CreateSubscriberResponse> modifySubscriber = mSyncSubscribersService
+        Call<SubscriberDetailsResponse> modifySubscriber = mSyncSubscribersService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber.execute().body();
     }
