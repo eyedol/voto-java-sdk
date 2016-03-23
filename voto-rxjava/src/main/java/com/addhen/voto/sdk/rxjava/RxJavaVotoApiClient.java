@@ -16,7 +16,7 @@
 package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
-import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.Util.StringUtils;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -35,20 +35,18 @@ import rx.Observable;
 /**
  * @author Henry Addo
  */
-public final class RxJavaVotoApiClient {
+public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     private RxJavaVotoService mRxJavaVotoService;
 
-    private int limit = Constants.PAGINATION_LIMIT;
-
-    private RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
+    public RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
         mRxJavaVotoService = rxJavaVotoService;
     }
 
     public Observable<CreateSubscriberResponse> createSubscriber(String phone,
             Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException("phone is required and shouldn't be null or empty");
+            throw new IllegalArgumentException("phone is required and shouldn't be null or empty.");
         }
         Observable<CreateSubscriberResponse> createSubscriber = mRxJavaVotoService.createSubscriber(
                 phone,
@@ -61,7 +59,7 @@ public final class RxJavaVotoApiClient {
             IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException("phoneNumbers is required");
+            throw new IllegalArgumentException("phoneNumbers is required.");
         }
 
         Observable<CreateBulkSubscribersResponse> createBulkSubscribers = mRxJavaVotoService

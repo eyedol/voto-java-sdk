@@ -16,14 +16,14 @@
 package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
-import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.Util.StringUtils;
-import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.service.VotoService;
 
 import java.io.IOException;
 import java.util.Map;
@@ -36,11 +36,9 @@ import retrofit2.http.QueryMap;
 /**
  * @author Henry Addo
  */
-public class AsyncVotoApiClient {
+public class AsyncVotoApiClient extends BaseVotoApiClient {
 
     private VotoService mSyncSubscribersService;
-
-    private int limit = Constants.PAGINATION_LIMIT;
 
     public AsyncVotoApiClient(VotoService syncSubscribersService) {
         mSyncSubscribersService = syncSubscribersService;
