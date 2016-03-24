@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/eyedol/voto-java-sdk.svg?branch=develop)](https://travis-ci.org/eyedol/voto-java-sdk) [![Stories in Ready](https://badge.waffle.io/eyedol/voto-java-sdk.png?label=ready&title=Ready)](http://waffle.io/eyedol/voto-java-sdk) [![codecov.io](https://codecov.io/github/eyedol/voto-java-sdk/coverage.svg?branch=develop)](https://codecov.io/github/eyedol/voto-java-sdk?branch=develop)
-
 ### VOTO JAVA SDK
 
 VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easiy to use. The goal of this SDK is to ease 
@@ -67,8 +65,53 @@ RxJavaVotoApiClient rxVotoClient = new RxJavaVotoApiClient.Builder(<api_key>)
 
 ##### Execute API Request
 - Synchronous:
+```java
+SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder("api_key")
+	.withLogLevel(HttpLoggingInterceptor.Level.BODY)
+	.build();
+	
+ListSubscribersResponse listSubscribersResponse = null;
+try {
+    listSubscribersResponse = syncVotoApiClient.listSubscribers(10);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+System.out.println(listSubscribersResponse);
+```
 - Asynchronous:
+```java
+AsyncVotoApiClient asyncVotoApiClient = new AsyncVotoApiClient.Builder("api_key")
+	.withLogLevel(HttpLoggingInterceptor.Level.BODY)
+	.build();
+	
+asyncVotoApiClient.listSubscribers(10, new Callback<ListSubscribersResponse>() {
+	@Override
+    public void onResponse(Call<ListSubscribersResponse> call, Response<ListSubscribersResponse> response) {
+    ListSubscribersResponse listSubscribersResponse = response.body();
+    	System.out.println(listSubscribersResponse);
+    }
+
+    @Override
+    public void onFailure(Call<ListSubscribersResponse> call, Throwable t) {
+    	t.printStackTrace();
+    }
+});
+```
+
 - RxJava:
+```java
+RxJavaVotoApiClient rxJavaVotoApiClient = new RxJavaVotoApiClient.Builder("api_key")
+	.withLogLevel(HttpLoggingInterceptor.Level.BODY)
+	.build();
+	
+rxJavaVotoApiClient.listSubscribers(10).subscribe(new Action1<ListSubscribersResponse>() {
+	@Override
+	public void call(ListSubscribersResponse listSubscribersResponse) {
+    	System.out.println(listSubscribersResponse);
+  	}
+});
+```
 
 License
 --------
