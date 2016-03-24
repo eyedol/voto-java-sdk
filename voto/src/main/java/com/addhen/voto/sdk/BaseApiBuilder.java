@@ -107,6 +107,7 @@ public abstract class BaseApiBuilder<B, A> {
         mOkHttpClientBuilder.writeTimeout(10, TimeUnit.SECONDS);
         mOkHttpClientBuilder.readTimeout(10, TimeUnit.SECONDS);
         mOkHttpClientBuilder.cookieJar(CookieJar.NO_COOKIES);
+        mOkHttpClientBuilder.addInterceptor(new ApiKeyInterceptor(mApiKey));
     }
 
     private void initializeGson() {
