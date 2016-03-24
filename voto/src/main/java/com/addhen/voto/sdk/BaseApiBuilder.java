@@ -94,7 +94,7 @@ public abstract class BaseApiBuilder<B, A> {
     }
 
     protected String getBaseUrl() {
-        return Constants.VotoEndpoints.VOTO_API_ENDPOINT + "/" + mApiVersion + "/";
+        return Constants.VotoEndpoints.VOTO_API_ENDPOINT + mApiVersion + "/";
     }
 
     protected void initDefaultRetrofit() {
