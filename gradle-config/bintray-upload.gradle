@@ -1,3 +1,5 @@
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 // Upload artifact to bintray repo
 publish {
     groupId = 'com.addhen'
@@ -7,6 +9,6 @@ publish {
     licences = ['Apache-2.0']
     website = 'https://github.com/eyedol/voto-java-sdk'
     autoPublish = true
-    bintrayUser = project.hasProperty("bintray.user") ? bintray.user : "";
-    bintrayKey = project.hasProperty("bintray.apikey") ? bintray.apikey : "";
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
 }
