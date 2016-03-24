@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.rxjava.RxJavaVotoApiClient;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.test.GsonDeserializer;
@@ -119,11 +120,11 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyModifySubscriber() throws IOException {
-        Observable<CreateSubscriberResponse> observable = mRxJavaVotoApiClient
+        Observable<SubscriberDetailsResponse> observable = mRxJavaVotoApiClient
                 .modifySubscriberDetails(1l, null);
-        TestSubscriber<CreateSubscriberResponse> result = new TestSubscriber<>();
+        TestSubscriber<SubscriberDetailsResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
-        CreateSubscriberResponse createSubscriberResponse = result.getOnNextEvents().get(0);
+        SubscriberDetailsResponse createSubscriberResponse = result.getOnNextEvents().get(0);
         assertNotNull(createSubscriberResponse);
     }
 

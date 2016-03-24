@@ -122,7 +122,6 @@ public class VotoServiceTest extends BaseTestCase {
         assertEquals(2, response.data.subscribers.size());
         assertNotNull(response.data.subscribers.get(0));
         assertEquals(373648l, (long) response.data.subscribers.get(0).id);
-        System.out.println(response.data.subscribers.get(0));
         assertEquals("0", response.data.subscribers.get(0).receiveSms);
         assertEquals("1", response.data.subscribers.get(0).receiveVoice);
         assertEquals("0", response.data.subscribers.get(0).receiveData);

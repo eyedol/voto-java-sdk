@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.rxjava.service.RxJavaVotoService;
 import com.addhen.voto.sdk.test.GsonDeserializer;
 
@@ -46,7 +47,7 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     @Override
     public Observable<CreateSubscriberResponse> createSubscriber(@Field("phone") String phone,
             @QueryMap Map<String, String> optionalFields) {
-        CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
+        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .deserializeCreateSubscriberResponse();
         return Observable.just(createSubscriberResponse);
     }
@@ -56,28 +57,28 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
             @Field("phone_numbers") String phone,
             @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) {
-        CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
+        final CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
                 .deserializeCreateBulkSubscriberResponse();
         return Observable.just(createBulkSubscribersResponse);
     }
 
     @Override
     public Observable<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
-        ListSubscribersResponse listSubscribersResponse = mGsonDeserializer.listSubscribers();
+        final ListSubscribersResponse listSubscribersResponse = mGsonDeserializer.listSubscribers();
         return Observable.just(listSubscribersResponse);
     }
 
     @Override
-    public Observable<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
+    public Observable<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
+        final SubscriberDetailsResponse createSubscriberResponse = mGsonDeserializer
                 .modifySubscriberDetails();
         return Observable.just(createSubscriberResponse);
     }
 
     @Override
     public Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id) {
-        DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer.deleteSubscriber();
+        final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer.deleteSubscriber();
         return Observable.just(deleteSubscriberResponse);
     }
 }

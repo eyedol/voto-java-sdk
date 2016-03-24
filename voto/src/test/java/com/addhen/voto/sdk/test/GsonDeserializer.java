@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 
 import java.io.IOException;
 
@@ -72,14 +73,14 @@ public final class GsonDeserializer {
         return mGson.fromJson(responseJson, ListSubscribersResponse.class);
     }
 
-    public CreateSubscriberResponse modifySubscriberDetails() {
+    public SubscriberDetailsResponse modifySubscriberDetails() {
         String responseJson = null;
         try {
             responseJson = getResource("json/subscriber/modify_subscriber_response.json");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return mGson.fromJson(responseJson, CreateSubscriberResponse.class);
+        return mGson.fromJson(responseJson, SubscriberDetailsResponse.class);
     }
 
     public DeleteSubscriberResponse deleteSubscriber() {

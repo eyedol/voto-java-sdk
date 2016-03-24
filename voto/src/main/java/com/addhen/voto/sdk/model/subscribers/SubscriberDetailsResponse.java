@@ -40,5 +40,12 @@ public class SubscriberDetailsResponse extends BaseResponse {
 
         /** List of subscribers **/
         public Subscriber subscriber;
+
+        @Override
+        public String toString() {
+            return "Data{"
+                    + "subscriber=" + subscriber
+                    + '}';
+        }
     }
 }

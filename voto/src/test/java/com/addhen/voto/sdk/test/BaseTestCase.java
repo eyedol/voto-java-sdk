@@ -40,12 +40,15 @@ public abstract class BaseTestCase {
 
     protected Gson mGson;
 
+    protected GsonDeserializer mGsonDeserializer;
+
     @Before
     public void setUp() throws Exception {
         mGson = new GsonBuilder()
                 .setDateFormat(Constants.DATE_FORMAT)
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
+        mGsonDeserializer = new GsonDeserializer(mGson);
     }
 
     protected static String formatShowingDate(Date date) {

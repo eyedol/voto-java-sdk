@@ -1,8 +1,14 @@
 apply plugin: 'java'
 apply from: '../gradle-config/quality.gradle'
+apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+tasks.matching { it instanceof Test }.all {
+    testLogging.events = ["failed", "passed", "skipped"]
+    testLogging.showStandardStreams = true
+}
 
 dependencies {
     def sdkDependencies = rootProject.ext.sdkDependencies

@@ -16,7 +16,7 @@
 
 package com.addhen.voto.sdk;
 
-import com.addhen.voto.sdk.Util.StringUtils;
+import com.addhen.voto.sdk.util.StringUtils;
 
 import java.io.IOException;
 

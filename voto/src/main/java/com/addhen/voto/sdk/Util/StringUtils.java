@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.Util;
+package com.addhen.voto.sdk.util;
 
 /**
  * @author Henry Addo
