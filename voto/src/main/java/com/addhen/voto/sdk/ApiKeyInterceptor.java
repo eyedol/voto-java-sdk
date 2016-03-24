@@ -41,7 +41,7 @@ public class ApiKeyInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         builder.header("Accept", "application/json");
         if (!StringUtils.isEmpty(apiKey)) {
-            builder.header("Authorization", apiKey);
+            builder.header("api_key", apiKey);
         }
         return chain.proceed(builder.build());
     }
