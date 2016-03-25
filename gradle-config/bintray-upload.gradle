@@ -1,14 +1,99 @@
+// Upload artifact to bintray
+def siteUrl = 'https://github.com/eyedol/voto-java-sdk'      // Homepage URL of the library
+def gitUrl = 'https://eyedol@github.com/eyedol/voto-java-sdk.git'   // Git repository URL
+def issueUrl = 'https://github.com/eyedol/voto-java-sdk/issues/'
+group = "com.addhen"                      // Maven Group ID for the artifact
+
+def libVersion = project.parent.version.toString()
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'jar'
+                // Add your description here
+                name artifact.toString()
+                description = blob
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'eyedol'
+                        name 'Henry Addo'
+                        email 'henry@addhen.org'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-// Upload artifact to bintray repo
-publish {
-    groupId = 'com.addhen'
-    artifactId = artifact
-    publishVersion = project.parent.version
-    desc = description
-    licences = ['Apache-2.0']
-    website = 'https://github.com/eyedol/voto-java-sdk'
-    autoPublish = true
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
+
+// https://github.com/bintray/gradle-bintray-plugin
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        // it is the name that appears in bintray when logged
+        name = artifact
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        issueTrackerUrl = issueUrl
+        licenses = ["Apache-2.0"]
+        labels = ['android', 'java', 'voto', 'sdk', 'api']
+        publicDownloadNumbers = true
+        publish = true
+        desc = blob
+        githubRepo = 'eyedol/voto-java-sdk' //Optional Github repository
+        githubReleaseNotesFile = 'CHANGELOG.md'
+        version {
+            name = libVersion
+            vcsTag = libVersion
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+            mavenCentralSync {
+                sync = true
+                //Optional (true by default). Determines whether to sync the version to Maven Central.
+                user = properties.getProperty("bintray.oss.user") //OSS user token
+                password = properties.getProperty("bintray.oss.password") //OSS user password
+                close = '1'
+                //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+            }
+        }
+    }
 }
