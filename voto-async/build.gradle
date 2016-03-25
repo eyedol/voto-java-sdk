@@ -1,5 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 apply from: '../gradle-config/quality.gradle'
 apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
@@ -11,7 +12,7 @@ dependencies {
 
 // Upload artifact to bintray repo
 ext {
-    artifact = 'voto.sdk.async'
-    description = 'Provides access to the VOTO API asynchronously'
+    artifact = 'voto-sdk-async'
+    blob = 'Provides access to the VOTO API asynchronously'
 }
 apply from: '../gradle-config/bintray-upload.gradle'
