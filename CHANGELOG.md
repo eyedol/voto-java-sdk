@@ -1,5 +1,5 @@
 ## v0.1.0
-_2016-03-24_
+_2016-03-25_
 
 * Implements create subscriber.
 * Implements create bulk subscriber.
