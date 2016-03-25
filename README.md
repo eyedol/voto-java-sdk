@@ -9,6 +9,8 @@ It comes with three independent modules:
 - Asynchronous module; Access the API asynchronously
 - RxJava module; Access the API using RxJava
 
+**Note:** These are not official libraries from the VOTO team.
+
 ###<a name="Setup">**Setup**
 Add gradle dependency:
 
@@ -22,21 +24,21 @@ repositories {
 Synchronous module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto.sdk.sync:0.1.0'
+    compile 'com.addhen:voto-sdk-sync:0.1.0'
 }
 ```
 
 Asynchronous module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto.sdk.async:0.1.0'
+    compile 'com.addhen:voto-sdk-async:0.1.0'
 }
 ```
 
 RxJava module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto.sdk.rxjava:0.1.0'
+    compile 'com.addhen:voto-sdk-rxjava:0.1.0'
 }
 ```
 ### Usage
