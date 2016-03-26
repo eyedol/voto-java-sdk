@@ -51,8 +51,12 @@ public abstract class BaseTestCase {
         mGsonDeserializer = new GsonDeserializer(mGson);
     }
 
-    protected static String formatShowingDate(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    protected static String formatDate(String pattern, Date date) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
+    }
+
+    protected static String formatShowingDate(Date date) {
+        return formatDate("yyyy-MM-dd", date);
     }
 }
