@@ -95,7 +95,7 @@ public final class GsonDeserializer {
     }
 
     // Audio files
-    public ListAudioFilesResponse listAudioFilesResponse() {
+    public ListAudioFilesResponse listAudioFiles() {
         String responseJson = null;
         try {
             responseJson = getResource("json/audio/list_audio_files_response.json");

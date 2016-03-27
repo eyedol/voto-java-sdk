@@ -17,6 +17,7 @@
 package com.addhen.voto.sdk.rxjava.service;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -73,4 +74,8 @@ public interface RxJavaVotoService {
 
     @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
     Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
+
+    // Audio files
+    @GET(Constants.VotoEndpoints.AUDIO_FILES)
+    Observable<ListAudioFilesResponse> listAudioFiles();
 }

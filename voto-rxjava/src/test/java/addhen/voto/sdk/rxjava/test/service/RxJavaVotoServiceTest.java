@@ -16,6 +16,8 @@
 
 package addhen.voto.sdk.rxjava.test.service;
 
+import com.addhen.voto.sdk.model.audio.AudioFile;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -23,6 +25,8 @@ import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.Status;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.test.GsonDeserializer;
+
+import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -129,5 +133,29 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         assertEquals("Kodjo Antwi", response.data.subscribers.get(0).properties.name);
         assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
         assertEquals("Out flying kites", response.data.subscribers.get(0).properties.comments);
+    }
+
+    @Test
+    public void shouldSuccessfullyListAudioFiles() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<ListAudioFilesResponse> observable = mMockRxJavaVotoService.listAudioFiles();
+        TestSubscriber<ListAudioFilesResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        ListAudioFilesResponse listAudioFilesResponse = result.getOnNextEvents().get(0);
+
+        TestCase.assertNotNull(listAudioFilesResponse);
+        assertEquals(200, (int) listAudioFilesResponse.status);
+        assertEquals("Audio Files", listAudioFilesResponse.message);
+        TestCase.assertNotNull(listAudioFilesResponse.data);
+        TestCase.assertNotNull(listAudioFilesResponse.data.audioFiles);
+        assertEquals(2, listAudioFilesResponse.data.audioFiles.size());
+        final AudioFile audioFile = listAudioFilesResponse.data.audioFiles.get(0);
+        assertEquals("Audio Filename A", audioFile.description);
+        assertEquals(3, (long) audioFile.languageId);
+        assertEquals(47, (int) audioFile.lengthSeconds);
+        String created = formatDate("yyyy-MM-dd h:m", audioFile.created);
+        assertEquals("2013-04-09 12:57", created);
+        String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
+        assertEquals("2013-04-09 12:57", modified);
     }
 }

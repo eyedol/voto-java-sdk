@@ -43,7 +43,7 @@ public class ListAudioFilesResponseTest extends BaseTestCase {
     @Test
     public void shouldSuccessfullyDeserializeListAudioFilesResponse() throws IOException {
         final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
-                .listAudioFilesResponse();
+                .listAudioFiles();
         assertNotNull(listAudioFilesResponse);
         assertEquals(200, (int) listAudioFilesResponse.status);
         assertEquals("Audio Files", listAudioFilesResponse.message);
@@ -63,7 +63,7 @@ public class ListAudioFilesResponseTest extends BaseTestCase {
     @Test
     public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
         final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
-                .listAudioFilesResponse();
+                .listAudioFiles();
         final String toString = listAudioFilesResponse.toString();
         assertFalse(StringUtils.isEmpty(toString));
     }

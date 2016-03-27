@@ -38,5 +38,8 @@ public final class Constants {
 
         /** The subscribers endpoint **/
         public static final String SUBSCRIBERS = "subscribers";
+
+        /** Audio files endpoint **/
+        public static final String AUDIO_FILES = "audio_files";
     }
 }
