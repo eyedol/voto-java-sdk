@@ -49,9 +49,9 @@ public class AudioFileTest extends BaseTestCase {
         assertEquals("Audio Filename A", audioFile.description);
         assertEquals(3, (long) audioFile.languageId);
         assertEquals(47, (int) audioFile.lengthSeconds);
-        String created = formatDate("yyyy-MM-dd h:m", audioFile.created);
+        String created = formatDate("yyyy-MM-dd h:mm", audioFile.created);
         assertEquals("2013-04-09 12:57", created);
-        String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
+        String modified = formatDate("yyyy-MM-dd h:mm", audioFile.modified);
         assertEquals("2013-04-09 12:57", modified);
     }
 
@@ -63,7 +63,7 @@ public class AudioFileTest extends BaseTestCase {
     }
 
     private AudioFile initAudioFile() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd h:m");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd h:mm");
         Date created = null;
         try {
             created = simpleDateFormat.parse("2013-04-09 12:57");

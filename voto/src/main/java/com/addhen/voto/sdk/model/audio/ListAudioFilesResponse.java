@@ -14,29 +14,30 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk;
+package com.addhen.voto.sdk.model.audio;
+
+import com.addhen.voto.sdk.model.BaseResponse;
+
+import java.util.List;
 
 /**
  * @author Henry Addo
  */
-public final class Constants {
+public class ListAudioFilesResponse extends BaseResponse {
 
-    /** Default pagination limit value **/
-    public static final int PAGINATION_LIMIT = 10;
+    /** The list of audio files */
+    public Data data;
 
-    private Constants() {
-        // No instantiation is allowed
-    }
+    public class Data {
 
-    public static class VotoEndpoints {
+        /** List of audio files **/
+        public List<AudioFile> audioFiles;
 
-        /** The default voto api endpoint **/
-        public static final String VOTO_API_ENDPOINT = " https://go.votomobile.org/api/";
-
-        /** The version number of the API endpoint **/
-        public static final String VOTO_API_ENDPOINT_VERSION = "v1";
-
-        /** The subscribers endpoint **/
-        public static final String SUBSCRIBERS = "subscribers";
+        @Override
+        public String toString() {
+            return "Data{"
+                    + "audio=" + audioFiles
+                    + '}';
+        }
     }
 }

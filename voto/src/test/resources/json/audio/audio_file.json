@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "message": "Audio Files",
+  "data": {
+    "audio_file": {
+      "id": 111,
+      "description": "Audio Filename A",
+      "language_id": 3,
+      "length_seconds": 47,
+      "created": "2013-04-09 12: 57",
+      "modified": "2013-04-09 12: 57"
+    }
+  }
+}

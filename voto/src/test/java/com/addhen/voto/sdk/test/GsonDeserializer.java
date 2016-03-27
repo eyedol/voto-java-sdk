@@ -18,6 +18,7 @@ package com.addhen.voto.sdk.test;
 
 import com.google.gson.Gson;
 
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -91,5 +92,16 @@ public final class GsonDeserializer {
             e.printStackTrace();
         }
         return mGson.fromJson(responseJson, DeleteSubscriberResponse.class);
+    }
+
+    // Audio files
+    public ListAudioFilesResponse listAudioFilesResponse() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/audio/list_audio_files_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, ListAudioFilesResponse.class);
     }
 }

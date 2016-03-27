@@ -14,29 +14,11 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk;
+package com.addhen.voto.sdk.test.model.audio;
 
 /**
  * @author Henry Addo
  */
-public final class Constants {
+public class AudioFileDate {
 
-    /** Default pagination limit value **/
-    public static final int PAGINATION_LIMIT = 10;
-
-    private Constants() {
-        // No instantiation is allowed
-    }
-
-    public static class VotoEndpoints {
-
-        /** The default voto api endpoint **/
-        public static final String VOTO_API_ENDPOINT = " https://go.votomobile.org/api/";
-
-        /** The version number of the API endpoint **/
-        public static final String VOTO_API_ENDPOINT_VERSION = "v1";
-
-        /** The subscribers endpoint **/
-        public static final String SUBSCRIBERS = "subscribers";
-    }
 }

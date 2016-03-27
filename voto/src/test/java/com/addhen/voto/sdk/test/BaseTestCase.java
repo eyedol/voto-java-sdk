@@ -20,7 +20,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.DateDeserializer;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -45,7 +45,7 @@ public abstract class BaseTestCase {
     @Before
     public void setUp() throws Exception {
         mGson = new GsonBuilder()
-                .setDateFormat(Constants.DATE_FORMAT)
+                .registerTypeAdapter(Date.class, new DateDeserializer())
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
         mGsonDeserializer = new GsonDeserializer(mGson);
