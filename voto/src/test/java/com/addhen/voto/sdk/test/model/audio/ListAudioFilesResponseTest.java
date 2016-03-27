@@ -19,6 +19,7 @@ package com.addhen.voto.sdk.test.model.audio;
 import com.addhen.voto.sdk.model.audio.AudioFile;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
+import com.addhen.voto.sdk.util.StringUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,7 @@ import java.io.IOException;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Henry Addo
@@ -56,5 +58,13 @@ public class ListAudioFilesResponseTest extends BaseTestCase {
         assertEquals("2013-04-09 12:57", created);
         String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
         assertEquals("2013-04-09 12:57", modified);
+    }
+
+    @Test
+    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+        final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
+                .listAudioFilesResponse();
+        final String toString = listAudioFilesResponse.toString();
+        assertFalse(StringUtils.isEmpty(toString));
     }
 }
