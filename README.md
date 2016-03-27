@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eyedol/voto-java-sdk.svg?branch=develop)](https://travis-ci.org/eyedol/voto-java-sdk) [![Stories in Ready](https://badge.waffle.io/eyedol/voto-java-sdk.png?label=ready&title=Ready)](http://waffle.io/eyedol/voto-java-sdk) [![codecov.io](https://codecov.io/github/eyedol/voto-java-sdk/coverage.svg?branch=develop)](https://codecov.io/github/eyedol/voto-java-sdk?branch=develop)
+
 ### VOTO JAVA SDK
 
 VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easiy to use. The goal of this SDK is to ease 
