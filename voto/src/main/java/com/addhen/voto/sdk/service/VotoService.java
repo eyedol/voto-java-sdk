@@ -17,6 +17,7 @@
 package com.addhen.voto.sdk.service;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -72,4 +73,7 @@ public interface VotoService {
     // Audio files
     @GET(Constants.VotoEndpoints.AUDIO_FILES)
     Call<ListAudioFilesResponse> listAudioFiles();
+
+    @DELETE(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+    Call<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id);
 }
