@@ -16,6 +16,7 @@
 
 package com.addhen.voto.sdk.test.service;
 
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -106,7 +107,14 @@ public class MockVotoService implements VotoService {
 
     @Override
     public Call<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id) {
-        DeleteAudioFileResponse deleteAudioFileResponse = mGsonDeserializer.deleteAudioFile();
+        final DeleteAudioFileResponse deleteAudioFileResponse = mGsonDeserializer.deleteAudioFile();
         return mDelegate.returningResponse(deleteAudioFileResponse).deleteAudioFile(1l);
+    }
+
+    @Override
+    public Call<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id) {
+        final AudioFileDetailsResponse audioFileDetailsResponse = mGsonDeserializer
+                .listAudioFileDetails();
+        return mDelegate.returningResponse(audioFileDetailsResponse).listAudioFileDetails(1l);
     }
 }

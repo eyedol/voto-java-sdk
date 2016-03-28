@@ -16,6 +16,7 @@
 
 package addhen.voto.sdk.rxjava.test.service;
 
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -95,5 +96,11 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     public Observable<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id) {
         final DeleteAudioFileResponse deleteAudioFileResponse = mGsonDeserializer.deleteAudioFile();
         return Observable.just(deleteAudioFileResponse);
+    }
+
+    @Override
+    public Observable<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id) {
+        final AudioFileDetailsResponse audioFileResponse = mGsonDeserializer.listAudioFileDetails();
+        return Observable.just(audioFileResponse);
     }
 }
