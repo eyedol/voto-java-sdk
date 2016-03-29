@@ -17,6 +17,9 @@ package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -103,6 +106,27 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
         }
         Observable<DeleteAudioFileResponse> response = mRxJavaVotoService.deleteAudioFile(id);
         return response;
+    }
+
+    public Observable<UploadAudioFileResponse> uploadAudioFileContent(String description,
+            AudioFileExtension fileExtension, Map<String, String> optionalFields) {
+        if (StringUtils.isEmpty(description)) {
+            throw new IllegalArgumentException("description is required.");
+        }
+
+        if ((fileExtension == null) || (StringUtils.isEmpty(fileExtension.name()))) {
+            throw new IllegalArgumentException("fileExtension is required.");
+        }
+
+        Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
+                .uploadAudioFileContent(description, fileExtension, optionalFields);
+        return observable;
+    }
+
+    public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
+        Observable<AudioFileDetailsResponse> observable = mRxJavaVotoService
+                .listAudioFileDetails(id);
+        return observable;
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {

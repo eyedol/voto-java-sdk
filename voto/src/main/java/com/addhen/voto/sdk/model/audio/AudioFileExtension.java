@@ -14,22 +14,24 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.model.subscribers;
+package com.addhen.voto.sdk.model.audio;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @author Henry Addo
  */
-public enum IfPhoneNumberExists {
-    /** Skip if phone number exists **/
-    SKIP("skip"),
-    /** Create duplicate if phone number exists **/
-    CREATE_DUPLICATE("create_duplicate"),
-    /** Add to group only if phone number exists **/
-    ADD_TO_GROUP_ONLY("add_to_group_only");
+public enum AudioFileExtension {
+    @SerializedName("mp3")
+    MP3("mp3"),
+    @SerializedName("wav")
+    WAV("wav"),
+    @SerializedName("ul")
+    UL("ul");
 
     private final String mValue;
 
-    IfPhoneNumberExists(String value) {
+    AudioFileExtension(String value) {
         mValue = value;
     }
 
