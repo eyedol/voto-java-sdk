@@ -95,4 +95,9 @@ public interface RxJavaVotoService {
             @Query("description") String description,
             @Query("file_extension") AudioFileExtension fileExtension,
             @QueryMap Map<String, String> optionalFields);
+
+    @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+    Observable<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+            @Query("file_extension") AudioFileExtension format,
+            @QueryMap Map<String, String> optionalFields);
 }

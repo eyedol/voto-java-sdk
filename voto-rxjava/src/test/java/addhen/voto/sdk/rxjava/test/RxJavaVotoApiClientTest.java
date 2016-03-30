@@ -164,6 +164,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
+    public void shouldSuccessfullyUpdateAudioFileContent() throws IOException {
+        Observable<UploadAudioFileResponse> observable = mRxJavaVotoApiClient
+                .updateAudioFileContent(1l, AudioFileExtension.MP3, null);
+        TestSubscriber<UploadAudioFileResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        UploadAudioFileResponse response = result.getOnNextEvents().get(0);
+        assertNotNull(response);
+    }
+
+    @Test
     public void shouldThrowExceptionWhenApiKeyIsNull() {
         try {
             new RxJavaVotoApiClient.Builder(null)

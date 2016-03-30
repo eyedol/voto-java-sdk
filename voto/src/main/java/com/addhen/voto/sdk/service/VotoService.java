@@ -88,4 +88,9 @@ public interface VotoService {
     Call<UploadAudioFileResponse> uploadAudioFileContent(@Query("description") String description,
             @Query("file_extension") AudioFileExtension format,
             @QueryMap Map<String, String> optionalFields);
+
+    @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+    Call<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+            @Query("file_extension") AudioFileExtension format,
+            @QueryMap Map<String, String> optionalFields);
 }

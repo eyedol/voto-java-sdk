@@ -19,9 +19,9 @@ import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
-import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
-import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -118,6 +118,14 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             throw new IllegalArgumentException("id cannot be null.");
         }
         Call<DeleteAudioFileResponse> call = mSyncVotoService.deleteAudioFile(id);
+        return call.execute().body();
+    }
+
+    public UploadAudioFileResponse updateAudioFileContent(Long id,
+            AudioFileExtension fileExtension, Map<String, String> optionalFields)
+            throws IOException {
+        Call<UploadAudioFileResponse> call = mSyncVotoService
+                .updateAudioFileContent(id, fileExtension, optionalFields);
         return call.execute().body();
     }
 
