@@ -17,7 +17,7 @@ package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
-import com.addhen.voto.sdk.util.StringUtils;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -25,6 +25,7 @@ import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
+import com.addhen.voto.sdk.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -91,6 +92,11 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         Call<DeleteSubscriberResponse> deleteSubscriber = mSyncSubscribersService
                 .deleteSubscriber(id);
         deleteSubscriber.enqueue(callback);
+    }
+
+    public void listAudioFiles(Callback<ListAudioFilesResponse> callback) {
+        Call<ListAudioFilesResponse> call = mSyncSubscribersService.listAudioFiles();
+        call.enqueue(callback);
     }
 
     public static class Builder extends BaseApiBuilder<Builder, AsyncVotoApiClient> {
