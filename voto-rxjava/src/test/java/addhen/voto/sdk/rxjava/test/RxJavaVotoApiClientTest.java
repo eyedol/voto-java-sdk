@@ -76,6 +76,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
+    public void shouldThrowExceptionWhenIdIsNull() {
+        try {
+            mRxJavaVotoApiClient.deleteAudioFile(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("id cannot be null.", e.getMessage());
+        }
+    }
+
+    @Test
     public void shouldSuccessfullyCreateSubscriber() throws IOException {
         Observable<CreateSubscriberResponse> observable = mRxJavaVotoApiClient
                 .createSubscriber("0243555333889", null);

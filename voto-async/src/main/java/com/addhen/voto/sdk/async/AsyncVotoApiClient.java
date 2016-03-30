@@ -17,7 +17,9 @@ package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.util.StringUtils;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -25,7 +27,6 @@ import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
-import com.addhen.voto.sdk.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -94,11 +95,18 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         deleteSubscriber.enqueue(callback);
     }
 
+public void deleteAudioFile(Long id, Callback<DeleteAudioFileResponse> callback) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+        Call<DeleteAudioFileResponse> call = mSyncSubscribersService.deleteAudioFile(id);
+        call.enqueue(callback);
+    }
+
     public void listAudioFiles(Callback<ListAudioFilesResponse> callback) {
         Call<ListAudioFilesResponse> call = mSyncSubscribersService.listAudioFiles();
         call.enqueue(callback);
     }
-
     public static class Builder extends BaseApiBuilder<Builder, AsyncVotoApiClient> {
 
         public Builder(String apiKey) {
