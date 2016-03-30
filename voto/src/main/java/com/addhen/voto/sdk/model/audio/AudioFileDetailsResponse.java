@@ -14,27 +14,35 @@
  *  limitations under the License.
  */
 
-package com.addhen.voto.sdk.model.subscribers;
+package com.addhen.voto.sdk.model.audio;
+
+import com.addhen.voto.sdk.model.BaseResponse;
 
 /**
  * @author Henry Addo
  */
-public enum IfPhoneNumberExists {
-    /** Skip if phone number exists **/
-    SKIP("skip"),
-    /** Create duplicate if phone number exists **/
-    CREATE_DUPLICATE("create_duplicate"),
-    /** Add to group only if phone number exists **/
-    ADD_TO_GROUP_ONLY("add_to_group_only");
+public class AudioFileDetailsResponse extends BaseResponse {
 
-    private final String mValue;
-
-    IfPhoneNumberExists(String value) {
-        mValue = value;
-    }
+    /** The returned subscribers list **/
+    public Data data;
 
     @Override
     public String toString() {
-        return mValue;
+        return "AudioFileDetailsResponse{"
+                + "data=" + data
+                + '}';
+    }
+
+    public static class Data {
+
+        /** The audio file */
+        public AudioFile audioFile;
+
+        @Override
+        public String toString() {
+            return "Data{"
+                    + "audioFile=" + audioFile
+                    + '}';
+        }
     }
 }

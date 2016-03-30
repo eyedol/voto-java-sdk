@@ -17,8 +17,11 @@
 package com.addhen.voto.sdk.rxjava.service;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -30,6 +33,7 @@ import java.util.Map;
 
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -51,7 +55,7 @@ public interface RxJavaVotoService {
     @POST(VotoEndpoints.SUBSCRIBERS)
     Observable<CreateSubscriberResponse> createSubscriber(
             @Field("phone") String phone,
-            @QueryMap Map<String, String> optionalFields
+            @FieldMap Map<String, String> optionalFields
     );
 
     @FormUrlEncoded
@@ -59,7 +63,7 @@ public interface RxJavaVotoService {
     Observable<CreateBulkSubscribersResponse> createBulkSubscribers(
             @Field("phone_numbers") String phone,
             @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
-            @QueryMap Map<String, String> optionalFields
+            @FieldMap Map<String, String> optionalFields
     );
 
     @GET(VotoEndpoints.SUBSCRIBERS)
@@ -70,7 +74,7 @@ public interface RxJavaVotoService {
     @PUT(VotoEndpoints.SUBSCRIBERS + "/{id}")
     Observable<SubscriberDetailsResponse> modifySubscriberDetails(
             @Path("id") Long id,
-            @QueryMap Map<String, String> optionalFields
+            @FieldMap Map<String, String> optionalFields
     );
 
     @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
@@ -82,4 +86,13 @@ public interface RxJavaVotoService {
 
     @DELETE(VotoEndpoints.AUDIO_FILES + "/{id}")
     Observable<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id);
+
+    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+    Observable<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id);
+
+    @POST(Constants.VotoEndpoints.AUDIO_FILES)
+    Observable<UploadAudioFileResponse> uploadAudioFileContent(
+            @Query("description") String description,
+            @Query("file_extension") AudioFileExtension fileExtension,
+            @QueryMap Map<String, String> optionalFields);
 }

@@ -17,6 +17,7 @@
 package com.addhen.voto.sdk.test.service;
 
 import com.addhen.voto.sdk.model.audio.AudioFile;
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -176,5 +177,24 @@ public class VotoServiceTest extends BaseTestCase {
         assertNotNull(response);
         assertEquals(200, (int) response.status);
         assertEquals("Successfully deleted audio file", response.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyListAudioFileDetails() throws IOException {
+        assertNotNull(mMockVotoService);
+        Call<AudioFileDetailsResponse> call = mMockVotoService.listAudioFileDetails(1l);
+        AudioFileDetailsResponse response = call.execute().body();
+        assertNotNull(response);
+        assertEquals("Audio File", response.message);
+        assertEquals(200, (int) response.status);
+        assertNotNull(response.data);
+        final AudioFile audioFile = response.data.audioFile;
+        assertEquals("Audio Filename A", audioFile.description);
+        assertEquals(3, (long) audioFile.languageId);
+        assertEquals(47, (int) audioFile.lengthSeconds);
+        String created = formatDate("yyyy-MM-dd h:m", audioFile.created);
+        assertEquals("2013-04-09 12:57", created);
+        String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
+        assertEquals("2013-04-09 12:57", modified);
     }
 }

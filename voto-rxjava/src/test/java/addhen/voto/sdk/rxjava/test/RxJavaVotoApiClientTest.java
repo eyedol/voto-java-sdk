@@ -17,8 +17,9 @@
 package addhen.voto.sdk.rxjava.test;
 
 import com.addhen.voto.sdk.Constants;
-import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
-import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -71,6 +72,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     public void shouldThrowExceptionWhenEmptyPhoneNumbersIsSet() {
         try {
             mRxJavaVotoApiClient.createBulkSubscribers(null, null, null);
+            fail();
         } catch (IllegalArgumentException e) {
             assertEquals("phoneNumbers is required.", e.getMessage());
         }
@@ -141,20 +143,23 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyListAudioFiles() throws IOException {
-        Observable<ListAudioFilesResponse> observable = mRxJavaVotoApiClient.listAudioFiles();
-        TestSubscriber<ListAudioFilesResponse> result = new TestSubscriber<>();
+    public void shouldSuccessfullyListAudioFileDetails() throws IOException {
+        Observable<AudioFileDetailsResponse> observable = mRxJavaVotoApiClient
+                .listAudioFileDetails(1l);
+        TestSubscriber<AudioFileDetailsResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
-        ListAudioFilesResponse response = result.getOnNextEvents().get(0);
+        AudioFileDetailsResponse response = result.getOnNextEvents().get(0);
         assertNotNull(response);
     }
 
     @Test
-    public void shouldSuccessfullyDeleteAudioFile() throws IOException {
-        Observable<DeleteAudioFileResponse> observable = mRxJavaVotoApiClient.deleteAudioFile(1l);
-        TestSubscriber<DeleteAudioFileResponse> result = new TestSubscriber<>();
+    public void shouldSuccessfullyUploadAudioFileContent() throws IOException {
+        Observable<UploadAudioFileResponse> observable = mRxJavaVotoApiClient
+                .uploadAudioFileContent("description",
+                        AudioFileExtension.MP3, null);
+        TestSubscriber<UploadAudioFileResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
-        DeleteAudioFileResponse response = result.getOnNextEvents().get(0);
+        UploadAudioFileResponse response = result.getOnNextEvents().get(0);
         assertNotNull(response);
     }
 
@@ -187,5 +192,25 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     public void shouldMakeSureIsDefaultLimit() {
         mRxJavaVotoApiClient.listSubscribers(0);
         assertEquals(Constants.PAGINATION_LIMIT, mRxJavaVotoApiClient.getLimit());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenEmptyDescriptionIsSet() {
+        try {
+            mRxJavaVotoApiClient.uploadAudioFileContent(null, AudioFileExtension.MP3, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("description is required.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenEmptyFileExtensionIsSet() {
+        try {
+            mRxJavaVotoApiClient.uploadAudioFileContent("description", null, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("fileExtension is required.", e.getMessage());
+        }
     }
 }
