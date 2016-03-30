@@ -43,7 +43,7 @@ import retrofit2.http.QueryMap;
  */
 public class SyncVotoApiClient extends BaseVotoApiClient {
 
-    private VotoService mSyncSubscribersService;
+    private VotoService mSyncVotoService;
 
     public SyncVotoApiClient(VotoService syncVotoService) {
         mSyncVotoService = syncVotoService;
