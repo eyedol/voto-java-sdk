@@ -17,6 +17,7 @@
 package addhen.voto.sdk.rxjava.test;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -72,6 +73,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.createBulkSubscribers(null, null, null);
         } catch (IllegalArgumentException e) {
             assertEquals("phoneNumbers is required.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenIdIsNull() {
+        try {
+            mRxJavaVotoApiClient.deleteAudioFile(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("id cannot be null.", e.getMessage());
         }
     }
 
@@ -135,7 +146,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         TestSubscriber<ListAudioFilesResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
         ListAudioFilesResponse response = result.getOnNextEvents().get(0);
-        assertNotNull(result);
+        assertNotNull(response);
+    }
+
+    @Test
+    public void shouldSuccessfullyDeleteAudioFile() throws IOException {
+        Observable<DeleteAudioFileResponse> observable = mRxJavaVotoApiClient.deleteAudioFile(1l);
+        TestSubscriber<DeleteAudioFileResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        DeleteAudioFileResponse response = result.getOnNextEvents().get(0);
+        assertNotNull(response);
     }
 
     @Test

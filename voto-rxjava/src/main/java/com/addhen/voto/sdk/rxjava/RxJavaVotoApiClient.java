@@ -17,6 +17,7 @@ package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -94,6 +95,14 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     public Observable<ListAudioFilesResponse> listAudioFiles() {
         Observable<ListAudioFilesResponse> observable = mRxJavaVotoService.listAudioFiles();
         return observable;
+    }
+    
+    public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+        Observable<DeleteAudioFileResponse> response = mRxJavaVotoService.deleteAudioFile(id);
+        return response;
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {

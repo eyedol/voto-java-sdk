@@ -18,6 +18,7 @@ package com.addhen.voto.sdk.sync;
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -93,6 +94,14 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public ListAudioFilesResponse listAudioFiles() throws IOException {
         Call<ListAudioFilesResponse> call = mSyncSubscribersService.listAudioFiles();
+        return call.execute().body();
+    }
+
+    public DeleteAudioFileResponse deleteAudioFile(Long id) throws IOException {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+        Call<DeleteAudioFileResponse> call = mSyncSubscribersService.deleteAudioFile(id);
         return call.execute().body();
     }
 
