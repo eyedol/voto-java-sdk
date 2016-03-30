@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 
 import com.addhen.voto.sdk.util.StringUtils;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -113,7 +114,7 @@ public abstract class BaseApiBuilder<B, A> {
     private void initializeGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        builder.setDateFormat(Constants.DATE_FORMAT);
+        builder.registerTypeAdapter(Date.class, new DateDeserializer());
         mGson = builder.create();
     }
 }

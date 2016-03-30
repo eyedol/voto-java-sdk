@@ -21,9 +21,6 @@ package com.addhen.voto.sdk;
  */
 public final class Constants {
 
-    /** The default date format. It's yyyy-MM-dd **/
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
-
     /** Default pagination limit value **/
     public static final int PAGINATION_LIMIT = 10;
 
@@ -41,5 +38,8 @@ public final class Constants {
 
         /** The subscribers endpoint **/
         public static final String SUBSCRIBERS = "subscribers";
+
+        /** Audio files endpoint **/
+        public static final String AUDIO_FILES = "audio_files";
     }
 }

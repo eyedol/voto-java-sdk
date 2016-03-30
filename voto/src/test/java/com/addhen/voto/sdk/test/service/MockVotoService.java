@@ -16,11 +16,7 @@
 
 package com.addhen.voto.sdk.test.service;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -49,18 +45,12 @@ public class MockVotoService implements VotoService {
 
     private final BehaviorDelegate<VotoService> mDelegate;
 
-    private Gson mGson;
-
     private GsonDeserializer mGsonDeserializer;
 
     public MockVotoService(BehaviorDelegate<VotoService> delegate,
             GsonDeserializer gsonDeserializer) {
         mDelegate = delegate;
         mGsonDeserializer = gsonDeserializer;
-        mGson = new GsonBuilder()
-                .setDateFormat(Constants.DATE_FORMAT)
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create();
     }
 
     @Override
@@ -104,5 +94,12 @@ public class MockVotoService implements VotoService {
         final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer
                 .deleteSubscriber();
         return mDelegate.returningResponse(deleteSubscriberResponse).deleteSubscriber(1l);
+    }
+
+    @Override
+    public Call<ListAudioFilesResponse> listAudioFiles() {
+        final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
+                .listAudioFiles();
+        return mDelegate.returningResponse(listAudioFilesResponse).listAudioFiles();
     }
 }
