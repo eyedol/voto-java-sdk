@@ -115,4 +115,14 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
                 .uploadAudioFileContent();
         return Observable.just(uploadAudioFileResponse);
     }
+
+    @Override
+    public Observable<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+            @Query("file_extension") AudioFileExtension format,
+            @QueryMap Map<String, String> optionalFields) {
+
+        final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
+                .updateAudioFileContent();
+        return Observable.just(uploadAudioFileResponse);
+    }
 }

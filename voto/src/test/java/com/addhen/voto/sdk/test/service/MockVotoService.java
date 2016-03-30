@@ -130,4 +130,14 @@ public class MockVotoService implements VotoService {
         return mDelegate.returningResponse(audioFileResponse)
                 .uploadAudioFileContent("description", AudioFileExtension.MP3, null);
     }
+
+    @Override
+    public Call<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+            @Query("file_extension") AudioFileExtension format,
+            @QueryMap Map<String, String> optionalFields) {
+        final UploadAudioFileResponse audioFileResponse = mGsonDeserializer
+                .updateAudioFileContent();
+        return mDelegate.returningResponse(audioFileResponse)
+                .updateAudioFileContent(id, format, optionalFields);
+    }
 }

@@ -19,9 +19,9 @@ import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
-import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -99,7 +99,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
         Observable<ListAudioFilesResponse> observable = mRxJavaVotoService.listAudioFiles();
         return observable;
     }
-    
+
     public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id cannot be null.");
@@ -126,6 +126,13 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
         Observable<AudioFileDetailsResponse> observable = mRxJavaVotoService
                 .listAudioFileDetails(id);
+        return observable;
+    }
+
+    public Observable<UploadAudioFileResponse> updateAudioFileContent(Long id,
+            AudioFileExtension fileExtension, Map<String, String> optionalFields) {
+        Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
+                .updateAudioFileContent(id, fileExtension, optionalFields);
         return observable;
     }
 

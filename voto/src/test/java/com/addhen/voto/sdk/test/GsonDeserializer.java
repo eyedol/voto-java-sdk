@@ -137,4 +137,14 @@ public final class GsonDeserializer {
         }
         return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
     }
+
+    public UploadAudioFileResponse updateAudioFileContent() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/audio/update_audio_file_content_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+    }
 }

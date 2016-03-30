@@ -126,6 +126,14 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         call.enqueue(callback);
     }
 
+    public void updateAudioFileContent(Long id,
+            AudioFileExtension fileExtension, Map<String, String> optionalFields,
+            Callback<UploadAudioFileResponse> callback) {
+        Call<UploadAudioFileResponse> call = mAsyncVotoService
+                .updateAudioFileContent(id, fileExtension, optionalFields);
+        call.enqueue(callback);
+    }
+
     public static class Builder extends BaseApiBuilder<Builder, AsyncVotoApiClient> {
 
         public Builder(String apiKey) {
