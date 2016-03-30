@@ -35,6 +35,7 @@ public class AudioFileDetailsResponse extends BaseResponse {
 
     public static class Data {
 
+        /** The audio file */
         public AudioFile audioFile;
 
         @Override

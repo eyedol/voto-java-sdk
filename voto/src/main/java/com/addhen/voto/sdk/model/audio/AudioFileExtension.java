@@ -22,10 +22,13 @@ import com.google.gson.annotations.SerializedName;
  * @author Henry Addo
  */
 public enum AudioFileExtension {
+    /** MP3 extension **/
     @SerializedName("mp3")
     MP3("mp3"),
+    /** Wav extension **/
     @SerializedName("wav")
     WAV("wav"),
+    /** Ul extension **/
     @SerializedName("ul")
     UL("ul");
 
