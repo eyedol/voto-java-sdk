@@ -18,6 +18,7 @@ package com.addhen.voto.sdk.test.service;
 
 import com.addhen.voto.sdk.model.audio.AudioFile;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -37,6 +38,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Random;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.mock.BehaviorDelegate;
@@ -196,5 +198,14 @@ public class VotoServiceTest extends BaseTestCase {
         assertEquals("2013-04-09 12:57", created);
         String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
         assertEquals("2013-04-09 12:57", modified);
+    }
+
+    @Test
+    public void shouldSuccessfullyDownloadAudioFile() throws IOException {
+        assertNotNull(mMockVotoService);
+        Call<ResponseBody> call = mMockVotoService.downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
+        ResponseBody responseBody = call.execute().body();
+        assertNotNull(responseBody);
+        assertEquals("AudioFile", responseBody.string());
     }
 }

@@ -19,6 +19,7 @@ package addhen.voto.sdk.rxjava.test;
 import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -35,6 +36,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import addhen.voto.sdk.rxjava.test.service.MockRxJavaVotoService;
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
@@ -222,5 +224,36 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         } catch (IllegalArgumentException e) {
             assertEquals("fileExtension is required.", e.getMessage());
         }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenDownloadFileIdIsNull() {
+        try {
+            mRxJavaVotoApiClient.downloadAudioFile(null, AudioFileFormat.ORIGINAL);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("id cannot be null.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenDownloadFileFileFormatIsNotSet() {
+        try {
+            mRxJavaVotoApiClient.downloadAudioFile(1l, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("format is required.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldSuccessfullyDownloadAudioFile() throws IOException {
+        Observable<ResponseBody> observable = mRxJavaVotoApiClient
+                .downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
+        TestSubscriber<ResponseBody> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        ResponseBody responseBody = result.getOnNextEvents().get(0);
+        assertNotNull(responseBody);
+        assertEquals("AudioFile", responseBody.string());
     }
 }

@@ -19,6 +19,7 @@ import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
@@ -33,6 +34,7 @@ import com.addhen.voto.sdk.util.StringUtils;
 
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.http.QueryMap;
@@ -133,6 +135,19 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             AudioFileExtension fileExtension, Map<String, String> optionalFields) {
         Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
                 .updateAudioFileContent(id, fileExtension, optionalFields);
+        return observable;
+    }
+
+    public Observable<ResponseBody> downloadAudioFile(Long id, AudioFileFormat format) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        if ((format == null) || (StringUtils.isEmpty(format.name()))) {
+            throw new IllegalArgumentException("format is required.");
+        }
+
+        Observable<ResponseBody> observable = mRxJavaVotoService.downloadAudioFile(id, format);
         return observable;
     }
 
