@@ -1,3 +1,12 @@
+## v0.2.0
+_2016-03-31_
+
+* Implements upload audio file.
+* Implements update/replace audio file.
+* Implements list audio files.
+* Implements delete audio file.
+* Implement list audio details.
+
 ## v0.1.0
 _2016-03-25_
 
