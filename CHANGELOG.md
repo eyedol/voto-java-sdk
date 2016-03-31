@@ -6,6 +6,7 @@ _2016-03-31_
 * Implements list audio files.
 * Implements delete audio file.
 * Implement list audio details.
+* Implement subscriber details.
 
 ## v0.1.0
 _2016-03-25_
