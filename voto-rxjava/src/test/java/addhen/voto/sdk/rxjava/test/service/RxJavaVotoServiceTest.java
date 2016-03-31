@@ -18,6 +18,7 @@ package addhen.voto.sdk.rxjava.test.service;
 
 import com.addhen.voto.sdk.model.audio.AudioFile;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -35,6 +36,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
@@ -194,5 +196,17 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         assertEquals("2013-04-09 12:57", created);
         String modified = formatDate("yyyy-MM-dd h:m", audioFile.modified);
         assertEquals("2013-04-09 12:57", modified);
+    }
+
+    @Test
+    public void shouldSuccessfullyDownloadAudioFile() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<ResponseBody> observable = mMockRxJavaVotoService
+                .downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
+        TestSubscriber<ResponseBody> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        ResponseBody responseBody = result.getOnNextEvents().get(0);
+        assertNotNull(responseBody);
+        assertEquals("AudioFile", responseBody.string());
     }
 }

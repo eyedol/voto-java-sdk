@@ -19,6 +19,7 @@ package com.addhen.voto.sdk.service;
 import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
@@ -31,6 +32,7 @@ import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -42,6 +44,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
 
 /**
  * @author Henry Addo
@@ -93,4 +96,8 @@ public interface VotoService {
     Call<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
             @Query("file_extension") AudioFileExtension format,
             @QueryMap Map<String, String> optionalFields);
+
+    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+    @Streaming
+    Call<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format);
 }

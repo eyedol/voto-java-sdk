@@ -19,6 +19,7 @@ import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
+import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
@@ -34,6 +35,7 @@ import com.addhen.voto.sdk.util.StringUtils;
 import java.io.IOException;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -107,6 +109,15 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
             AudioFileExtension fileExtension, Map<String, String> optionalFields,
             Callback<UploadAudioFileResponse> callback)
             throws IOException {
+
+        if (StringUtils.isEmpty(description)) {
+            throw new IllegalArgumentException("description is required.");
+        }
+
+        if ((fileExtension == null) || (StringUtils.isEmpty(fileExtension.name()))) {
+            throw new IllegalArgumentException("fileExtension is required.");
+        }
+
         Call<UploadAudioFileResponse> call = mAsyncVotoService
                 .uploadAudioFileContent(description, fileExtension, optionalFields);
         call.enqueue(callback);
@@ -129,8 +140,29 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
     public void updateAudioFileContent(Long id,
             AudioFileExtension fileExtension, Map<String, String> optionalFields,
             Callback<UploadAudioFileResponse> callback) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        if ((fileExtension == null) || (StringUtils.isEmpty(fileExtension.name()))) {
+            throw new IllegalArgumentException("fileExtension is required.");
+        }
+
         Call<UploadAudioFileResponse> call = mAsyncVotoService
                 .updateAudioFileContent(id, fileExtension, optionalFields);
+        call.enqueue(callback);
+    }
+
+    public void downloadAudioFile(Long id, AudioFileFormat format, Callback<ResponseBody> callback) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        if ((format == null) || (StringUtils.isEmpty(format.name()))) {
+            throw new IllegalArgumentException("format is required.");
+        }
+
+        Call<ResponseBody> call = mAsyncVotoService.downloadAudioFile(id, format);
         call.enqueue(callback);
     }
 
