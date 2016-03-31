@@ -84,11 +84,21 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
         return listSubscribers;
     }
 
-    public Observable<SubscriberDetailsResponse> modifySubscriberDetails(Long id,
+    public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) {
-        Observable<SubscriberDetailsResponse> modifySubscriber = mRxJavaVotoService
+        Observable<CreateSubscriberResponse> modifySubscriber = mRxJavaVotoService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber;
+    }
+
+    public Observable<SubscriberDetailsResponse> listSubscriberDetails(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        Observable<SubscriberDetailsResponse> response = mRxJavaVotoService
+                .listSubscriberDetails(id);
+        return response;
     }
 
     public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {

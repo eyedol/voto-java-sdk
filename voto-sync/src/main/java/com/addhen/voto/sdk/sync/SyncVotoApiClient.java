@@ -84,9 +84,9 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
         return listSubscribers.execute().body();
     }
 
-    public SubscriberDetailsResponse modifySubscriberDetails(Long id,
+    public CreateSubscriberResponse modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) throws IOException {
-        Call<SubscriberDetailsResponse> modifySubscriber = mSyncVotoService
+        Call<CreateSubscriberResponse> modifySubscriber = mSyncVotoService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber.execute().body();
     }
@@ -102,6 +102,15 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             throws IOException {
         Call<UploadAudioFileResponse> call = mSyncVotoService
                 .uploadAudioFileContent(description, fileExtension, optionalFields);
+        return call.execute().body();
+    }
+
+    public SubscriberDetailsResponse listSubscriberDetails(Long id) throws IOException {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        Call<SubscriberDetailsResponse> call = mSyncVotoService.listSubscriberDetails(id);
         return call.execute().body();
     }
 

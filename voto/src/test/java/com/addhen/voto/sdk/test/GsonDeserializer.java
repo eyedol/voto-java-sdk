@@ -77,13 +77,24 @@ public final class GsonDeserializer {
         return mGson.fromJson(responseJson, ListSubscribersResponse.class);
     }
 
-    public SubscriberDetailsResponse modifySubscriberDetails() {
+    public CreateSubscriberResponse modifySubscriberDetails() {
         String responseJson = null;
         try {
-            responseJson = getResource("json/subscriber/modify_subscriber_response.json");
+            responseJson = getResource("json/subscriber/modify_subscriber_details_response.json");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return mGson.fromJson(responseJson, CreateSubscriberResponse.class);
+    }
+
+    public SubscriberDetailsResponse listSubscriberDetails() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/subscriber/subscriber_details_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return mGson.fromJson(responseJson, SubscriberDetailsResponse.class);
     }
 

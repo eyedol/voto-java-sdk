@@ -26,6 +26,8 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.Status;
+import com.addhen.voto.sdk.model.subscribers.Subscriber;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.test.GsonDeserializer;
 
@@ -97,6 +99,52 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         assertNotNull(response);
         assertEquals(200, (int) response.status);
         assertEquals("Successfully deleted subscriber", response.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyModifySubscriber() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<CreateSubscriberResponse> observable = mMockRxJavaVotoService
+                .modifySubscriberDetails(1l, null);
+        TestSubscriber<CreateSubscriberResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        CreateSubscriberResponse response = result.getOnNextEvents().get(0);
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Subscriber Modified", response.message);
+        assertEquals(2, (long) response.data.id);
+    }
+
+    @Test
+    public void shouldSuccessfullyListSubscribersDetails() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<SubscriberDetailsResponse> observable = mMockRxJavaVotoService
+                .listSubscriberDetails(1l);
+        TestSubscriber<SubscriberDetailsResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        SubscriberDetailsResponse response = result.getOnNextEvents().get(0);
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Subscriber Details", response.message);
+        assertNotNull(response.data);
+        final Subscriber subscriber = response.data.subscriber;
+        assertNotNull(subscriber);
+        assertEquals(33105, (long) subscriber.id);
+        assertEquals("1", subscriber.receiveSms);
+        assertEquals("1", subscriber.receiveVoice);
+        assertEquals("0", subscriber.receiveData);
+        assertEquals("0", subscriber.receiveUssd);
+        assertEquals("255754280903", subscriber.phone);
+        assertEquals(Status.ACTIVE, subscriber.status);
+        String date = BaseTestCase.formatShowingDate(subscriber.startDate);
+        assertEquals("2015-11-13", date);
+        assertEquals(200715, (long) subscriber.languageId);
+        assertEquals("0", subscriber.isTestSubscriber);
+        assertEquals("31,32", subscriber.groupIds);
+        assertNotNull(subscriber.properties);
+        assertEquals("Firstname Othernames", subscriber.properties.name);
+        assertEquals("Someplace", subscriber.properties.location);
+        assertEquals("This is a comment", subscriber.properties.comments);
     }
 
     @Test

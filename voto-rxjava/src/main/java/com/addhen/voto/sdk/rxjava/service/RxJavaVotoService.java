@@ -75,13 +75,16 @@ public interface RxJavaVotoService {
     );
 
     @PUT(VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Observable<SubscriberDetailsResponse> modifySubscriberDetails(
+    Observable<CreateSubscriberResponse> modifySubscriberDetails(
             @Path("id") Long id,
             @FieldMap Map<String, String> optionalFields
     );
 
     @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
     Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
+
+    @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+    Observable<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
 
     // Audio files
     @GET(Constants.VotoEndpoints.AUDIO_FILES)

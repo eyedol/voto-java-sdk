@@ -77,9 +77,9 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
+    public Observable<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        final SubscriberDetailsResponse createSubscriberResponse = mGsonDeserializer
+        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .modifySubscriberDetails();
         return Observable.just(createSubscriberResponse);
     }
@@ -89,6 +89,12 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
         final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer
                 .deleteSubscriber();
         return Observable.just(deleteSubscriberResponse);
+    }
+
+    @Override
+    public Observable<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id) {
+        final SubscriberDetailsResponse response = mGsonDeserializer.listSubscriberDetails();
+        return Observable.just(response);
     }
 
     @Override

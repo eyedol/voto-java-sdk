@@ -88,9 +88,9 @@ public class MockVotoService implements VotoService {
     }
 
     @Override
-    public Call<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
+    public Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
             @QueryMap Map<String, String> optionalFields) {
-        SubscriberDetailsResponse createSubscriberResponse = mGsonDeserializer
+        final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .modifySubscriberDetails();
         return mDelegate.returningResponse(createSubscriberResponse)
                 .modifySubscriberDetails(id, optionalFields);
@@ -101,6 +101,12 @@ public class MockVotoService implements VotoService {
         final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer
                 .deleteSubscriber();
         return mDelegate.returningResponse(deleteSubscriberResponse).deleteSubscriber(1l);
+    }
+
+    @Override
+    public Call<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id) {
+        final SubscriberDetailsResponse response = mGsonDeserializer.listSubscriberDetails();
+        return mDelegate.returningResponse(response).listSubscriberDetails(id);
     }
 
     @Override

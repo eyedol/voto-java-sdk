@@ -71,11 +71,14 @@ public interface VotoService {
     Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit);
 
     @PUT(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Call<SubscriberDetailsResponse> modifySubscriberDetails(@Path("id") Long id,
+    Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
             @FieldMap Map<String, String> optionalFields);
 
     @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
     Call<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
+
+    @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+    Call<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
 
     // Audio files
     @GET(Constants.VotoEndpoints.AUDIO_FILES)

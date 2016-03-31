@@ -88,10 +88,19 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
     }
 
     public void modifySubscriberDetails(Long id, Map<String, String> optionalFields,
-            Callback<SubscriberDetailsResponse> callback) {
-        Call<SubscriberDetailsResponse> modifySubscriber = mAsyncVotoService
+            Callback<CreateSubscriberResponse> callback) {
+        Call<CreateSubscriberResponse> modifySubscriber = mAsyncVotoService
                 .modifySubscriberDetails(id, optionalFields);
         modifySubscriber.enqueue(callback);
+    }
+
+    public void listSubscriberDetails(Long id, Callback<SubscriberDetailsResponse> callback) {
+        if (id == null) {
+            throw new IllegalArgumentException("id cannot be null.");
+        }
+
+        Call<SubscriberDetailsResponse> response = mAsyncVotoService.listSubscriberDetails(id);
+        response.enqueue(callback);
     }
 
     public void deleteSubscriber(Long id, Callback<DeleteSubscriberResponse> callback) {
@@ -153,7 +162,8 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         call.enqueue(callback);
     }
 
-    public void downloadAudioFile(Long id, AudioFileFormat format, Callback<ResponseBody> callback) {
+    public void downloadAudioFile(Long id, AudioFileFormat format,
+            Callback<ResponseBody> callback) {
         if (id == null) {
             throw new IllegalArgumentException("id cannot be null.");
         }
