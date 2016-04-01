@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.util.StringUtils;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,6 +73,7 @@ public class ListAudioFilesResponseTest extends BaseTestCase {
     public void shouldTestDataToStringToMakeSureItsNotEmpty() throws Exception {
         final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
                 .listAudioFiles();
+        Assert.assertNotNull(listAudioFilesResponse.data);
         final String toString = listAudioFilesResponse.data.toString();
         assertFalse(StringUtils.isEmpty(toString));
     }

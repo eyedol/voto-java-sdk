@@ -28,7 +28,7 @@ public class ListAudioFilesResponse extends BaseResponse {
     /** The list of audio files */
     public Data data;
 
-    public class Data {
+    public static class Data {
 
         /** List of audio files **/
         public List<AudioFile> audioFiles;

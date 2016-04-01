@@ -58,4 +58,12 @@ public class UploadAudioFileResponseTest extends BaseTestCase {
         assertFalse(StringUtils.isEmpty(toString));
     }
 
+    @Test
+    public void shouldTestDataToStringToMakeSureItsNotEmpty() throws Exception {
+        final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
+                .uploadAudioFileContent();
+        assertNotNull(uploadAudioFileResponse.data);
+        final String toString = uploadAudioFileResponse.data.toString();
+        assertFalse(StringUtils.isEmpty(toString));
+    }
 }
