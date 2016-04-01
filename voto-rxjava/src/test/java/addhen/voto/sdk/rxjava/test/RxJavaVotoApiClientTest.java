@@ -285,6 +285,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         observable.subscribe(result);
         DeleteAudioFileResponse audioFileResponse = result.getOnNextEvents().get(0);
         assertNotNull(audioFileResponse);
-        System.out.println("AudioFileResponse: " + audioFileResponse);
+        assertEquals(200, (int) audioFileResponse.status);
+        assertEquals("Successfully deleted audio file", audioFileResponse.message);
     }
 }
