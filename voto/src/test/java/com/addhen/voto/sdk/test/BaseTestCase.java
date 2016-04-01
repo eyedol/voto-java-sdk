@@ -21,6 +21,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.addhen.voto.sdk.DateDeserializer;
+import com.addhen.voto.sdk.service.VotoService;
+import com.addhen.voto.sdk.test.service.MockVotoService;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -28,6 +30,12 @@ import org.junit.runners.JUnit4;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
+import retrofit2.Retrofit;
+import retrofit2.mock.BehaviorDelegate;
+import retrofit2.mock.MockRetrofit;
+import retrofit2.mock.NetworkBehavior;
 
 /**
  * All unit test cases have to inherit from this. This is to make it easier to
@@ -58,5 +66,24 @@ public abstract class BaseTestCase {
 
     protected static String formatShowingDate(Date date) {
         return formatDate("yyyy-MM-dd", date);
+    }
+
+    protected MockVotoService getMockVotoService() {
+        // Create a very simple Retrofit adapter which points the GitHub API.
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://www.demo.com")
+                .build();
+
+        // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
+        NetworkBehavior behavior = NetworkBehavior.create(new Random(2847));
+        MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
+                .networkBehavior(behavior)
+                .build();
+
+        GsonDeserializer gsonDeserializer = new GsonDeserializer(mGson);
+
+        BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
+                .create(VotoService.class);
+        return new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
     }
 }

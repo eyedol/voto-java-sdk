@@ -26,9 +26,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.Status;
-import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.test.BaseTestCase;
-import com.addhen.voto.sdk.test.GsonDeserializer;
 
 import junit.framework.TestCase;
 
@@ -36,14 +34,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Random;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.mock.BehaviorDelegate;
-import retrofit2.mock.MockRetrofit;
-import retrofit2.mock.NetworkBehavior;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
@@ -59,22 +52,7 @@ public class VotoServiceTest extends BaseTestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        // Create a very simple Retrofit adapter which points the GitHub API.
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.demo.com")
-                .build();
-
-        // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
-        NetworkBehavior behavior = NetworkBehavior.create(new Random(2847));
-        MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
-                .networkBehavior(behavior)
-                .build();
-
-        GsonDeserializer gsonDeserializer = new GsonDeserializer(mGson);
-
-        BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
-                .create(VotoService.class);
-        mMockVotoService = new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
+        mMockVotoService = getMockVotoService();
     }
 
     @Test

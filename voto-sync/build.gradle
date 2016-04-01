@@ -9,7 +9,9 @@ dependencies {
     def syncTestDependencies = rootProject.ext.syncTestDependencies
 
     compile project(':voto')
+    testCompile files(project(':voto').sourceSets.test.output)
     testCompile syncTestDependencies.junit
+    testCompile sdkTestDependencies.retrofitMock
 }
 
 ext {

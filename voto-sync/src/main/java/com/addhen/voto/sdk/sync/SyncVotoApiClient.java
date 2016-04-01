@@ -54,7 +54,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     public CreateSubscriberResponse createSubscriber(String phone,
             Map<String, String> optionalFields) throws IOException {
         if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException("phone is required and shouldn't be null or empty");
+            throw new IllegalArgumentException("phone is required and shouldn't be null or empty.");
         }
         Call<CreateSubscriberResponse> createSubscriber = mSyncVotoService.createSubscriber(
                 phone,
@@ -67,7 +67,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) throws IOException {
         if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException("phoneNumbers is required");
+            throw new IllegalArgumentException("phoneNumbers is required.");
         }
 
         Call<CreateBulkSubscribersResponse> createBulkSubscribers = mSyncVotoService
@@ -100,6 +100,14 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     public UploadAudioFileResponse uploadAudioFileContent(String description,
             AudioFileExtension fileExtension, Map<String, String> optionalFields)
             throws IOException {
+        if (StringUtils.isEmpty(description)) {
+            throw new IllegalArgumentException("description is required.");
+        }
+
+        if (fileExtension == null) {
+            throw new IllegalArgumentException("fileExtension is required.");
+        }
+
         Call<UploadAudioFileResponse> call = mSyncVotoService
                 .uploadAudioFileContent(description, fileExtension, optionalFields);
         return call.execute().body();
