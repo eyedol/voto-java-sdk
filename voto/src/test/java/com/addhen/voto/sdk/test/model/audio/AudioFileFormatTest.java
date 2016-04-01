@@ -54,4 +54,20 @@ public class AudioFileFormatTest extends BaseTestCase {
     public void shouldNotBeOrignialFormat() {
         assertNotSame("original", AudioFileFormat.OGG.toString());
     }
+
+    @Test
+    public void shouldBeOGG() {
+        assertEquals(AudioFileFormat.OGG, AudioFileFormat.valueOf(AudioFileFormat.OGG.name()));
+    }
+
+    @Test
+    public void shouldBeOriginal() {
+        assertEquals(AudioFileFormat.ORIGINAL,
+                AudioFileFormat.valueOf(AudioFileFormat.ORIGINAL.name()));
+    }
+
+    @Test
+    public void shouldKnowSizeOfSupportedFormat() {
+        assertEquals(2, AudioFileFormat.values().length);
+    }
 }
