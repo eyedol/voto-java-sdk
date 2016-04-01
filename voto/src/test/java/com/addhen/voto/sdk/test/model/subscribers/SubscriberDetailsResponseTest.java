@@ -16,7 +16,6 @@
 
 package com.addhen.voto.sdk.test.model.subscribers;
 
-import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.Status;
 import com.addhen.voto.sdk.model.subscribers.Subscriber;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
@@ -70,9 +69,17 @@ public class SubscriberDetailsResponseTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final CreateSubscriberResponse response = mGsonDeserializer.modifySubscriberDetails();
+    public void shouldTestToStringToMakeSureIsNotEmpty() throws Exception {
+        final SubscriberDetailsResponse response = mGsonDeserializer.listSubscriberDetails();
         final String toString = response.toString();
+        assertFalse(StringUtils.isEmpty(response.toString()));
+    }
+
+    @Test
+    public void shouldMakeSureDataToStringIsNotEmpty() throws Exception {
+        final SubscriberDetailsResponse response = mGsonDeserializer.listSubscriberDetails();
+        assertNotNull(response.data);
+        final String toString = response.data.toString();
         assertFalse(StringUtils.isEmpty(response.toString()));
     }
 }

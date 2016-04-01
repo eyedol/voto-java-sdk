@@ -16,15 +16,20 @@
 
 package com.addhen.voto.sdk.model.subscribers;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Henry Addo
  */
 public enum IfPhoneNumberExists {
     /** Skip if phone number exists **/
+    @SerializedName("skip")
     SKIP("skip"),
     /** Create duplicate if phone number exists **/
+    @SerializedName("create_duplicate")
     CREATE_DUPLICATE("create_duplicate"),
     /** Add to group only if phone number exists **/
+    @SerializedName("add_to_group_only")
     ADD_TO_GROUP_ONLY("add_to_group_only");
 
     private final String mValue;

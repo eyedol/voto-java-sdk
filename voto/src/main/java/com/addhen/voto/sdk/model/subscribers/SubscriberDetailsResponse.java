@@ -36,7 +36,7 @@ public class SubscriberDetailsResponse extends BaseResponse {
                 + '}';
     }
 
-    public class Data {
+    public static class Data {
 
         /** List of subscribers **/
         public Subscriber subscriber;

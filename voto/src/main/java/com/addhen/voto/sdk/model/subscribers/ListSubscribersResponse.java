@@ -54,7 +54,7 @@ public class ListSubscribersResponse extends BaseResponse {
                 + '}';
     }
 
-    public class Data {
+    public static class Data {
 
         /** List of subscribers **/
         public List<Subscriber> subscribers;

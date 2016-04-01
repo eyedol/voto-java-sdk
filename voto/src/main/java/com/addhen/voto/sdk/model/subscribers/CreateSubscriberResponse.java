@@ -37,7 +37,7 @@ public class CreateSubscriberResponse extends BaseResponse {
     }
 
     /** The data response */
-    public class Data {
+    public static class Data {
 
         /** The id of the newly created subscriber **/
         public Long id;
