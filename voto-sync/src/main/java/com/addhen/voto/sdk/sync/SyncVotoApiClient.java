@@ -40,6 +40,12 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.QueryMap;
 
+import static com.addhen.voto.sdk.Constants.ErrorMessage.DESCRIPTION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_EXTENSION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_FORMAT_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.ID_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.PHONE_NUMBER_REQUIRED;
+
 /**
  * @author Henry Addo
  */
@@ -54,7 +60,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     public CreateSubscriberResponse createSubscriber(String phone,
             Map<String, String> optionalFields) throws IOException {
         if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException("phone is required and shouldn't be null or empty.");
+            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
         }
         Call<CreateSubscriberResponse> createSubscriber = mSyncVotoService.createSubscriber(
                 phone,
@@ -67,7 +73,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) throws IOException {
         if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException("phoneNumbers is required.");
+            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
         }
 
         Call<CreateBulkSubscribersResponse> createBulkSubscribers = mSyncVotoService
@@ -86,12 +92,20 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public CreateSubscriberResponse modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) throws IOException {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
         Call<CreateSubscriberResponse> modifySubscriber = mSyncVotoService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber.execute().body();
     }
 
     public DeleteSubscriberResponse deleteSubscriber(Long id) throws IOException {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
         Call<DeleteSubscriberResponse> deleteSubscriber = mSyncVotoService
                 .deleteSubscriber(id);
         return deleteSubscriber.execute().body();
@@ -101,11 +115,11 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             AudioFileExtension fileExtension, Map<String, String> optionalFields)
             throws IOException {
         if (StringUtils.isEmpty(description)) {
-            throw new IllegalArgumentException("description is required.");
+            throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
         }
 
         if (fileExtension == null) {
-            throw new IllegalArgumentException("fileExtension is required.");
+            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
         }
 
         Call<UploadAudioFileResponse> call = mSyncVotoService
@@ -115,7 +129,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public SubscriberDetailsResponse listSubscriberDetails(Long id) throws IOException {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
 
         Call<SubscriberDetailsResponse> call = mSyncVotoService.listSubscriberDetails(id);
@@ -123,6 +137,9 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     }
 
     public AudioFileDetailsResponse listAudioFileDetails(Long id) throws IOException {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
         Call<AudioFileDetailsResponse> call = mSyncVotoService.listAudioFileDetails(id);
         return call.execute().body();
     }
@@ -134,7 +151,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public DeleteAudioFileResponse deleteAudioFile(Long id) throws IOException {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
         Call<DeleteAudioFileResponse> call = mSyncVotoService.deleteAudioFile(id);
         return call.execute().body();
@@ -143,6 +160,15 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     public UploadAudioFileResponse updateAudioFileContent(Long id,
             AudioFileExtension fileExtension, Map<String, String> optionalFields)
             throws IOException {
+
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
+        if (fileExtension == null) {
+            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
+        }
+
         Call<UploadAudioFileResponse> call = mSyncVotoService
                 .updateAudioFileContent(id, fileExtension, optionalFields);
         return call.execute().body();
@@ -150,11 +176,11 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public ResponseBody downloadAudioFile(Long id, AudioFileFormat format) throws IOException {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
 
         if (format == null) {
-            throw new IllegalArgumentException("format is required.");
+            throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
         }
 
         Call<ResponseBody> call = mSyncVotoService.downloadAudioFile(id, format);

@@ -7,7 +7,9 @@ apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 dependencies {
     compile project(':voto')
-    testCompile 'junit:junit:4.12'
+    testCompile files(project(':voto').sourceSets.test.output)
+    testCompile syncTestDependencies.junit
+    testCompile sdkTestDependencies.retrofitMock
 }
 
 // Upload artifact to bintray repo

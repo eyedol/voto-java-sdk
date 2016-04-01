@@ -42,6 +42,11 @@ import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 
+import static com.addhen.voto.sdk.Constants.ErrorMessage.DESCRIPTION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_EXTENSION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_FORMAT_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.ID_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.PHONE_NUMBER_REQUIRED;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -68,7 +73,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.createSubscriber(null, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("phone is required and shouldn't be null or empty.", e.getMessage());
+            assertEquals(PHONE_NUMBER_REQUIRED, e.getMessage());
         }
     }
 
@@ -78,7 +83,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.createBulkSubscribers(null, null, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("phoneNumbers is required.", e.getMessage());
+            assertEquals(PHONE_NUMBER_REQUIRED, e.getMessage());
         }
     }
 
@@ -88,7 +93,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.deleteAudioFile(null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("id cannot be null.", e.getMessage());
+            assertEquals(ID_REQUIRED, e.getMessage());
         }
     }
 
@@ -219,12 +224,41 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
+    public void shouldThrowExceptionWhenDeleteSubscriberFileIdIsNull() throws IOException {
+        try {
+            mRxJavaVotoApiClient.deleteSubscriber(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(ID_REQUIRED, e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenModifySubscriberDetailsFileIdIsNull() throws IOException {
+        try {
+            mRxJavaVotoApiClient.modifySubscriberDetails(null, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(ID_REQUIRED, e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenListAudioFileDetailsFileIdIsNull() throws IOException {
+        try {
+            mRxJavaVotoApiClient.listAudioFileDetails(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals(ID_REQUIRED, e.getMessage());
+        }
+    }
+
+    @Test
     public void shouldThrowExceptionWhenEmptyDescriptionIsSet() {
         try {
             mRxJavaVotoApiClient.uploadAudioFileContent(null, AudioFileExtension.MP3, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("description is required.", e.getMessage());
+            assertEquals(DESCRIPTION_REQUIRED, e.getMessage());
         }
     }
 
@@ -234,7 +268,28 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.uploadAudioFileContent("description", null, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("fileExtension is required.", e.getMessage());
+            assertEquals(FILE_EXTENSION_REQUIRED, e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenUpdateAudioFileContentFileIdIsNull() throws IOException {
+        try {
+            mRxJavaVotoApiClient.updateAudioFileContent(null, AudioFileExtension.MP3, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(ID_REQUIRED, e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenUpdateAudioFileContentFileExtensionIsNull()
+            throws IOException {
+        try {
+            mRxJavaVotoApiClient.updateAudioFileContent(1l, null, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(FILE_EXTENSION_REQUIRED, e.getMessage());
         }
     }
 
@@ -244,7 +299,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.downloadAudioFile(null, AudioFileFormat.ORIGINAL);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("id cannot be null.", e.getMessage());
+            assertEquals(ID_REQUIRED, e.getMessage());
         }
     }
 
@@ -254,7 +309,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.downloadAudioFile(1l, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("format is required.", e.getMessage());
+            assertEquals(FILE_FORMAT_REQUIRED, e.getMessage());
         }
     }
 
@@ -264,7 +319,7 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
             mRxJavaVotoApiClient.listSubscriberDetails(null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("id cannot be null.", e.getMessage());
+            assertEquals(ID_REQUIRED, e.getMessage());
         }
     }
 

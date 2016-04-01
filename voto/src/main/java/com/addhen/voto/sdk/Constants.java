@@ -28,6 +28,25 @@ public final class Constants {
         // No instantiation is allowed
     }
 
+    public static class ErrorMessage {
+
+        /** Error message for ID **/
+        public static final String ID_REQUIRED = "id cannot be null.";
+
+        /** Error message for file extension **/
+        public static final String FILE_EXTENSION_REQUIRED = "fileExtension is required.";
+
+        /** Error message for file format **/
+        public static final String FILE_FORMAT_REQUIRED = "format is required.";
+
+        /** Error message for description **/
+        public static final String DESCRIPTION_REQUIRED = "description is required.";
+
+        /** Error message for phone number **/
+        public static final String PHONE_NUMBER_REQUIRED
+                = "phone is required and shouldn't be null or empty.";
+    }
+
     public static class VotoEndpoints {
 
         /** The default voto api endpoint **/

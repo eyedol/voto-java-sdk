@@ -40,6 +40,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
+import static com.addhen.voto.sdk.Constants.ErrorMessage.DESCRIPTION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_EXTENSION_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.FILE_FORMAT_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.ID_REQUIRED;
+import static com.addhen.voto.sdk.Constants.ErrorMessage.PHONE_NUMBER_REQUIRED;
+
 /**
  * @author Henry Addo
  */
@@ -54,7 +60,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     public Observable<CreateSubscriberResponse> createSubscriber(String phone,
             Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException("phone is required and shouldn't be null or empty.");
+            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
         }
         Observable<CreateSubscriberResponse> createSubscriber = mRxJavaVotoService.createSubscriber(
                 phone,
@@ -67,7 +73,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             IfPhoneNumberExists ifPhoneNumberExists,
             @QueryMap Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException("phoneNumbers is required.");
+            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
         }
 
         Observable<CreateBulkSubscribersResponse> createBulkSubscribers = mRxJavaVotoService
@@ -86,6 +92,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
             Map<String, String> optionalFields) {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
         Observable<CreateSubscriberResponse> modifySubscriber = mRxJavaVotoService
                 .modifySubscriberDetails(id, optionalFields);
         return modifySubscriber;
@@ -93,7 +103,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<SubscriberDetailsResponse> listSubscriberDetails(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
 
         Observable<SubscriberDetailsResponse> response = mRxJavaVotoService
@@ -102,6 +112,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     }
 
     public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
         Observable<DeleteSubscriberResponse> deleteSubscriber = mRxJavaVotoService
                 .deleteSubscriber(id);
         return deleteSubscriber;
@@ -114,8 +128,9 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
+
         Observable<DeleteAudioFileResponse> response = mRxJavaVotoService.deleteAudioFile(id);
         return response;
     }
@@ -123,11 +138,11 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     public Observable<UploadAudioFileResponse> uploadAudioFileContent(String description,
             AudioFileExtension fileExtension, Map<String, String> optionalFields) {
         if (StringUtils.isEmpty(description)) {
-            throw new IllegalArgumentException("description is required.");
+            throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
         }
 
         if (fileExtension == null) {
-            throw new IllegalArgumentException("fileExtension is required.");
+            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
         }
 
         Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
@@ -136,6 +151,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     }
 
     public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
         Observable<AudioFileDetailsResponse> observable = mRxJavaVotoService
                 .listAudioFileDetails(id);
         return observable;
@@ -143,6 +162,14 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<UploadAudioFileResponse> updateAudioFileContent(Long id,
             AudioFileExtension fileExtension, Map<String, String> optionalFields) {
+        if (id == null) {
+            throw new IllegalArgumentException(ID_REQUIRED);
+        }
+
+        if (fileExtension == null) {
+            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
+        }
+
         Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
                 .updateAudioFileContent(id, fileExtension, optionalFields);
         return observable;
@@ -150,11 +177,11 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<ResponseBody> downloadAudioFile(Long id, AudioFileFormat format) {
         if (id == null) {
-            throw new IllegalArgumentException("id cannot be null.");
+            throw new IllegalArgumentException(ID_REQUIRED);
         }
 
         if (format == null) {
-            throw new IllegalArgumentException("format is required.");
+            throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
         }
 
         Observable<ResponseBody> observable = mRxJavaVotoService.downloadAudioFile(id, format);
