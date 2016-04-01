@@ -67,4 +67,12 @@ public class ListAudioFilesResponseTest extends BaseTestCase {
         final String toString = listAudioFilesResponse.toString();
         assertFalse(StringUtils.isEmpty(toString));
     }
+
+    @Test
+    public void shouldTestDataToStringToMakeSureItsNotEmpty() throws Exception {
+        final ListAudioFilesResponse listAudioFilesResponse = mGsonDeserializer
+                .listAudioFiles();
+        final String toString = listAudioFilesResponse.data.toString();
+        assertFalse(StringUtils.isEmpty(toString));
+    }
 }
