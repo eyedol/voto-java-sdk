@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
+import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -287,5 +288,15 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         assertNotNull(audioFileResponse);
         assertEquals(200, (int) audioFileResponse.status);
         assertEquals("Successfully deleted audio file", audioFileResponse.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyListAudioFile() throws IOException {
+        Observable<ListAudioFilesResponse> observable = mRxJavaVotoApiClient.listAudioFiles();
+        TestSubscriber<ListAudioFilesResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        ListAudioFilesResponse audioFilesResponse = result.getOnNextEvents().get(0);
+        assertNotNull(audioFilesResponse);
+        assertEquals(200, (int) audioFilesResponse.status);
     }
 }

@@ -145,7 +145,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
             throw new IllegalArgumentException("id cannot be null.");
         }
 
-        if ((format == null) || (StringUtils.isEmpty(format.name()))) {
+        if (format == null) {
             throw new IllegalArgumentException("format is required.");
         }
 

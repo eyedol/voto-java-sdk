@@ -126,7 +126,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             throw new IllegalArgumentException("description is required.");
         }
 
-        if ((fileExtension == null) || (StringUtils.isEmpty(fileExtension.name()))) {
+        if (fileExtension == null) {
             throw new IllegalArgumentException("fileExtension is required.");
         }
 
@@ -153,7 +153,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             throw new IllegalArgumentException("id cannot be null.");
         }
 
-        if ((format == null) || (StringUtils.isEmpty(format.name()))) {
+        if (format == null) {
             throw new IllegalArgumentException("format is required.");
         }
 
