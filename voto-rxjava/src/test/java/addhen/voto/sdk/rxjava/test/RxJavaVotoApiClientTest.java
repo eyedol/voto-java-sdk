@@ -20,11 +20,13 @@ import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
+import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
+import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.rxjava.RxJavaVotoApiClient;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.test.GsonDeserializer;
@@ -144,6 +146,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
+    public void shouldSuccessfullyListSubscriberDetails() throws IOException {
+        Observable<SubscriberDetailsResponse> observable = mRxJavaVotoApiClient
+                .listSubscriberDetails(1l);
+        TestSubscriber<SubscriberDetailsResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        SubscriberDetailsResponse createSubscriberResponse = result.getOnNextEvents().get(0);
+        assertNotNull(createSubscriberResponse);
+    }
+
+    @Test
     public void shouldSuccessfullyListAudioFileDetails() throws IOException {
         Observable<AudioFileDetailsResponse> observable = mRxJavaVotoApiClient
                 .listAudioFileDetails(1l);
@@ -246,6 +258,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
+    public void shouldThrowExceptionWhenListSubscriberIdFieldIsNull() {
+        try {
+            mRxJavaVotoApiClient.listSubscriberDetails(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("id cannot be null.", e.getMessage());
+        }
+    }
+
+    @Test
     public void shouldSuccessfullyDownloadAudioFile() throws IOException {
         Observable<ResponseBody> observable = mRxJavaVotoApiClient
                 .downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
@@ -254,5 +276,15 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         ResponseBody responseBody = result.getOnNextEvents().get(0);
         assertNotNull(responseBody);
         assertEquals("AudioFile", responseBody.string());
+    }
+
+    @Test
+    public void shouldSuccessfullyDeleteAudioFile() throws IOException {
+        Observable<DeleteAudioFileResponse> observable = mRxJavaVotoApiClient.deleteAudioFile(1l);
+        TestSubscriber<DeleteAudioFileResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        DeleteAudioFileResponse audioFileResponse = result.getOnNextEvents().get(0);
+        assertNotNull(audioFileResponse);
+        System.out.println(audioFileResponse);
     }
 }
