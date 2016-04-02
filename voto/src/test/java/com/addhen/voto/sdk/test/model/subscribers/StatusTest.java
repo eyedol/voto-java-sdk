@@ -33,7 +33,7 @@ public class StatusTest extends BaseTestCase {
     public void setUp() throws Exception {
         super.setUp();
     }
-    
+
     @Test
     public void shouldSetInActive() {
         assertEquals(Status.INACTIVE, Status.valueOf(Status.INACTIVE.name()));
