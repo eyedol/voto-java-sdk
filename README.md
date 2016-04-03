@@ -2,7 +2,7 @@
 
 ### VOTO JAVA SDK
 
-VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easiy to use. The goal of this SDK is to ease 
+VOTO Java SDK is a wrapper around the [VOTO API][1] to make it very easy to use. The goal of this SDK is to ease 
 VOTO API integration into both Android and Java applications.
 
 It comes with three independent modules:
