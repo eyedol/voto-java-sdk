@@ -31,6 +31,7 @@ import org.junit.runners.JUnit4;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.Executor;
 
 import retrofit2.Retrofit;
 import retrofit2.mock.BehaviorDelegate;
@@ -69,7 +70,6 @@ public abstract class BaseTestCase {
     }
 
     protected MockVotoService getMockVotoService() {
-        // Create a very simple Retrofit adapter which points the GitHub API.
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.demo.com")
                 .build();
@@ -85,5 +85,13 @@ public abstract class BaseTestCase {
         BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
                 .create(VotoService.class);
         return new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
+    }
+
+    private static class Synchronous implements Executor {
+
+        @Override
+        public void execute(Runnable command) {
+            command.run();
+        }
     }
 }

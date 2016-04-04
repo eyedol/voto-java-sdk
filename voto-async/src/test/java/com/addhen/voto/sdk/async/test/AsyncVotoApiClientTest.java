@@ -55,6 +55,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+
 /**
  * @author Henry Addo
  */
@@ -101,7 +102,7 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyCreateSubscriber() throws IOException {
+    public void shouldSuccessfullyCreateSubscriber() throws IOException, InterruptedException {
         mAsyncVotoApiClient
                 .createSubscriber("0243555333889", null, new Callback<CreateSubscriberResponse>() {
                     @Override
@@ -110,24 +111,22 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         CreateSubscriberResponse createSubscriberResponse = response.body();
                         assertNotNull(createSubscriberResponse);
                         assertNotNull(createSubscriberResponse.data);
-                        assertEquals(430l, (long) createSubscriberResponse.data.id);
+                        assertEquals(11, (long) createSubscriberResponse.data.id);
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateSubscriberResponse> call, Throwable t) {
+                        mCountDownLatch.countDown();
 
                     }
                 });
 
-        try {
-            mCountDownLatch.await(30, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            fail(e.getMessage());
-        }
+        mCountDownLatch.await(30, TimeUnit.SECONDS);
     }
 
     @Test
-    public void shouldSuccessfullyCreateBulkSubscribers() throws IOException {
+    public void shouldSuccessfullyCreateBulkSubscribers() throws IOException, InterruptedException {
 
         mAsyncVotoApiClient.createBulkSubscribers("02345", null, null,
                 new Callback<CreateBulkSubscribersResponse>() {
@@ -153,15 +152,11 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                     }
                 });
 
-        try {
-            mCountDownLatch.await(40, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            fail(e.getMessage());
-        }
+        mCountDownLatch.await(40, TimeUnit.SECONDS);
     }
 
     @Test
-    public void shouldSuccessfullyDeleteSubscriber() throws IOException {
+    public void shouldSuccessfullyDeleteSubscriber() throws IOException, InterruptedException {
 
         mAsyncVotoApiClient.deleteSubscriber(1l,
                 new Callback<DeleteSubscriberResponse>() {
@@ -172,17 +167,19 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         assertNotNull(response);
                         assertEquals(200, (int) response.status);
                         assertEquals("Successfully deleted subscriber", response.message);
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<DeleteSubscriberResponse> call, Throwable t) {
-
+                        mCountDownLatch.countDown();
                     }
                 });
+        mCountDownLatch.await(40, TimeUnit.SECONDS);
     }
 
     @Test
-    public void shouldSuccessfullyListSubscribers() throws IOException {
+    public void shouldSuccessfullyListSubscribers() throws IOException, InterruptedException {
 
         mAsyncVotoApiClient.listSubscribers(10,
                 new Callback<ListSubscribersResponse>() {
@@ -226,17 +223,19 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
                         assertEquals("Out flying kites",
                                 response.data.subscribers.get(0).properties.comments);
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<ListSubscribersResponse> call, Throwable t) {
-
+                        mCountDownLatch.countDown();
                     }
                 });
+        mCountDownLatch.await(40, TimeUnit.SECONDS);
     }
 
     @Test
-    public void shouldSuccessfullyModifySubscriber() throws IOException {
+    public void shouldSuccessfullyModifySubscriber() throws IOException, InterruptedException {
         mAsyncVotoApiClient
                 .modifySubscriberDetails(1l, null, new Callback<CreateSubscriberResponse>() {
                     @Override
@@ -244,17 +243,20 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                             Response<CreateSubscriberResponse> resp) {
                         CreateSubscriberResponse createSubscriberResponse = resp.body();
                         assertNotNull(createSubscriberResponse);
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateSubscriberResponse> call, Throwable t) {
                         // Do nothing
+                        mCountDownLatch.countDown();
                     }
                 });
+        mCountDownLatch.await(40, TimeUnit.SECONDS);
     }
 
     @Test
-    public void shouldSuccessfullyListSubscriberDetails() throws IOException {
+    public void shouldSuccessfullyListSubscriberDetails() throws IOException, InterruptedException {
         mAsyncVotoApiClient
                 .listSubscriberDetails(1l, new Callback<SubscriberDetailsResponse>() {
                     @Override
@@ -262,13 +264,16 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                             Response<SubscriberDetailsResponse> resp) {
                         SubscriberDetailsResponse createSubscriberResponse = resp.body();
                         assertNotNull(createSubscriberResponse);
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<SubscriberDetailsResponse> call, Throwable t) {
                         // Do nothing
+                        mCountDownLatch.countDown();
                     }
                 });
+        mCountDownLatch.await(40, TimeUnit.SECONDS);
     }
 
     @Test
