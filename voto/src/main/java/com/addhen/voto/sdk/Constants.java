@@ -60,5 +60,8 @@ public final class Constants {
 
         /** Audio files endpoint **/
         public static final String AUDIO_FILES = "audio_files";
+
+        /** Messages endpoint **/
+        public static final String MESSAGES = "messages";
     }
 }

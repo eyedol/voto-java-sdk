@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -157,5 +158,16 @@ public final class GsonDeserializer {
             e.printStackTrace();
         }
         return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+    }
+
+    // Messages
+    public ListMessagesResponse listMessages() {
+        String responseJson = null;
+        try {
+            responseJson = getResource("json/message/list_message_response.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mGson.fromJson(responseJson, ListMessagesResponse.class);
     }
 }

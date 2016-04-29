@@ -23,6 +23,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -191,6 +192,12 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         }
 
         Call<ResponseBody> call = mAsyncVotoService.downloadAudioFile(id, format);
+        call.enqueue(callback);
+    }
+
+    // Messages
+    public void listMessages(Callback<ListMessagesResponse> callback) {
+        Call<ListMessagesResponse> call = mAsyncVotoService.listMessages();
         call.enqueue(callback);
     }
 

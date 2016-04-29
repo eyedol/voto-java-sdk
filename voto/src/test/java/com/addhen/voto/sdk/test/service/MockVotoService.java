@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -154,5 +155,11 @@ public class MockVotoService implements VotoService {
     public Call<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format) {
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("text/plain"), "AudioFile");
         return mDelegate.returningResponse(responseBody).downloadAudioFile(id, format);
+    }
+
+    @Override
+    public Call<ListMessagesResponse> listMessages() {
+        final ListMessagesResponse listMessagesResponse = mGsonDeserializer.listMessages();
+        return mDelegate.returningResponse(listMessagesResponse).listMessages();
     }
 }

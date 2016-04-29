@@ -1,0 +1,188 @@
+{
+  "status": 200,
+  "code": 1000,
+  "data": {
+    "messages": [
+      {
+        "id": "201712",
+        "title": "Test release 15 Sep 2014 ",
+        "has_sms": "1",
+        "has_voice": "1",
+        "created_at": "2014-09-15 16:20:48",
+        "updated_at": "2014-09-15 16:20:48"
+      },
+      {
+        "id": "201729",
+        "title": "JHR Test message 1",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-09-21 23:35:25",
+        "updated_at": "2014-09-21 23:35:25"
+      },
+      {
+        "id": "201730",
+        "title": "JHR Test message 2",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-09-21 23:35:58",
+        "updated_at": "2014-09-21 23:35:58"
+      },
+      {
+        "id": "201731",
+        "title": "JHR Test message 3",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-09-21 23:36:28",
+        "updated_at": "2014-09-21 23:36:28"
+      },
+      {
+        "id": "201732",
+        "title": "JHR Test message 4",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-09-21 23:37:00",
+        "updated_at": "2014-09-21 23:37:00"
+      },
+      {
+        "id": "201783",
+        "title": "JHR Test message 6 -- cron",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-10-01 19:31:14",
+        "updated_at": "2014-10-01 19:31:14"
+      },
+      {
+        "id": "201784",
+        "title": "Test message 7 - cron test again",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2014-10-01 20:26:26",
+        "updated_at": "2014-10-01 20:26:26"
+      },
+      {
+        "id": "201968",
+        "title": "New this thing",
+        "has_sms": "0",
+        "has_voice": "1",
+        "created_at": "2014-10-31 16:29:50",
+        "updated_at": "2015-06-30 17:28:22"
+      },
+      {
+        "id": "202149",
+        "title": "Test message for hangup timestamp experiment",
+        "has_sms": "0",
+        "has_voice": "1",
+        "created_at": "2014-12-08 23:19:57",
+        "updated_at": "2014-12-08 23:19:57"
+      },
+      {
+        "id": "202263",
+        "title": "Testing sms sender id with Shamiso",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-01-09 08:11:41",
+        "updated_at": "2015-01-09 08:11:41"
+      },
+      {
+        "id": "202772",
+        "title": "New test messages nkoaa",
+        "has_sms": "1",
+        "has_voice": "1",
+        "created_at": "2015-05-14 22:34:59",
+        "updated_at": "2015-05-14 22:37:55"
+      },
+      {
+        "id": "202849",
+        "title": "New test message 3",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-06-08 12:32:28",
+        "updated_at": "2015-06-08 12:32:28"
+      },
+      {
+        "id": "203115",
+        "title": "New test message 3 (Copy)",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-04 17:41:05",
+        "updated_at": "2015-08-04 17:41:05"
+      },
+      {
+        "id": "203116",
+        "title": "New test messages nkoaa (Copy)",
+        "has_sms": "1",
+        "has_voice": "1",
+        "created_at": "2015-08-04 17:41:40",
+        "updated_at": "2015-08-04 17:41:40"
+      },
+      {
+        "id": "203117",
+        "title": "New test messages nkoaa (Copy 2)",
+        "has_sms": "1",
+        "has_voice": "1",
+        "created_at": "2015-08-04 17:42:26",
+        "updated_at": "2015-08-04 17:42:26"
+      },
+      {
+        "id": "203144",
+        "title": "sms from burkina dn",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-10 22:44:34",
+        "updated_at": "2015-08-21 12:03:09"
+      },
+      {
+        "id": "203231",
+        "title": "1 SMS from Niger DN",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-22 12:17:34",
+        "updated_at": "2015-08-22 12:18:23"
+      },
+      {
+        "id": "203241",
+        "title": "2 SMS from Niger DN",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-24 04:26:49",
+        "updated_at": "2015-08-24 04:28:09"
+      },
+      {
+        "id": "203242",
+        "title": "3 SMS from Niger DN",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-24 04:34:52",
+        "updated_at": "2015-08-24 05:13:13"
+      },
+      {
+        "id": "203243",
+        "title": "4 SMS from Niger DN",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-24 05:28:03",
+        "updated_at": "2015-08-24 05:29:27"
+      },
+      {
+        "id": "203244",
+        "title": "New message just in case.",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-24 05:28:48",
+        "updated_at": "2015-10-30 09:22:15"
+      },
+      {
+        "id": "203252",
+        "title": "Test message to send DJ",
+        "has_sms": "1",
+        "has_voice": "0",
+        "created_at": "2015-08-26 18:49:26",
+        "updated_at": "2015-08-26 18:52:35"
+      }
+    ]
+  },
+  "message": "Messages Fetched Successfully",
+  "more_info": "",
+  "pagination": null,
+  "url": "https://go.votomobile.org/api/v1/messages?limit=1"
+}
