@@ -54,7 +54,7 @@ public class Subscriber extends Model {
     /** The group IDs of the subscribers. This is CSV **/
     public String groupIds;
 
-    /** The active statue of the subscriber **/
+    /** The active status of the subscriber **/
     @SerializedName("active")
     public Status status;
 

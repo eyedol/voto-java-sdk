@@ -24,6 +24,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -543,5 +544,23 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         // Do nothing
                     }
                 });
+    }
+
+    @Test
+    public void shouldSuccessfullyListMessages() throws IOException {
+        mAsyncVotoApiClient.listMessages(new Callback<ListMessagesResponse>() {
+            @Override
+            public void onResponse(Call<ListMessagesResponse> call,
+                    Response<ListMessagesResponse> response) {
+                ListMessagesResponse listMessagesResponse = response.body();
+                assertNotNull(listMessagesResponse);
+                assertEquals(200, (int) listMessagesResponse.status);
+            }
+
+            @Override
+            public void onFailure(Call<ListMessagesResponse> call, Throwable t) {
+                // Do nothing
+            }
+        });
     }
 }

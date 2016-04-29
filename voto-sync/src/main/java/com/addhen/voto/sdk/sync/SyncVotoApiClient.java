@@ -23,6 +23,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -136,6 +137,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
         return call.execute().body();
     }
 
+    // Audio files
     public AudioFileDetailsResponse listAudioFileDetails(Long id) throws IOException {
         if (id == null) {
             throw new IllegalArgumentException(ID_REQUIRED);
@@ -185,6 +187,12 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
         Call<ResponseBody> call = mSyncVotoService.downloadAudioFile(id, format);
         return call.execute().body();
+    }
+
+    // Messages
+    public ListMessagesResponse listMessages() throws IOException {
+        Call<ListMessagesResponse> listMessages = mSyncVotoService.listMessages();
+        return listMessages.execute().body();
     }
 
     public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {
