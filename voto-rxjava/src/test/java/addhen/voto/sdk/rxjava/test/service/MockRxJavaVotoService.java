@@ -16,6 +16,8 @@
 
 package addhen.voto.sdk.rxjava.test.service;
 
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -37,6 +39,7 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -147,5 +150,13 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     public Observable<ListMessagesResponse> listMessages() {
         final ListMessagesResponse listMessagesResponse = mGsonDeserializer.listMessages();
         return Observable.just(listMessagesResponse);
+    }
+
+    @Override
+    public Observable<CreateResponse> createMessage(@Field("title") String title,
+            @Field("has_sms") Status hasSms, @Field("has_voice") Status hasVoice,
+            @FieldMap Map<String, String> optionalFields) {
+        final CreateResponse createResponse = mGsonDeserializer.createMessage();
+        return Observable.just(createResponse);
     }
 }

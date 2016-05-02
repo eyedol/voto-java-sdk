@@ -17,6 +17,8 @@ package com.addhen.voto.sdk.async;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -198,6 +200,13 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
     // Messages
     public void listMessages(Callback<ListMessagesResponse> callback) {
         Call<ListMessagesResponse> call = mAsyncVotoService.listMessages();
+        call.enqueue(callback);
+    }
+
+    public void createMessage(String title, Status hasSms, Status hasVoice,
+            Map<String, String> optionalFields, Callback<CreateResponse> callback) {
+        Call<CreateResponse> call = mAsyncVotoService
+                .createMessage(title, hasSms, hasVoice, optionalFields);
         call.enqueue(callback);
     }
 

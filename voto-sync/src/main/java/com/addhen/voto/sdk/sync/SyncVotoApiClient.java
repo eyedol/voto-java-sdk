@@ -17,6 +17,8 @@ package com.addhen.voto.sdk.sync;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -38,6 +40,7 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.http.QueryMap;
 
@@ -193,6 +196,14 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     public ListMessagesResponse listMessages() throws IOException {
         Call<ListMessagesResponse> listMessages = mSyncVotoService.listMessages();
         return listMessages.execute().body();
+    }
+
+    public CreateResponse createMessage(String title, Status hasSms, Status hasVoice,
+            Map<String, String> optionalFields, Callback<CreateResponse> callback)
+            throws IOException {
+        Call<CreateResponse> call = mSyncVotoService
+                .createMessage(title, hasSms, hasVoice, optionalFields);
+        return call.execute().body();
     }
 
     public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {
