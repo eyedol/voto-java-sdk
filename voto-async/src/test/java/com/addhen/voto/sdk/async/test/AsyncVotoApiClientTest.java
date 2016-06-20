@@ -18,6 +18,7 @@ package com.addhen.voto.sdk.async.test;
 
 import com.addhen.voto.sdk.Constants;
 import com.addhen.voto.sdk.async.AsyncVotoApiClient;
+import com.addhen.voto.sdk.model.CreateResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -562,5 +563,24 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                 // Do nothing
             }
         });
+    }
+
+    @Test
+    public void shouldSuccessfullyCreateMessages() throws IOException {
+        mAsyncVotoApiClient.createMessage("title", com.addhen.voto.sdk.model.Status.NO,
+                com.addhen.voto.sdk.model.Status.YES, null, new Callback<CreateResponse>() {
+                    @Override
+                    public void onResponse(Call<CreateResponse> call,
+                            Response<CreateResponse> response) {
+                        CreateResponse createResponse = response.body();
+                        assertNotNull(createResponse);
+                        assertEquals(200, (int) createResponse.status);
+                    }
+
+                    @Override
+                    public void onFailure(Call<CreateResponse> call, Throwable t) {
+                        // Do nothing
+                    }
+                });
     }
 }

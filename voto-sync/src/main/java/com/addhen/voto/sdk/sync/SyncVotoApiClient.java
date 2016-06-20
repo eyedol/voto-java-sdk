@@ -40,7 +40,6 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.http.QueryMap;
 
@@ -199,7 +198,7 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
     }
 
     public CreateResponse createMessage(String title, Status hasSms, Status hasVoice,
-            Map<String, String> optionalFields, Callback<CreateResponse> callback)
+            Map<String, String> optionalFields)
             throws IOException {
         Call<CreateResponse> call = mSyncVotoService
                 .createMessage(title, hasSms, hasVoice, optionalFields);

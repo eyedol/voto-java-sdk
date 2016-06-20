@@ -17,6 +17,8 @@
 package addhen.voto.sdk.rxjava.test;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -364,5 +366,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         ListMessagesResponse listMessagesResponse = result.getOnNextEvents().get(0);
         assertNotNull(listMessagesResponse);
         assertEquals(200, (int) listMessagesResponse.status);
+    }
+
+    @Test
+    public void shouldSuccessfullyCreateMessages() throws IOException {
+        Observable<CreateResponse> observable = mRxJavaVotoApiClient
+                .createMessage("title", Status.NO, Status.YES, null);
+        TestSubscriber<CreateResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        CreateResponse createResponse = result.getOnNextEvents().get(0);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
     }
 }
