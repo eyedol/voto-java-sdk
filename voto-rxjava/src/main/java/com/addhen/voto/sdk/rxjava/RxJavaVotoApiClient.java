@@ -89,7 +89,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             this.limit = limit;
         }
         Observable<ListSubscribersResponse> listSubscribers = mRxJavaVotoService
-                .listSubscribers(limit);
+                .listSubscribers(this.limit);
         return listSubscribers;
     }
 
@@ -201,6 +201,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             Map<String, String> optionalFields) {
         return mRxJavaVotoService.createMessage(title, hasSms, hasVoice, optionalFields);
 
+    }
+
+    public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
+        return mRxJavaVotoService.updateMessage(id, optionalFields);
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {

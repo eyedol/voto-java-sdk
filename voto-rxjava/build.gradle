@@ -14,9 +14,9 @@ dependencies {
 }
 
 // Upload artifact to bintray repo
-/*ext {
+ext {
     artifact = 'voto-sdk-rxjava'
     blob = 'Uses RxJava for accessing the VOTO API'
 }
 // Upload artifact to bintray repo
-apply from: '../gradle-config/bintray-upload.gradle'*/
+apply from: '../gradle-config/bintray-upload.gradle'

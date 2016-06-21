@@ -92,7 +92,7 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
             this.limit = limit;
         }
         Call<ListSubscribersResponse> listSubscribers = mAsyncVotoService
-                .listSubscribers(limit);
+                .listSubscribers(this.limit);
         listSubscribers.enqueue(callback);
     }
 
@@ -207,6 +207,12 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
             Map<String, String> optionalFields, Callback<CreateResponse> callback) {
         Call<CreateResponse> call = mAsyncVotoService
                 .createMessage(title, hasSms, hasVoice, optionalFields);
+        call.enqueue(callback);
+    }
+
+    public void updateMessage(Long id, Map<String, String> optionalFields,
+            Callback<CreateResponse> callback) {
+        Call<CreateResponse> call = mAsyncVotoService.updateMessage(id, optionalFields);
         call.enqueue(callback);
     }
 

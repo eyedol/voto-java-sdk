@@ -117,6 +117,13 @@ rxJavaVotoApiClient.listSubscribers(10).subscribe(new Action1<ListSubscribersRes
 });
 ```
 
+### Run sample
+
+Make sure you've your VOTO API key set in the `local.properties` file located in the root directory
+of the project. The property name should be `votoApiKey`. If you don't set this, a dummy API key will be used.
+
+After setting the voto api key, issue `./gradlew run`. This should run the sample app and output the results in the console.
+
 License
 --------
 

@@ -165,6 +165,10 @@ public final class GsonDeserializer {
         return createResponse("json/message/create_message_response.json");
     }
 
+    public CreateResponse updateMessage() {
+        return createMessage();
+    }
+
     public CreateResponse createResponse(String responseJson) {
         String createResponse = null;
         try {
