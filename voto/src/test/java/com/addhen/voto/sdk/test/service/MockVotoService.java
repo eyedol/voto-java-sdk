@@ -174,4 +174,11 @@ public class MockVotoService implements VotoService {
         return mDelegate.returningResponse(createResponse)
                 .createMessage(title, hasSms, hasVoice, optionalFields);
     }
+
+    @Override
+    public Call<CreateResponse> updateMessage(@Path("id") Long id,
+            @FieldMap Map<String, String> optionalFields) {
+        final CreateResponse createResponse = mGsonDeserializer.updateMessage();
+        return mDelegate.returningResponse(createResponse).updateMessage(id, optionalFields);
+    }
 }

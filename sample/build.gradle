@@ -28,6 +28,20 @@ mainClassName = "com.addhen.voto.sdk.sample.Main"
  */
 applicationDefaultJvmArgs = ["-Djsse.enableSNIExtension=false"]
 
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+run {
+
+    if (!properties.getProperty('votoApiKey').isEmpty()) {
+        args properties.getProperty('votoApiKey')
+    } else {
+        args 'dummi_api'
+    }
+}
+
 dependencies {
     compile project(':voto')
     compile project(':voto-sync')

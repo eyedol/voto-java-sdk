@@ -17,6 +17,7 @@
 package com.addhen.voto.sdk.sample;
 
 import com.addhen.voto.sdk.async.AsyncVotoApiClient;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.rxjava.RxJavaVotoApiClient;
 import com.addhen.voto.sdk.sync.SyncVotoApiClient;
@@ -34,14 +35,18 @@ import rx.functions.Action1;
  */
 public class Main {
 
+    private static String api_key;
+
     public static void main(String args[]) {
+        api_key = args[0];
         syncClient();
         asyncClient();
         rxJavaClient();
+        listMessagesSyncClient();
     }
 
     private static void syncClient() {
-        SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder("api_key")
+        SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder(api_key)
                 .withLogLevel(HttpLoggingInterceptor.Level.BODY)
                 .build();
         ListSubscribersResponse listSubscribersResponse = null;
@@ -55,7 +60,7 @@ public class Main {
     }
 
     private static void asyncClient() {
-        AsyncVotoApiClient asyncVotoApiClient = new AsyncVotoApiClient.Builder("api_key")
+        AsyncVotoApiClient asyncVotoApiClient = new AsyncVotoApiClient.Builder(api_key)
                 .withLogLevel(HttpLoggingInterceptor.Level.BODY)
                 .build();
         asyncVotoApiClient.listSubscribers(10, new Callback<ListSubscribersResponse>() {
@@ -74,7 +79,7 @@ public class Main {
     }
 
     private static void rxJavaClient() {
-        RxJavaVotoApiClient rxJavaVotoApiClient = new RxJavaVotoApiClient.Builder("api_key")
+        RxJavaVotoApiClient rxJavaVotoApiClient = new RxJavaVotoApiClient.Builder(api_key)
                 .withLogLevel(HttpLoggingInterceptor.Level.BODY)
                 .build();
         rxJavaVotoApiClient.listSubscribers(10).subscribe(new Action1<ListSubscribersResponse>() {
@@ -83,5 +88,19 @@ public class Main {
                 System.out.println(listSubscribersResponse);
             }
         });
+    }
+
+    private static void listMessagesSyncClient() {
+        SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder(api_key)
+                .withLogLevel(HttpLoggingInterceptor.Level.BODY)
+                .build();
+        ListMessagesResponse listMessagesResponse = null;
+        try {
+            listMessagesResponse = syncVotoApiClient.listMessages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(listMessagesResponse);
     }
 }

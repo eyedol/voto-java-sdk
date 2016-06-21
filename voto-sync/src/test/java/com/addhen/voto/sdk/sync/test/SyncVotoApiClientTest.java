@@ -378,4 +378,11 @@ public class SyncVotoApiClientTest extends BaseTestCase {
         assertNotNull(createResponse);
         assertEquals(200, (int) createResponse.status);
     }
+
+    @Test
+    public void shouldSuccessfullyUpdateMessage() throws IOException {
+        CreateResponse createResponse = mSyncVotoApiClient.updateMessage(1l, null);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
+    }
 }

@@ -89,7 +89,7 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
             this.limit = limit;
         }
         Observable<ListSubscribersResponse> listSubscribers = mRxJavaVotoService
-                .listSubscribers(limit);
+                .listSubscribers(this.limit);
         return listSubscribers;
     }
 

@@ -205,6 +205,12 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
         return call.execute().body();
     }
 
+    public CreateResponse updateMessage(Long id, Map<String, String> optionalFields)
+            throws IOException {
+        Call<CreateResponse> call = mSyncVotoService.updateMessage(id, optionalFields);
+        return call.execute().body();
+    }
+
     public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {
 
         public Builder(String apiKey) {

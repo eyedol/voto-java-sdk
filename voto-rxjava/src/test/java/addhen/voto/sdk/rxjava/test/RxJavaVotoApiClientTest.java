@@ -378,4 +378,16 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         assertNotNull(createResponse);
         assertEquals(200, (int) createResponse.status);
     }
+
+    @Test
+    public void shouldSuccessfullyUpdateMessage() throws IOException {
+        Observable<CreateResponse> observable = mRxJavaVotoApiClient.updateMessage(1l, null);
+        TestSubscriber<CreateResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        CreateResponse createResponse = result.getOnNextEvents().get(0);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
+        assertEquals(112l, (long) createResponse.data.id);
+        assertEquals("Message Created Successfully", createResponse.message);
+    }
 }

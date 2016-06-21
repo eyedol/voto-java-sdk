@@ -92,7 +92,7 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
             this.limit = limit;
         }
         Call<ListSubscribersResponse> listSubscribers = mAsyncVotoService
-                .listSubscribers(limit);
+                .listSubscribers(this.limit);
         listSubscribers.enqueue(callback);
     }
 
