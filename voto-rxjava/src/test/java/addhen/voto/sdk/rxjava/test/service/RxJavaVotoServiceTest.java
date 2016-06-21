@@ -16,11 +16,14 @@
 
 package addhen.voto.sdk.rxjava.test.service;
 
+import com.addhen.voto.sdk.model.CreateResponse;
 import com.addhen.voto.sdk.model.audio.AudioFile;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.Message;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -256,5 +259,55 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         ResponseBody responseBody = result.getOnNextEvents().get(0);
         assertNotNull(responseBody);
         assertEquals("AudioFile", responseBody.string());
+    }
+
+    @Test
+    public void shouldSuccessfullyCreateMessage() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<CreateResponse> observable = mMockRxJavaVotoService.createMessage("title",
+                com.addhen.voto.sdk.model.Status.NO, com.addhen.voto.sdk.model.Status.YES, null);
+        TestSubscriber<CreateResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        CreateResponse createResponse = result.getOnNextEvents().get(0);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
+        assertEquals(112l, (long) createResponse.data.id);
+        assertEquals("Message Created Successfully", createResponse.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyListMessages() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<ListMessagesResponse> observable = mMockRxJavaVotoService.listMessages();
+        TestSubscriber<ListMessagesResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        ListMessagesResponse listMessagesResponse = result.getOnNextEvents().get(0);
+        assertNotNull(listMessagesResponse);
+        assertEquals(200, (int) listMessagesResponse.status);
+        Message message = listMessagesResponse.data.messages.get(0);
+        assertNotNull(message);
+        assertEquals(201712, (long) message.id);
+        assertEquals("Test release 15 Sep 2014 ", message.title);
+        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasSms);
+        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasVoice);
+        System.out.println("Date: " + message);
+        String created = formatDate("yyyy-MM-dd H:mm:ss", message.created);
+        System.out.println("Created: " + created);
+        assertEquals("2014-09-15 16:20:48", created);
+        String modified = formatDate("yyyy-MM-dd H:mm:ss", message.modified);
+        assertEquals("2014-09-15 16:20:48", modified);
+    }
+
+    @Test
+    public void shouldSuccessfullyUpdateMessages() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<CreateResponse> observable = mMockRxJavaVotoService.updateMessage(112l, null);
+        TestSubscriber<CreateResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        CreateResponse createResponse = result.getOnNextEvents().get(0);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
+        assertEquals(112l, (long) createResponse.data.id);
+        assertEquals("Message Created Successfully", createResponse.message);
     }
 }

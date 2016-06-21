@@ -38,9 +38,6 @@ import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -57,7 +54,7 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<CreateSubscriberResponse> createSubscriber(@Field("phone") String phone,
+    public Observable<CreateSubscriberResponse> createSubscriber(String phone,
             @QueryMap Map<String, String> optionalFields) {
         final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .deserializeCreateSubscriberResponse();
@@ -66,37 +63,36 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
 
     @Override
     public Observable<CreateBulkSubscribersResponse> createBulkSubscribers(
-            @Field("phone_numbers") String phone,
-            @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
-            @QueryMap Map<String, String> optionalFields) {
+            String phone, IfPhoneNumberExists ifPhoneNumberExists,
+            Map<String, String> optionalFields) {
         final CreateBulkSubscribersResponse createBulkSubscribersResponse = mGsonDeserializer
                 .deserializeCreateBulkSubscriberResponse();
         return Observable.just(createBulkSubscribersResponse);
     }
 
     @Override
-    public Observable<ListSubscribersResponse> listSubscribers(@Query("limit") int limit) {
+    public Observable<ListSubscribersResponse> listSubscribers(int limit) {
         final ListSubscribersResponse listSubscribersResponse = mGsonDeserializer.listSubscribers();
         return Observable.just(listSubscribersResponse);
     }
 
     @Override
-    public Observable<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
-            @QueryMap Map<String, String> optionalFields) {
+    public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
+            Map<String, String> optionalFields) {
         final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .modifySubscriberDetails();
         return Observable.just(createSubscriberResponse);
     }
 
     @Override
-    public Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id) {
+    public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {
         final DeleteSubscriberResponse deleteSubscriberResponse = mGsonDeserializer
                 .deleteSubscriber();
         return Observable.just(deleteSubscriberResponse);
     }
 
     @Override
-    public Observable<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id) {
+    public Observable<SubscriberDetailsResponse> listSubscriberDetails(Long id) {
         final SubscriberDetailsResponse response = mGsonDeserializer.listSubscriberDetails();
         return Observable.just(response);
     }
@@ -108,13 +104,13 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id) {
+    public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
         final DeleteAudioFileResponse deleteAudioFileResponse = mGsonDeserializer.deleteAudioFile();
         return Observable.just(deleteAudioFileResponse);
     }
 
     @Override
-    public Observable<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id) {
+    public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
         final AudioFileDetailsResponse audioFileResponse = mGsonDeserializer.listAudioFileDetails();
         return Observable.just(audioFileResponse);
     }
@@ -130,9 +126,8 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
-            @Query("file_extension") AudioFileExtension format,
-            @QueryMap Map<String, String> optionalFields) {
+    public Observable<UploadAudioFileResponse> updateAudioFileContent(Long id,
+            AudioFileExtension format, Map<String, String> optionalFields) {
 
         final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
                 .updateAudioFileContent();
@@ -140,7 +135,7 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format) {
+    public Observable<ResponseBody> downloadAudioFile(Long id, AudioFileFormat format) {
         // Return a plain text file
         ResponseBody responseBody = ResponseBody.create(MediaType.parse("text/plain"), "AudioFile");
         return Observable.just(responseBody);
@@ -153,10 +148,15 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     }
 
     @Override
-    public Observable<CreateResponse> createMessage(@Field("title") String title,
-            @Field("has_sms") Status hasSms, @Field("has_voice") Status hasVoice,
-            @FieldMap Map<String, String> optionalFields) {
+    public Observable<CreateResponse> createMessage(String title,
+            Status hasSms, Status hasVoice, Map<String, String> optionalFields) {
         final CreateResponse createResponse = mGsonDeserializer.createMessage();
+        return Observable.just(createResponse);
+    }
+
+    @Override
+    public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
+        final CreateResponse createResponse = mGsonDeserializer.updateMessage();
         return Observable.just(createResponse);
     }
 }

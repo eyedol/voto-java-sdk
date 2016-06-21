@@ -583,4 +583,21 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                     }
                 });
     }
+
+    @Test
+    public void shouldSuccessfullyUpdateMessage() throws IOException {
+        mAsyncVotoApiClient.updateMessage(1l, null, new Callback<CreateResponse>() {
+            @Override
+            public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
+                CreateResponse createResponse = response.body();
+                assertNotNull(createResponse);
+                assertEquals(200, (int) createResponse.status);
+            }
+
+            @Override
+            public void onFailure(Call<CreateResponse> call, Throwable t) {
+                // Do nothing
+            }
+        });
+    }
 }

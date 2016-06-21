@@ -42,7 +42,7 @@ public class Message extends Model {
     public Date created;
 
     /** The date the audio file was modified **/
-    @SerializedName("modified_at")
+    @SerializedName("updated_at")
     public Date modified;
 
     public Message(Long id, String title, Status hasVoice, Status hasSms, Date created,

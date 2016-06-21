@@ -13,8 +13,8 @@ dependencies {
 }
 
 // Upload artifact to bintray repo
-/*ext {
+ext {
     artifact = 'voto-sdk-async'
     blob = 'Provides access to the VOTO API asynchronously'
 }
-apply from: '../gradle-config/bintray-upload.gradle'*/
+apply from: '../gradle-config/bintray-upload.gradle'
