@@ -17,6 +17,8 @@
 package com.addhen.voto.sdk.service;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -108,4 +110,13 @@ public interface VotoService {
     // Messages
     @GET(Constants.VotoEndpoints.MESSAGES)
     Call<ListMessagesResponse> listMessages();
+
+    @FormUrlEncoded
+    @POST(Constants.VotoEndpoints.MESSAGES)
+    Call<CreateResponse> createMessage(
+            @Field("title") String title,
+            @Field("has_sms") Status hasSms,
+            @Field("has_voice") Status hasVoice,
+            @FieldMap Map<String, String> optionalFields
+    );
 }

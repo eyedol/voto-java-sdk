@@ -17,12 +17,14 @@
 package com.addhen.voto.sdk.sync.test;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.CreateResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -359,5 +361,21 @@ public class SyncVotoApiClientTest extends BaseTestCase {
         ListAudioFilesResponse audioFilesResponse = mSyncVotoApiClient.listAudioFiles();
         assertNotNull(audioFilesResponse);
         assertEquals(200, (int) audioFilesResponse.status);
+    }
+
+    @Test
+    public void shouldSuccessfullyListMessages() throws IOException {
+        ListMessagesResponse listMessagesResponse = mSyncVotoApiClient.listMessages();
+        assertNotNull(listMessagesResponse);
+        assertEquals(200, (int) listMessagesResponse.status);
+    }
+
+    @Test
+    public void shouldSuccessfullyCreateMessage() throws IOException {
+        CreateResponse createResponse = mSyncVotoApiClient
+                .createMessage("title", com.addhen.voto.sdk.model.Status.NO,
+                        com.addhen.voto.sdk.model.Status.YES, null);
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
     }
 }

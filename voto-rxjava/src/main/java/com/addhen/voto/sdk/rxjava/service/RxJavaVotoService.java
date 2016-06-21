@@ -17,6 +17,8 @@
 package com.addhen.voto.sdk.rxjava.service;
 
 import com.addhen.voto.sdk.Constants;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -115,4 +117,13 @@ public interface RxJavaVotoService {
     // Messages
     @GET(Constants.VotoEndpoints.MESSAGES)
     Observable<ListMessagesResponse> listMessages();
+
+    @FormUrlEncoded
+    @POST(Constants.VotoEndpoints.MESSAGES)
+    Observable<CreateResponse> createMessage(
+            @Field("title") String title,
+            @Field("has_sms") Status hasSms,
+            @Field("has_voice") Status hasVoice,
+            @FieldMap Map<String, String> optionalFields
+    );
 }

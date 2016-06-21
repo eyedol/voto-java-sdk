@@ -17,6 +17,8 @@ package com.addhen.voto.sdk.rxjava;
 
 import com.addhen.voto.sdk.BaseApiBuilder;
 import com.addhen.voto.sdk.BaseVotoApiClient;
+import com.addhen.voto.sdk.model.CreateResponse;
+import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
@@ -193,6 +195,12 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
     public Observable<ListMessagesResponse> listMessages() {
         Observable<ListMessagesResponse> observable = mRxJavaVotoService.listMessages();
         return observable;
+    }
+
+    public Observable<CreateResponse> createMessage(String title, Status hasSms, Status hasVoice,
+            Map<String, String> optionalFields) {
+        return mRxJavaVotoService.createMessage(title, hasSms, hasVoice, optionalFields);
+
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {
