@@ -119,4 +119,10 @@ public interface VotoService {
             @Field("has_voice") Status hasVoice,
             @FieldMap Map<String, String> optionalFields
     );
+
+    @PUT(Constants.VotoEndpoints.MESSAGES + "/{id}")
+    Call<CreateResponse> updateMessage(
+            @Path("id") Long id,
+            @FieldMap Map<String, String> optionalFields
+    );
 }

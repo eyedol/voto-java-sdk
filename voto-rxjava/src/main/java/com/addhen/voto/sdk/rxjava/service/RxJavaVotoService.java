@@ -126,4 +126,10 @@ public interface RxJavaVotoService {
             @Field("has_voice") Status hasVoice,
             @FieldMap Map<String, String> optionalFields
     );
+
+    @PUT(VotoEndpoints.MESSAGES + "/{id}")
+    Observable<CreateResponse> updateMessage(
+            @Path("id") Long id,
+            @FieldMap Map<String, String> optionalFields
+    );
 }

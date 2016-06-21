@@ -203,6 +203,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     }
 
+    public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
+        return mRxJavaVotoService.updateMessage(id, optionalFields);
+    }
+
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {
 
         public Builder(String apiKey) {

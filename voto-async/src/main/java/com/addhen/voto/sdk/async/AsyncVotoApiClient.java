@@ -210,6 +210,12 @@ public class AsyncVotoApiClient extends BaseVotoApiClient {
         call.enqueue(callback);
     }
 
+    public void updateMessage(Long id, Map<String, String> optionalFields,
+            Callback<CreateResponse> callback) {
+        Call<CreateResponse> call = mAsyncVotoService.updateMessage(id, optionalFields);
+        call.enqueue(callback);
+    }
+
     public static class Builder extends BaseApiBuilder<Builder, AsyncVotoApiClient> {
 
         public Builder(String apiKey) {
