@@ -35,7 +35,8 @@ if (project.rootProject.file('local.properties').exists()) {
 
 run {
 
-    if (!properties.getProperty('votoApiKey').isEmpty()) {
+    if (properties.getProperty('votoApiKey') != null &&
+            !properties.getProperty('votoApiKey').isEmpty()) {
         args properties.getProperty('votoApiKey')
     } else {
         args 'dummi_api'
