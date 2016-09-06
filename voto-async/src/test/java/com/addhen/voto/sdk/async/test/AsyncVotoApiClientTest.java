@@ -278,14 +278,15 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyListAudioFileDetails() throws IOException {
+    public void shouldSuccessfullyListAudioFileDetails() throws IOException, InterruptedException {
+        final AtomicReference<AudioFileDetailsResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .listAudioFileDetails(1l, new Callback<AudioFileDetailsResponse>() {
                     @Override
                     public void onResponse(Call<AudioFileDetailsResponse> call,
                             Response<AudioFileDetailsResponse> resp) {
-                        AudioFileDetailsResponse response = resp.body();
-                        assertNotNull(response);
+                        actual.set(resp.body());
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
@@ -293,18 +294,22 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         // Do nothing
                     }
                 });
+        setCountDownLatchTime();
+        AudioFileDetailsResponse response = actual.get();
+        assertNotNull(response);
     }
 
     @Test
-    public void shouldSuccessfullyUploadAudioFileContent() throws IOException {
+    public void shouldSuccessfullyUploadAudioFileContent()
+            throws IOException, InterruptedException {
+        final AtomicReference<UploadAudioFileResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .uploadAudioFileContent("description",
                         AudioFileExtension.MP3, null, new Callback<UploadAudioFileResponse>() {
                             @Override
                             public void onResponse(Call<UploadAudioFileResponse> call,
                                     Response<UploadAudioFileResponse> resp) {
-                                UploadAudioFileResponse response = resp.body();
-                                assertNotNull(response);
+                                actual.set(resp.body());
                             }
 
                             @Override
@@ -312,18 +317,23 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                                 //Do nothing
                             }
                         });
+        setCountDownLatchTime();
+        UploadAudioFileResponse response = actual.get();
+        assertNotNull(response);
     }
 
     @Test
-    public void shouldSuccessfullyUpdateAudioFileContent() throws IOException {
+    public void shouldSuccessfullyUpdateAudioFileContent()
+            throws IOException, InterruptedException {
+        final AtomicReference<UploadAudioFileResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .updateAudioFileContent(1l, AudioFileExtension.MP3, null,
                         new Callback<UploadAudioFileResponse>() {
                             @Override
                             public void onResponse(Call<UploadAudioFileResponse> call,
                                     Response<UploadAudioFileResponse> resp) {
-                                UploadAudioFileResponse response = resp.body();
-                                assertNotNull(response);
+                                actual.set(resp.body());
+                                mCountDownLatch.countDown();
                             }
 
                             @Override
@@ -331,6 +341,9 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                                 //Do nothing
                             }
                         });
+        setCountDownLatchTime();
+        UploadAudioFileResponse response = actual.get();
+        assertNotNull(response);
     }
 
     @Test
@@ -350,7 +363,7 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldMakeSureLimitIsSet() throws IOException {
+    public void shouldMakeSureLimitIsSet() throws IOException, InterruptedException {
         mAsyncVotoApiClient.listSubscribers(2, new Callback<ListSubscribersResponse>() {
             @Override
             public void onResponse(Call<ListSubscribersResponse> call,
@@ -485,166 +498,199 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldSuccessfullyDownloadAudioFile() throws IOException {
+    public void shouldSuccessfullyDownloadAudioFile() throws IOException, InterruptedException {
+        final AtomicReference<ResponseBody> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .downloadAudioFile(1l, AudioFileFormat.ORIGINAL, new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call,
                             Response<ResponseBody> resp) {
-                        ResponseBody responseBody = resp.body();
-                        assertNotNull(responseBody);
-                        try {
-                            assertEquals("AudioFile", responseBody.string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        actual.set(resp.body());
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        throw new AssertionError();
                     }
                 });
+        setCountDownLatchTime();
+        ResponseBody responseBody = actual.get();
+        assertNotNull(responseBody);
+        try {
+            assertEquals("AudioFile", responseBody.string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void shouldSuccessfullyDeleteAudioFile() throws IOException {
+    public void shouldSuccessfullyDeleteAudioFile() throws IOException, InterruptedException {
+        final AtomicReference<DeleteAudioFileResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.deleteAudioFile(1l,
                 new Callback<DeleteAudioFileResponse>() {
                     @Override
                     public void onResponse(Call<DeleteAudioFileResponse> call,
                             Response<DeleteAudioFileResponse> resp) {
-                        DeleteAudioFileResponse audioFileResponse = resp.body();
-                        assertNotNull(audioFileResponse);
-                        assertEquals(200, (int) audioFileResponse.status);
-                        assertEquals("Successfully deleted audio file", audioFileResponse.message);
+                        actual.set(resp.body());
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<DeleteAudioFileResponse> call, Throwable t) {
-                        // Do nothing
+                        throw new AssertionError();
                     }
                 });
+        setCountDownLatchTime();
+        DeleteAudioFileResponse audioFileResponse = actual.get();
+        assertNotNull(audioFileResponse);
+        assertEquals(200, (int) audioFileResponse.status);
+        assertEquals("Successfully deleted audio file", audioFileResponse.message);
     }
 
     @Test
-    public void shouldSuccessfullyListAudioFile() throws IOException {
+    public void shouldSuccessfullyListAudioFile() throws IOException, InterruptedException {
+        final AtomicReference<ListAudioFilesResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.listAudioFiles(
                 new Callback<ListAudioFilesResponse>() {
                     @Override
                     public void onResponse(Call<ListAudioFilesResponse> call,
                             Response<ListAudioFilesResponse> resp) {
-                        ListAudioFilesResponse audioFilesResponse = resp.body();
-                        assertNotNull(audioFilesResponse);
-                        assertEquals(200, (int) audioFilesResponse.status);
+                        actual.set(resp.body());
+                        mCountDownLatch.countDown();
+
                     }
 
                     @Override
                     public void onFailure(Call<ListAudioFilesResponse> call, Throwable t) {
-                        // Do nothing
+                        throw new AssertionError();
                     }
                 });
+        setCountDownLatchTime();
+        ListAudioFilesResponse audioFilesResponse = actual.get();
+        assertNotNull(audioFilesResponse);
+        assertEquals(200, (int) audioFilesResponse.status);
     }
 
     @Test
-    public void shouldSuccessfullyListMessages() throws IOException {
+    public void shouldSuccessfullyListMessages() throws IOException, InterruptedException {
+        final AtomicReference<ListMessagesResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.listMessages(new Callback<ListMessagesResponse>() {
             @Override
             public void onResponse(Call<ListMessagesResponse> call,
                     Response<ListMessagesResponse> response) {
-                ListMessagesResponse listMessagesResponse = response.body();
-                assertNotNull(listMessagesResponse);
-                assertEquals(200, (int) listMessagesResponse.status);
+                actual.set(response.body());
+                mCountDownLatch.countDown();
             }
 
             @Override
             public void onFailure(Call<ListMessagesResponse> call, Throwable t) {
-                // Do nothing
+                throw new AssertionError();
             }
         });
+        setCountDownLatchTime();
+        ListMessagesResponse listMessagesResponse = actual.get();
+        assertNotNull(listMessagesResponse);
+        assertEquals(200, (int) listMessagesResponse.status);
     }
 
     @Test
-    public void shouldSuccessfullyCreateMessages() throws IOException {
+    public void shouldSuccessfullyCreateMessages() throws IOException, InterruptedException {
+        final AtomicReference<CreateResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.createMessage("title", com.addhen.voto.sdk.model.Status.NO,
                 com.addhen.voto.sdk.model.Status.YES, null, new Callback<CreateResponse>() {
                     @Override
                     public void onResponse(Call<CreateResponse> call,
                             Response<CreateResponse> response) {
-                        CreateResponse createResponse = response.body();
-                        assertNotNull(createResponse);
-                        assertEquals(200, (int) createResponse.status);
+                        actual.set(response.body());
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateResponse> call, Throwable t) {
-                        // Do nothing
+                        throw new AssertionError();
                     }
                 });
+        setCountDownLatchTime();
+        CreateResponse createResponse = actual.get();
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
     }
 
     @Test
-    public void shouldSuccessfullyUpdateMessage() throws IOException {
+    public void shouldSuccessfullyUpdateMessage() throws IOException, InterruptedException {
+        final AtomicReference<CreateResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.updateMessage(1l, null, new Callback<CreateResponse>() {
             @Override
             public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
-                CreateResponse createResponse = response.body();
-                assertNotNull(createResponse);
-                assertEquals(200, (int) createResponse.status);
+                actual.set(response.body());
+                mCountDownLatch.countDown();
             }
 
             @Override
             public void onFailure(Call<CreateResponse> call, Throwable t) {
-                // Do nothing
+                throw new AssertionError();
             }
         });
+        setCountDownLatchTime();
+        CreateResponse createResponse = actual.get();
+        assertNotNull(createResponse);
+        assertEquals(200, (int) createResponse.status);
     }
 
     @Test
-    public void shouldSuccessfullyDeleteMessage() throws IOException {
+    public void shouldSuccessfullyDeleteMessage() throws IOException, InterruptedException {
+        final AtomicReference<DeleteMessageResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.deleteMessage(1l, new Callback<DeleteMessageResponse>() {
             @Override
             public void onResponse(Call<DeleteMessageResponse> call,
                     Response<DeleteMessageResponse> response) {
-                DeleteMessageResponse deleteMessageResponse = response.body();
-                assertNotNull(deleteMessageResponse);
-                assertEquals(200, (int) deleteMessageResponse.status);
-                assertEquals("Successfully deleted message", deleteMessageResponse.message);
+                actual.set(response.body());
+                mCountDownLatch.countDown();
             }
 
             @Override
             public void onFailure(Call<DeleteMessageResponse> call, Throwable t) {
-                // Do nothing
+                throw new AssertionError();
             }
         });
-
+        setCountDownLatchTime();
+        DeleteMessageResponse deleteMessageResponse = actual.get();
+        assertNotNull(deleteMessageResponse);
+        assertEquals(200, (int) deleteMessageResponse.status);
+        assertEquals("Successfully deleted message", deleteMessageResponse.message);
     }
 
     @Test
-    public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
+    public void shouldSuccessfullyGetMessageDeliveryLogCount()
+            throws IOException, InterruptedException {
+        final AtomicReference<MessageDeliveryLogResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.getMessageDeliveryLog(1l, null,
                 new Callback<MessageDeliveryLogResponse>() {
                     @Override
                     public void onResponse(Call<MessageDeliveryLogResponse> call,
                             Response<MessageDeliveryLogResponse> response) {
-                        MessageDeliveryLogResponse messageDeliveryLogResponse = response.body();
-                        assertNotNull(messageDeliveryLogResponse);
-                        assertNotNull(messageDeliveryLogResponse);
-                        assertEquals(200, (int) messageDeliveryLogResponse.status);
-                        assertEquals(1000, (int) messageDeliveryLogResponse.code);
-                        assertNotNull(messageDeliveryLogResponse.data);
-                        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
-                        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
-                        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
-                        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
-                        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
+                        actual.set(response.body());
+                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<MessageDeliveryLogResponse> call, Throwable t) {
-                        // Do nothing
+                        throw new AssertionError();
                     }
                 });
+        setCountDownLatchTime();
+        MessageDeliveryLogResponse messageDeliveryLogResponse = actual.get();
+        assertNotNull(messageDeliveryLogResponse);
+        assertNotNull(messageDeliveryLogResponse);
+        assertEquals(200, (int) messageDeliveryLogResponse.status);
+        assertEquals(1000, (int) messageDeliveryLogResponse.code);
+        assertNotNull(messageDeliveryLogResponse.data);
+        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
+        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
+        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
+        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
+        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
     }
 
     private void setCountDownLatchTime() throws InterruptedException {
