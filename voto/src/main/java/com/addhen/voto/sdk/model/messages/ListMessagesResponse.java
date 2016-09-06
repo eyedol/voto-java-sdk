@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.messages;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-import com.addhen.voto.sdk.model.Pagination;
 
 import java.util.List;
 
@@ -27,18 +26,6 @@ import java.util.List;
  * @author Henry Addo
  */
 public class ListMessagesResponse extends BaseResponse {
-
-    /** The code from the API response **/
-    public Integer code;
-
-    /** More info **/
-    public String moreInfo;
-
-    /** The to fetch the URL **/
-    public String url;
-
-    /** The pagination property **/
-    public Pagination pagination;
 
     /** The returned subscribers list **/
     public Data data;

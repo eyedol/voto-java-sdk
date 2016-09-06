@@ -24,6 +24,18 @@ package com.addhen.voto.sdk.model;
  */
 public abstract class BaseResponse {
 
+    /** The code from the API response **/
+    public Integer code;
+
+    /** More info **/
+    public String moreInfo;
+
+    /** The to fetch the URL **/
+    public String url;
+
+    /** The pagination property **/
+    public Pagination pagination;
+
     /** The status code of the request **/
     public Integer status;
 

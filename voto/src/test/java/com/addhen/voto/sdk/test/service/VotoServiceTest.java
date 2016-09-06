@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -185,5 +186,21 @@ public class VotoServiceTest extends BaseTestCase {
         ResponseBody responseBody = call.execute().body();
         assertNotNull(responseBody);
         assertEquals("AudioFile", responseBody.string());
+    }
+
+    @Test
+    public void shouldSuccessfullyFetchMessageDeliveryCount() throws IOException {
+        assertNotNull(mMockVotoService);
+        Call<MessageDeliveryLogResponse> call = mMockVotoService.getMessageDeliveryLog(1l, null);
+        MessageDeliveryLogResponse messageDeliveryLogResponse = call.execute().body();
+        assertNotNull(messageDeliveryLogResponse);
+        assertEquals(200, (int) messageDeliveryLogResponse.status);
+        assertEquals(1000, (int) messageDeliveryLogResponse.code);
+        assertNotNull(messageDeliveryLogResponse.data);
+        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
+        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
+        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
+        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
+        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
     }
 }
