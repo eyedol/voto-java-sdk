@@ -321,6 +321,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         DeleteMessageResponse deleteMessageResponse = result.getOnNextEvents().get(0);
         assertNotNull(deleteMessageResponse);
         assertEquals(200, (int) deleteMessageResponse.status);
-        assertEquals("Succesfully deleted message", deleteMessageResponse.message);
+        assertEquals("Successfully deleted message", deleteMessageResponse.message);
     }
 }
