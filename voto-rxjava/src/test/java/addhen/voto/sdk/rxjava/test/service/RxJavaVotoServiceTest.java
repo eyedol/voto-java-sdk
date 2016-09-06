@@ -22,6 +22,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.Message;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
@@ -309,5 +310,17 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         assertEquals(200, (int) createResponse.status);
         assertEquals(112l, (long) createResponse.data.id);
         assertEquals("Message Created Successfully", createResponse.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyDeleteMessage() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<DeleteMessageResponse> observable = mMockRxJavaVotoService.deleteMessage(1l);
+        TestSubscriber<DeleteMessageResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        DeleteMessageResponse deleteMessageResponse = result.getOnNextEvents().get(0);
+        assertNotNull(deleteMessageResponse);
+        assertEquals(200, (int) deleteMessageResponse.status);
+        assertEquals("Successfully deleted message", deleteMessageResponse.message);
     }
 }
