@@ -27,6 +27,7 @@ import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -214,6 +215,13 @@ public class SyncVotoApiClient extends BaseVotoApiClient {
 
     public DeleteMessageResponse deleteMessage(Long id) throws IOException {
         Call<DeleteMessageResponse> call = mSyncVotoService.deleteMessage(id);
+        return call.execute().body();
+    }
+
+    public MessageDeliveryLogResponse getMessageDeliveryLog(Long id,
+            @QueryMap Map<String, String> optionalFields) throws IOException {
+        Call<MessageDeliveryLogResponse> call = mSyncVotoService
+                .getMessageDeliveryLog(id, optionalFields);
         return call.execute().body();
     }
 
