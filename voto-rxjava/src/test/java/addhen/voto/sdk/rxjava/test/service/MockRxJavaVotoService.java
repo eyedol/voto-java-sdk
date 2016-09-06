@@ -25,6 +25,7 @@ import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.MessageResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -38,6 +39,7 @@ import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -158,5 +160,11 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
         final CreateResponse createResponse = mGsonDeserializer.updateMessage();
         return Observable.just(createResponse);
+    }
+
+    @Override
+    public Observable<MessageResponse> deleteMessage(@Path("id") Long id) {
+        // TODO: Implement message deletion
+        return null;
     }
 }

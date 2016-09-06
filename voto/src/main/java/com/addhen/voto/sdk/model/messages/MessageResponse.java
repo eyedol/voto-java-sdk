@@ -17,42 +17,12 @@
 package com.addhen.voto.sdk.model.messages;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-import com.addhen.voto.sdk.model.Pagination;
-
-import java.util.List;
 
 /**
- * Response for message listing
+ * Base response for messages operations
  *
  * @author Henry Addo
  */
-public class ListMessagesResponse extends BaseResponse {
+public class MessageResponse extends BaseResponse {
 
-    /** The code from the API response **/
-    public Integer code;
-
-    /** More info **/
-    public String moreInfo;
-
-    /** The to fetch the URL **/
-    public String url;
-
-    /** The pagination property **/
-    public Pagination pagination;
-
-    /** The returned subscribers list **/
-    public Data data;
-
-    public static class Data {
-
-        /** List of subscribers **/
-        public List<Message> messages;
-
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "messages=" + messages
-                    + '}';
-        }
-    }
 }
