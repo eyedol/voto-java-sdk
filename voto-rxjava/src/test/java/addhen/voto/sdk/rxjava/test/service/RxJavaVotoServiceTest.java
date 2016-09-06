@@ -24,7 +24,7 @@ import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
-import com.addhen.voto.sdk.model.messages.Message;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -283,20 +283,7 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         TestSubscriber<ListMessagesResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
         ListMessagesResponse listMessagesResponse = result.getOnNextEvents().get(0);
-        assertNotNull(listMessagesResponse);
-        assertEquals(200, (int) listMessagesResponse.status);
-        Message message = listMessagesResponse.data.messages.get(0);
-        assertNotNull(message);
-        assertEquals(201712, (long) message.id);
-        assertEquals("Test release 15 Sep 2014 ", message.title);
-        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasSms);
-        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasVoice);
-        System.out.println("Date: " + message);
-        String created = formatDate("yyyy-MM-dd H:mm:ss", message.created);
-        System.out.println("Created: " + created);
-        assertEquals("2014-09-15 16:20:48", created);
-        String modified = formatDate("yyyy-MM-dd H:mm:ss", message.modified);
-        assertEquals("2014-09-15 16:20:48", modified);
+        assertListMessages(listMessagesResponse);
     }
 
     @Test
@@ -322,5 +309,16 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         assertNotNull(deleteMessageResponse);
         assertEquals(200, (int) deleteMessageResponse.status);
         assertEquals("Successfully deleted message", deleteMessageResponse.message);
+    }
+
+    @Test
+    public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
+        assertNotNull(mMockRxJavaVotoService);
+        Observable<MessageDeliveryLogResponse> observable = mMockRxJavaVotoService
+                .getMessageDeliveryLog(1l, null);
+        TestSubscriber<MessageDeliveryLogResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        MessageDeliveryLogResponse messageDeliveryLogResponse = result.getOnNextEvents().get(0);
+        assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
     }
 }

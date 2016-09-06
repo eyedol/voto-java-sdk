@@ -42,7 +42,6 @@ public class CreateSubscriberResponseTest extends BaseTestCase {
         final CreateSubscriberResponse createSubscriberResponse = mGsonDeserializer
                 .deserializeCreateSubscriberResponse();
         assertNotNull(createSubscriberResponse);
-        assertNotNull(createSubscriberResponse);
         assertNotNull(createSubscriberResponse.data);
         assertEquals(430l, (long) createSubscriberResponse.data.id);
     }

@@ -21,6 +21,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.addhen.voto.sdk.DateDeserializer;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.Message;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.test.service.MockVotoService;
 
@@ -31,12 +34,15 @@ import org.junit.runners.JUnit4;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Retrofit;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
+
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 /**
  * All unit test cases have to inherit from this. This is to make it easier to
@@ -77,6 +83,7 @@ public abstract class BaseTestCase {
         // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
         NetworkBehavior behavior = NetworkBehavior.create(new Random(2847));
         MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
+                .backgroundExecutor(Executors.newSingleThreadExecutor())
                 .networkBehavior(behavior)
                 .build();
 
@@ -87,11 +94,30 @@ public abstract class BaseTestCase {
         return new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
     }
 
-    private static class Synchronous implements Executor {
+    protected void assertMessageDeliveryLogCountResponse(
+            MessageDeliveryLogResponse messageDeliveryLogResponse) {
+        assertNotNull(messageDeliveryLogResponse);
+        assertEquals(200, (int) messageDeliveryLogResponse.status);
+        assertEquals(1000, (int) messageDeliveryLogResponse.code);
+        assertNotNull(messageDeliveryLogResponse.data);
+        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
+        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
+    }
 
-        @Override
-        public void execute(Runnable command) {
-            command.run();
-        }
+    protected void assertListMessages(ListMessagesResponse listMessagesResponse) {
+        assertNotNull(listMessagesResponse);
+        assertEquals(200, (int) listMessagesResponse.status);
+        Message message = listMessagesResponse.data.messages.get(0);
+        assertNotNull(message);
+        assertEquals(201712, (long) message.id);
+        assertEquals("Test release 15 Sep 2014 ", message.title);
+        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasSms);
+        assertEquals(com.addhen.voto.sdk.model.Status.YES, message.hasVoice);
+        System.out.println("Date: " + message);
+        String created = formatDate("yyyy-MM-dd H:mm:ss", message.created);
+        System.out.println("Created: " + created);
+        assertEquals("2014-09-15 16:20:48", created);
+        String modified = formatDate("yyyy-MM-dd H:mm:ss", message.modified);
+        assertEquals("2014-09-15 16:20:48", modified);
     }
 }
