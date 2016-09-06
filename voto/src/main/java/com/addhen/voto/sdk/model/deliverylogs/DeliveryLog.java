@@ -24,6 +24,14 @@ public class DeliveryLog {
     /** Number of delivery reports */
     public Integer count;
 
+    public DeliveryLog(Long messageId, DeliveryStatus filterDeliveryStatus, Date filterAfterDate,
+            Date filterBeforeDate) {
+        this.messageId = messageId;
+        this.filterDeliveryStatus = filterDeliveryStatus;
+        this.filterAfterDate = filterAfterDate;
+        this.filterBeforeDate = filterBeforeDate;
+    }
+
     @Override
     public String toString() {
         return "DeliveryLog{"
