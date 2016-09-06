@@ -26,6 +26,7 @@ import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -166,5 +167,13 @@ public class MockRxJavaVotoService implements RxJavaVotoService {
     public Observable<DeleteMessageResponse> deleteMessage(@Path("id") Long id) {
         final DeleteMessageResponse deleteMessageResponse = mGsonDeserializer.deleteMessage();
         return Observable.just(deleteMessageResponse);
+    }
+
+    @Override
+    public Observable<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
+            @QueryMap Map<String, String> optionalFields) {
+        final MessageDeliveryLogResponse messageDeliveryLogResponse = mGsonDeserializer
+                .getMessageDeliveryLogCount();
+        return Observable.just(messageDeliveryLogResponse);
     }
 }
