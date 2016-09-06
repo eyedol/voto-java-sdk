@@ -26,6 +26,7 @@ import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -599,5 +600,32 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                 // Do nothing
             }
         });
+    }
+
+    @Test
+    public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
+        mAsyncVotoApiClient.getMessageDeliveryLog(1l, null,
+                new Callback<MessageDeliveryLogResponse>() {
+                    @Override
+                    public void onResponse(Call<MessageDeliveryLogResponse> call,
+                            Response<MessageDeliveryLogResponse> response) {
+                        MessageDeliveryLogResponse messageDeliveryLogResponse = response.body();
+                        assertNotNull(messageDeliveryLogResponse);
+                        assertNotNull(messageDeliveryLogResponse);
+                        assertEquals(200, (int) messageDeliveryLogResponse.status);
+                        assertEquals(1000, (int) messageDeliveryLogResponse.code);
+                        assertNotNull(messageDeliveryLogResponse.data);
+                        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
+                        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
+                        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
+                        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
+                        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MessageDeliveryLogResponse> call, Throwable t) {
+                        // Do nothing
+                    }
+                });
     }
 }
