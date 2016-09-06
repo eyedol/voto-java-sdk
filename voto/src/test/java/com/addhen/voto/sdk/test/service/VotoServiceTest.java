@@ -193,14 +193,6 @@ public class VotoServiceTest extends BaseTestCase {
         assertNotNull(mMockVotoService);
         Call<MessageDeliveryLogResponse> call = mMockVotoService.getMessageDeliveryLog(1l, null);
         MessageDeliveryLogResponse messageDeliveryLogResponse = call.execute().body();
-        assertNotNull(messageDeliveryLogResponse);
-        assertEquals(200, (int) messageDeliveryLogResponse.status);
-        assertEquals(1000, (int) messageDeliveryLogResponse.code);
-        assertNotNull(messageDeliveryLogResponse.data);
-        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
-        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
-        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
-        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
-        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
+        assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
     }
 }
