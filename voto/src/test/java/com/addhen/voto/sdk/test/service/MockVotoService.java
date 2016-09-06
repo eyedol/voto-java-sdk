@@ -25,6 +25,7 @@ import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
+import com.addhen.voto.sdk.model.messages.MessageResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -180,5 +181,11 @@ public class MockVotoService implements VotoService {
             @FieldMap Map<String, String> optionalFields) {
         final CreateResponse createResponse = mGsonDeserializer.updateMessage();
         return mDelegate.returningResponse(createResponse).updateMessage(id, optionalFields);
+    }
+
+    @Override
+    public Call<MessageResponse> deleteMessage(@Path("id") Long id) {
+        // TODO: Delete messages
+        return null;
     }
 }
