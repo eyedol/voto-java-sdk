@@ -26,7 +26,7 @@ import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
-import com.addhen.voto.sdk.model.messages.MessageResponse;
+import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -135,5 +135,5 @@ public interface RxJavaVotoService {
     );
 
     @DELETE(VotoEndpoints.MESSAGES + "/{id}")
-    Observable<MessageResponse> deleteMessage(@Path("id") Long id);
+    Observable<DeleteMessageResponse> deleteMessage(@Path("id") Long id);
 }

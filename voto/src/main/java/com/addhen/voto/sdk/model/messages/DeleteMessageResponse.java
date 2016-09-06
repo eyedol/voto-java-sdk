@@ -23,6 +23,6 @@ import com.addhen.voto.sdk.model.BaseResponse;
  *
  * @author Henry Addo
  */
-public class MessageResponse extends BaseResponse {
+public class DeleteMessageResponse extends BaseResponse {
 
 }
