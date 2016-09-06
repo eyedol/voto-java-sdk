@@ -400,11 +400,6 @@ public class SyncVotoApiClientTest extends BaseTestCase {
     public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
         MessageDeliveryLogResponse messageDeliveryLogResponse = mSyncVotoApiClient
                 .getMessageDeliveryLog(1l, null);
-        assertNotNull(messageDeliveryLogResponse);
-        assertEquals(200, (int) messageDeliveryLogResponse.status);
-        assertEquals(1000, (int) messageDeliveryLogResponse.code);
-        assertNotNull(messageDeliveryLogResponse.data);
-        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
-        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
+        assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
     }
 }

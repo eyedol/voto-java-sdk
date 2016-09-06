@@ -34,7 +34,6 @@ public class DeleteMessageResponseTest extends BaseTestCase {
     @Test
     public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
         final String toString = mDeleteMessageResponse.toString();
-        System.out.print(toString);
         assertEquals(
                 "BaseResponse{status=200, message='Successfully deleted message'}",
                 toString

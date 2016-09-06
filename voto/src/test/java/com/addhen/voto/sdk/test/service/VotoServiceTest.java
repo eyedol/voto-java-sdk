@@ -21,6 +21,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
+import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -54,11 +55,11 @@ public class VotoServiceTest extends BaseTestCase {
     public void setUp() throws Exception {
         super.setUp();
         mMockVotoService = getMockVotoService();
+        assertNotNull(mMockVotoService);
     }
 
     @Test
     public void shouldSuccessfullyCreateSubscriber() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<CreateSubscriberResponse> call = mMockVotoService
                 .createSubscriber("", null);
         CreateSubscriberResponse createSubscriberResponse = call.execute().body();
@@ -69,7 +70,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyCreateBulkSubscribers() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<CreateBulkSubscribersResponse> call = mMockVotoService
                 .createBulkSubscribers("", null, null);
         CreateBulkSubscribersResponse response = call.execute().body();
@@ -82,7 +82,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeleteSubscriber() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<DeleteSubscriberResponse> call = mMockVotoService.deleteSubscriber(1l);
         DeleteSubscriberResponse response = call.execute().body();
         assertNotNull(response);
@@ -92,7 +91,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListSubscribers() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<ListSubscribersResponse> call = mMockVotoService.listSubscribers(10);
         ListSubscribersResponse response = call.execute().body();
         assertNotNull(response);
@@ -130,7 +128,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListAudioFiles() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<ListAudioFilesResponse> call = mMockVotoService.listAudioFiles();
         ListAudioFilesResponse listAudioFilesResponse = call.execute().body();
 
@@ -152,7 +149,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeleteAudioFIle() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<DeleteAudioFileResponse> call = mMockVotoService.deleteAudioFile(1l);
         DeleteAudioFileResponse response = call.execute().body();
         assertNotNull(response);
@@ -162,7 +158,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListAudioFileDetails() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<AudioFileDetailsResponse> call = mMockVotoService.listAudioFileDetails(1l);
         AudioFileDetailsResponse response = call.execute().body();
         assertNotNull(response);
@@ -181,7 +176,6 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDownloadAudioFile() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<ResponseBody> call = mMockVotoService.downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
         ResponseBody responseBody = call.execute().body();
         assertNotNull(responseBody);
@@ -190,9 +184,15 @@ public class VotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyFetchMessageDeliveryCount() throws IOException {
-        assertNotNull(mMockVotoService);
         Call<MessageDeliveryLogResponse> call = mMockVotoService.getMessageDeliveryLog(1l, null);
         MessageDeliveryLogResponse messageDeliveryLogResponse = call.execute().body();
         assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
+    }
+
+    @Test
+    public void shouldSuccessfullyListMessages() throws IOException {
+        Call<ListMessagesResponse> call = mMockVotoService.listMessages();
+        ListMessagesResponse listMessagesResponse = call.execute().body();
+        assertListMessages(listMessagesResponse);
     }
 }
