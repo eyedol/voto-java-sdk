@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.addhen.voto.sdk.DateDeserializer;
+import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
 import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.test.service.MockVotoService;
 
@@ -37,6 +38,9 @@ import retrofit2.Retrofit;
 import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
+
+import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 /**
  * All unit test cases have to inherit from this. This is to make it easier to
@@ -86,5 +90,15 @@ public abstract class BaseTestCase {
         BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
                 .create(VotoService.class);
         return new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
+    }
+
+    protected void assertMessageDeliveryLogCountResponse(
+            MessageDeliveryLogResponse messageDeliveryLogResponse) {
+        assertNotNull(messageDeliveryLogResponse);
+        assertEquals(200, (int) messageDeliveryLogResponse.status);
+        assertEquals(1000, (int) messageDeliveryLogResponse.code);
+        assertNotNull(messageDeliveryLogResponse.data);
+        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
+        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
     }
 }

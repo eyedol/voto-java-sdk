@@ -333,14 +333,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         TestSubscriber<MessageDeliveryLogResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
         MessageDeliveryLogResponse messageDeliveryLogResponse = result.getOnNextEvents().get(0);
-        assertNotNull(messageDeliveryLogResponse);
-        assertEquals(200, (int) messageDeliveryLogResponse.status);
-        assertEquals(1000, (int) messageDeliveryLogResponse.code);
-        assertNotNull(messageDeliveryLogResponse.data);
-        assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
-        assertEquals(2, (int) messageDeliveryLogResponse.data.count);
-        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
-        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
-        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
+        assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
     }
 }

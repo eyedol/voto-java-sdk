@@ -3,6 +3,8 @@
   "code": 1000,
   "data": {
     "message_id": "201712",
+    "filter_delivery_status": "6",
+    "filter_after_date": "2014-02-15",
     "count": 2
   },
   "message": "Fetched Message Counts: 2 times accessed.",

@@ -406,8 +406,5 @@ public class SyncVotoApiClientTest extends BaseTestCase {
         assertNotNull(messageDeliveryLogResponse.data);
         assertEquals(201712, (long) messageDeliveryLogResponse.data.messageId);
         assertEquals(2, (int) messageDeliveryLogResponse.data.count);
-        assertNull(messageDeliveryLogResponse.data.filterAfterDate);
-        assertNull(messageDeliveryLogResponse.data.filterBeforeDate);
-        assertNull(messageDeliveryLogResponse.data.filterDeliveryStatus);
     }
 }
