@@ -42,6 +42,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -67,7 +68,7 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
 
     private AsyncVotoApiClient mAsyncVotoApiClient;
 
-    private CountDownLatch mCountDownLatch = new CountDownLatch(1);
+    private final CountDownLatch mCountDownLatch = new CountDownLatch(1);
 
     @Before
     public void setUp() throws Exception {
@@ -116,168 +117,164 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         assertNotNull(createSubscriberResponse);
                         assertNotNull(createSubscriberResponse.data);
                         assertEquals(11, (long) createSubscriberResponse.data.id);
-                        mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateSubscriberResponse> call, Throwable t) {
-                        mCountDownLatch.countDown();
 
                     }
                 });
-
-        mCountDownLatch.await(30, TimeUnit.SECONDS);
     }
 
     @Test
     public void shouldSuccessfullyCreateBulkSubscribers() throws IOException, InterruptedException {
-
+        final AtomicReference<CreateBulkSubscribersResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.createBulkSubscribers("02345", null, null,
                 new Callback<CreateBulkSubscribersResponse>() {
                     @Override
                     public void onResponse(Call<CreateBulkSubscribersResponse> call,
                             Response<CreateBulkSubscribersResponse> resp) {
-                        CreateBulkSubscribersResponse response = resp.body();
-                        assertNotNull(response);
-                        assertEquals(200, (int) response.status);
-                        assertEquals("Subscriber(s) Created Successfully..",
-                                response.message);
-                        assertEquals(5, response.data.size());
-                        assertEquals(181, (long) response.data.get(0));
-
-                        //Release latch
+                        actual.set(resp.body());
                         mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateBulkSubscribersResponse> call,
                             Throwable t) {
-
+                        throw new AssertionError();
                     }
                 });
-
-        mCountDownLatch.await(40, TimeUnit.SECONDS);
+        setCountDownLatchTime();
+        CreateBulkSubscribersResponse response = actual.get();
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Subscriber(s) Created Successfully", response.message);
+        assertEquals(5, response.data.size());
+        assertEquals(181, (long) response.data.get(0));
     }
 
     @Test
     public void shouldSuccessfullyDeleteSubscriber() throws IOException, InterruptedException {
-
+        final AtomicReference<DeleteSubscriberResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.deleteSubscriber(1l,
                 new Callback<DeleteSubscriberResponse>() {
                     @Override
                     public void onResponse(Call<DeleteSubscriberResponse> call,
                             Response<DeleteSubscriberResponse> resp) {
-                        DeleteSubscriberResponse response = resp.body();
-                        assertNotNull(response);
-                        assertEquals(200, (int) response.status);
-                        assertEquals("Successfully deleted subscriber", response.message);
+                        actual.set(resp.body());
                         mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<DeleteSubscriberResponse> call, Throwable t) {
-                        mCountDownLatch.countDown();
                     }
                 });
-        mCountDownLatch.await(40, TimeUnit.SECONDS);
+        setCountDownLatchTime();
+        DeleteSubscriberResponse response = actual.get();
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals("Successfully deleted subscriber", response.message);
     }
 
     @Test
     public void shouldSuccessfullyListSubscribers() throws IOException, InterruptedException {
-
+        final AtomicReference<ListSubscribersResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient.listSubscribers(10,
                 new Callback<ListSubscribersResponse>() {
                     @Override
                     public void onResponse(Call<ListSubscribersResponse> call,
                             Response<ListSubscribersResponse> resp) {
-                        ListSubscribersResponse response = resp.body();
-                        assertNotNull(response);
-                        assertEquals(200, (int) response.status);
-                        assertEquals(1001, (int) response.code);
-                        assertEquals("Subscribers fetched successfully", response.message);
-                        assertEquals("", response.moreInfo);
-                        assertNotNull(response.message);
-                        assertEquals("https://go.votomobile.org/api/v1/subscribers?limit=2",
-                                response.url);
-                        assertEquals(
-                                "https://go.votomobile.org/api/v1/subscribers?limit=2&page_after=376089",
-                                response.pagination.nextURL);
-                        assertNull(response.pagination.previousURL);
-                        assertNotNull(response.data.subscribers);
-                        assertEquals(2, response.data.subscribers.size());
-                        assertNotNull(response.data.subscribers.get(0));
-                        assertEquals(373648l, (long) response.data.subscribers.get(0).id);
-                        assertEquals("0", response.data.subscribers.get(0).receiveSms);
-                        assertEquals("1", response.data.subscribers.get(0).receiveVoice);
-                        assertEquals("0", response.data.subscribers.get(0).receiveData);
-                        assertEquals("0", response.data.subscribers.get(0).receiveUssd);
-                        assertEquals("233264164182", response.data.subscribers.get(0).phone);
-                        assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
-                        String date = BaseTestCase
-                                .formatShowingDate(response.data.subscribers.get(0).startDate);
-                        assertEquals("2014-09-10", date);
-                        assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
-                        assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);
-                        assertEquals(
-                                "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, 204137",
-                                response.data.subscribers.get(0).groupIds);
-                        assertNotNull(response.data.subscribers.get(0).properties);
-                        assertEquals("Kodjo Antwi",
-                                response.data.subscribers.get(0).properties.name);
-                        assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
-                        assertEquals("Out flying kites",
-                                response.data.subscribers.get(0).properties.comments);
+                        actual.set(resp.body());
                         mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<ListSubscribersResponse> call, Throwable t) {
-                        mCountDownLatch.countDown();
+                        throw new AssertionError();
                     }
                 });
-        mCountDownLatch.await(40, TimeUnit.SECONDS);
+        setCountDownLatchTime();
+        ListSubscribersResponse response = actual.get();
+        assertNotNull(response);
+        assertEquals(200, (int) response.status);
+        assertEquals(1001, (int) response.code);
+        assertEquals("Subscribers fetched successfully", response.message);
+        assertEquals("", response.moreInfo);
+        assertNotNull(response.message);
+        assertEquals("https://go.votomobile.org/api/v1/subscribers?limit=2",
+                response.url);
+        assertEquals(
+                "https://go.votomobile.org/api/v1/subscribers?limit=2&page_after=376089",
+                response.pagination.nextURL);
+        assertNull(response.pagination.previousURL);
+        assertNotNull(response.data.subscribers);
+        assertEquals(2, response.data.subscribers.size());
+        assertNotNull(response.data.subscribers.get(0));
+        assertEquals(373648l, (long) response.data.subscribers.get(0).id);
+        assertEquals("0", response.data.subscribers.get(0).receiveSms);
+        assertEquals("1", response.data.subscribers.get(0).receiveVoice);
+        assertEquals("0", response.data.subscribers.get(0).receiveData);
+        assertEquals("0", response.data.subscribers.get(0).receiveUssd);
+        assertEquals("233264164182", response.data.subscribers.get(0).phone);
+        assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
+        String date = BaseTestCase
+                .formatShowingDate(response.data.subscribers.get(0).startDate);
+        assertEquals("2014-09-10", date);
+        assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
+        assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);
+        assertEquals(
+                "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, 204137",
+                response.data.subscribers.get(0).groupIds);
+        assertNotNull(response.data.subscribers.get(0).properties);
+        assertEquals("Kodjo Antwi",
+                response.data.subscribers.get(0).properties.name);
+        assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
+        assertEquals("Out flying kites",
+                response.data.subscribers.get(0).properties.comments);
     }
 
     @Test
     public void shouldSuccessfullyModifySubscriber() throws IOException, InterruptedException {
+        final AtomicReference<CreateSubscriberResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .modifySubscriberDetails(1l, null, new Callback<CreateSubscriberResponse>() {
                     @Override
                     public void onResponse(Call<CreateSubscriberResponse> call,
                             Response<CreateSubscriberResponse> resp) {
-                        CreateSubscriberResponse createSubscriberResponse = resp.body();
-                        assertNotNull(createSubscriberResponse);
+                        actual.set(resp.body());
                         mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<CreateSubscriberResponse> call, Throwable t) {
-                        // Do nothing
-                        mCountDownLatch.countDown();
+                        throw new AssertionError();
                     }
                 });
-        mCountDownLatch.await(40, TimeUnit.SECONDS);
+        setCountDownLatchTime();
+        CreateSubscriberResponse createSubscriberResponse = actual.get();
+        assertNotNull(createSubscriberResponse);
     }
 
     @Test
     public void shouldSuccessfullyListSubscriberDetails() throws IOException, InterruptedException {
+        final AtomicReference<SubscriberDetailsResponse> actual = new AtomicReference<>();
         mAsyncVotoApiClient
                 .listSubscriberDetails(1l, new Callback<SubscriberDetailsResponse>() {
                     @Override
                     public void onResponse(Call<SubscriberDetailsResponse> call,
                             Response<SubscriberDetailsResponse> resp) {
-                        SubscriberDetailsResponse createSubscriberResponse = resp.body();
-                        assertNotNull(createSubscriberResponse);
+                        actual.set(resp.body());
                         mCountDownLatch.countDown();
                     }
 
                     @Override
                     public void onFailure(Call<SubscriberDetailsResponse> call, Throwable t) {
-                        // Do nothing
-                        mCountDownLatch.countDown();
+                        throw new AssertionError();
                     }
                 });
-        mCountDownLatch.await(40, TimeUnit.SECONDS);
+        setCountDownLatchTime();
+        SubscriberDetailsResponse createSubscriberResponse = actual.get();
+        assertNotNull(createSubscriberResponse);
     }
 
     @Test
@@ -648,5 +645,9 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
                         // Do nothing
                     }
                 });
+    }
+
+    private void setCountDownLatchTime() throws InterruptedException {
+        mCountDownLatch.await(10, TimeUnit.SECONDS);
     }
 }

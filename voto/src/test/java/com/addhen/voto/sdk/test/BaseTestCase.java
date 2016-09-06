@@ -31,7 +31,7 @@ import org.junit.runners.JUnit4;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Retrofit;
 import retrofit2.mock.BehaviorDelegate;
@@ -77,6 +77,7 @@ public abstract class BaseTestCase {
         // Create a MockRetrofit object with a NetworkBehavior which manages the fake behavior of calls.
         NetworkBehavior behavior = NetworkBehavior.create(new Random(2847));
         MockRetrofit mockRetrofit = new MockRetrofit.Builder(retrofit)
+                .backgroundExecutor(Executors.newSingleThreadExecutor())
                 .networkBehavior(behavior)
                 .build();
 
@@ -85,13 +86,5 @@ public abstract class BaseTestCase {
         BehaviorDelegate<VotoService> votoServiceBehaviorDelegate = mockRetrofit
                 .create(VotoService.class);
         return new MockVotoService(votoServiceBehaviorDelegate, gsonDeserializer);
-    }
-
-    private static class Synchronous implements Executor {
-
-        @Override
-        public void execute(Runnable command) {
-            command.run();
-        }
     }
 }
