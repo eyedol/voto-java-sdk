@@ -25,6 +25,7 @@ import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
+import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
@@ -205,6 +206,10 @@ public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
     public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
         return mRxJavaVotoService.updateMessage(id, optionalFields);
+    }
+
+    public Observable<DeleteMessageResponse> deleteMessage(Long id) {
+        return mRxJavaVotoService.deleteMessage(id);
     }
 
     public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {
