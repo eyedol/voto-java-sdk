@@ -26,21 +26,21 @@ repositories {
 Synchronous module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto-sdk-sync:0.2.0'
+    compile 'com.addhen:voto-sdk-sync:0.3.0'
 }
 ```
 
 Asynchronous module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto-sdk-async:0.2.0'
+    compile 'com.addhen:voto-sdk-async:0.3.0'
 }
 ```
 
 RxJava module:
 ```groovy
 dependencies {
-    compile 'com.addhen:voto-sdk-rxjava:0.2.0'
+    compile 'com.addhen:voto-sdk-rxjava:0.3.0'
 }
 ```
 ### Usage
