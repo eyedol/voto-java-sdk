@@ -1,3 +1,14 @@
+### v0.3.0
+_2016-09-07_
+
+* Minor code clean ups.
+* Implement get message by id.
+* Implement message log delivery counts.
+* Implement message deletion.
+* Implement message update.
+* Implement create a message.
+* Implement list messages.
+
 ## v0.2.0
 _2016-03-31_
 
