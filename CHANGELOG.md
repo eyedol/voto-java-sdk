@@ -1,4 +1,4 @@
-### v0.3.0
+## v0.3.0
 _2016-09-07_
 
 * Minor code clean ups.
