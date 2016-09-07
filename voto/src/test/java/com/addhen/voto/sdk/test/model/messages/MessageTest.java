@@ -16,6 +16,8 @@
 
 package com.addhen.voto.sdk.test.model.messages;
 
+import com.addhen.voto.sdk.model.Audio;
+import com.addhen.voto.sdk.model.SmsContent;
 import com.addhen.voto.sdk.model.Status;
 import com.addhen.voto.sdk.model.messages.Message;
 import com.addhen.voto.sdk.test.BaseTestCase;
@@ -26,6 +28,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import static junit.framework.TestCase.assertEquals;
@@ -56,6 +59,19 @@ public class MessageTest extends BaseTestCase {
         assertEquals("2015-08-24 05:28:48", created);
         String modified = formatDate(DATE_FORMAT, message.modified);
         assertEquals("2015-10-30 09:22:15", modified);
+        assertNotNull(message.smsContents);
+        SmsContent smsContent = message.smsContents.get(0);
+        assertNotNull(smsContent);
+        assertEquals(1, (long) smsContent.languageId);
+        assertEquals("Akan", smsContent.languageName);
+        assertEquals("Test release 15 Sep 2014", smsContent.smsContent);
+        assertNotNull(message.audioFiles);
+        Audio audio = message.audioFiles.get(0);
+        assertNotNull(audio);
+        assertEquals(1, (long) audio.languageId);
+        assertEquals("Frafra", audio.languageName);
+        assertEquals(1, (long) audio.audioFileId);
+        assertEquals("Foo", audio.audioFileDescription);
     }
 
     @Test
@@ -80,6 +96,14 @@ public class MessageTest extends BaseTestCase {
             e.printStackTrace();
         }
         return new Message(203244l, "New message just in case.", Status.YES, Status.NO, created,
-                modified);
+                modified, Arrays.asList(initSmsContent()), Arrays.asList(initAudio()));
+    }
+
+    private SmsContent initSmsContent() {
+        return new SmsContent(1l, "Akan", "Test release 15 Sep 2014");
+    }
+
+    private Audio initAudio() {
+        return new Audio(1l, "Frafra", 1l, "Foo");
     }
 }
