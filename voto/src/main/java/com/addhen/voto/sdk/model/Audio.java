@@ -11,8 +11,10 @@ public class Audio {
     /** The language name of the SMS */
     public String languageName;
 
+    /** The audio file's ID */
     public Long audioFileId;
 
+    /** The audio file's description */
     public String audioFileDescription;
 
     public Audio(Long languageId, String languageName, Long audioFileId,
