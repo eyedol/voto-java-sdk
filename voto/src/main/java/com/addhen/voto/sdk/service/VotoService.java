@@ -28,6 +28,7 @@ import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
+import com.addhen.voto.sdk.model.messages.MessageDetailsResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -131,7 +132,10 @@ public interface VotoService {
     @DELETE(Constants.VotoEndpoints.MESSAGES + "/{id}")
     Call<DeleteMessageResponse> deleteMessage(@Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}")
+    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}/count")
     Call<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
             @QueryMap Map<String, String> optionalFields);
+
+    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}")
+    Call<MessageDetailsResponse> getMessageDetails(@Path("id") Long id);
 }

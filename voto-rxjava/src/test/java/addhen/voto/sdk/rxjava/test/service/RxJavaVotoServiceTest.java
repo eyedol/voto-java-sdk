@@ -25,6 +25,7 @@ import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
+import com.addhen.voto.sdk.model.messages.MessageDetailsResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -62,11 +63,11 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
         super.setUp();
         GsonDeserializer gsonDeserializer = new GsonDeserializer(mGson);
         mMockRxJavaVotoService = new MockRxJavaVotoService(gsonDeserializer);
+        assertNotNull(mMockRxJavaVotoService);
     }
 
     @Test
     public void shouldSuccessfullyCreateSubscriber() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<CreateSubscriberResponse> observable = mMockRxJavaVotoService
                 .createSubscriber("", null);
         TestSubscriber<CreateSubscriberResponse> result = new TestSubscriber<>();
@@ -79,7 +80,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyCreateBulkSubscribers() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<CreateBulkSubscribersResponse> observable = mMockRxJavaVotoService
                 .createBulkSubscribers("", null, null);
         TestSubscriber<CreateBulkSubscribersResponse> result = new TestSubscriber<>();
@@ -94,7 +94,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeleteSubscriber() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<DeleteSubscriberResponse> observable = mMockRxJavaVotoService
                 .deleteSubscriber(1l);
         TestSubscriber<DeleteSubscriberResponse> result = new TestSubscriber<>();
@@ -107,7 +106,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyModifySubscriber() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<CreateSubscriberResponse> observable = mMockRxJavaVotoService
                 .modifySubscriberDetails(1l, null);
         TestSubscriber<CreateSubscriberResponse> result = new TestSubscriber<>();
@@ -121,7 +119,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListSubscribersDetails() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<SubscriberDetailsResponse> observable = mMockRxJavaVotoService
                 .listSubscriberDetails(1l);
         TestSubscriber<SubscriberDetailsResponse> result = new TestSubscriber<>();
@@ -153,7 +150,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListSubscribers() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<ListSubscribersResponse> observable = mMockRxJavaVotoService.listSubscribers(10);
         TestSubscriber<ListSubscribersResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
@@ -193,7 +189,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListAudioFiles() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<ListAudioFilesResponse> observable = mMockRxJavaVotoService.listAudioFiles();
         TestSubscriber<ListAudioFilesResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
@@ -217,7 +212,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeleteAudioFile() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<DeleteAudioFileResponse> observable = mMockRxJavaVotoService
                 .deleteAudioFile(1l);
         TestSubscriber<DeleteAudioFileResponse> result = new TestSubscriber<>();
@@ -230,7 +224,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListAudioFileDetails() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<AudioFileDetailsResponse> observable = mMockRxJavaVotoService
                 .listAudioFileDetails(1l);
         TestSubscriber<AudioFileDetailsResponse> result = new TestSubscriber<>();
@@ -252,7 +245,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDownloadAudioFile() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<ResponseBody> observable = mMockRxJavaVotoService
                 .downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
         TestSubscriber<ResponseBody> result = new TestSubscriber<>();
@@ -264,7 +256,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyCreateMessage() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<CreateResponse> observable = mMockRxJavaVotoService.createMessage("title",
                 com.addhen.voto.sdk.model.Status.NO, com.addhen.voto.sdk.model.Status.YES, null);
         TestSubscriber<CreateResponse> result = new TestSubscriber<>();
@@ -278,7 +269,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyListMessages() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<ListMessagesResponse> observable = mMockRxJavaVotoService.listMessages();
         TestSubscriber<ListMessagesResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
@@ -288,7 +278,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyUpdateMessages() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<CreateResponse> observable = mMockRxJavaVotoService.updateMessage(112l, null);
         TestSubscriber<CreateResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
@@ -301,7 +290,6 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyDeleteMessage() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<DeleteMessageResponse> observable = mMockRxJavaVotoService.deleteMessage(1l);
         TestSubscriber<DeleteMessageResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
@@ -313,12 +301,21 @@ public class RxJavaVotoServiceTest extends BaseTestCase {
 
     @Test
     public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
-        assertNotNull(mMockRxJavaVotoService);
         Observable<MessageDeliveryLogResponse> observable = mMockRxJavaVotoService
                 .getMessageDeliveryLog(1l, null);
         TestSubscriber<MessageDeliveryLogResponse> result = new TestSubscriber<>();
         observable.subscribe(result);
         MessageDeliveryLogResponse messageDeliveryLogResponse = result.getOnNextEvents().get(0);
         assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
+    }
+
+    @Test
+    public void shouldSuccessfullyGetMessageDetails() throws IOException {
+        Observable<MessageDetailsResponse> observable = mMockRxJavaVotoService
+                .getMessageDetails(1L);
+        TestSubscriber<MessageDetailsResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        MessageDetailsResponse messageDetailsResponse = result.getOnNextEvents().get(0);
+        assertMessageDetailsResponse(messageDetailsResponse);
     }
 }
