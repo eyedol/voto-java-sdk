@@ -42,7 +42,7 @@ public class AudioFileTest extends BaseTestCase {
     }
 
     @Test
-    public void shouldCreateSubscriberObject() {
+    public void shouldCreateAudioFileObject() {
         final AudioFile audioFile = initAudioFile();
         assertNotNull(audioFile);
         assertEquals(111, (long) audioFile.id);

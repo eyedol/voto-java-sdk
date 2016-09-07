@@ -27,6 +27,7 @@ import com.addhen.voto.sdk.model.audio.ListAudioFilesResponse;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
+import com.addhen.voto.sdk.model.messages.MessageDetailsResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -400,5 +401,14 @@ public class RxJavaVotoApiClientTest extends BaseTestCase {
         observable.subscribe(result);
         MessageDeliveryLogResponse messageDeliveryLogResponse = result.getOnNextEvents().get(0);
         assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
+    }
+
+    @Test
+    public void shouldSuccessfullyGetMessageDetails() throws IOException {
+        Observable<MessageDetailsResponse> observable = mRxJavaVotoApiClient.getMessageDetails(1L);
+        TestSubscriber<MessageDetailsResponse> result = new TestSubscriber<>();
+        observable.subscribe(result);
+        MessageDetailsResponse messageDetailsResponse = result.getOnNextEvents().get(0);
+        assertMessageDetailsResponse(messageDetailsResponse);
     }
 }

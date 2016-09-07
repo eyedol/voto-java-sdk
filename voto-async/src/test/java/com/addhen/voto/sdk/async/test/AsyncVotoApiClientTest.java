@@ -28,6 +28,7 @@ import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.model.messages.DeleteMessageResponse;
 import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.messages.MessageDeliveryLogResponse;
+import com.addhen.voto.sdk.model.messages.MessageDetailsResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
@@ -682,6 +683,27 @@ public class AsyncVotoApiClientTest extends BaseTestCase {
         setCountDownLatchTime();
         MessageDeliveryLogResponse messageDeliveryLogResponse = actual.get();
         assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
+    }
+
+    @Test
+    public void shouldSuccessfullyGetMessageDetails() throws IOException, InterruptedException {
+        final AtomicReference<MessageDetailsResponse> actual = new AtomicReference<>();
+        mAsyncVotoApiClient.getMessageDetails(1L, new Callback<MessageDetailsResponse>() {
+            @Override
+            public void onResponse(Call<MessageDetailsResponse> call,
+                    Response<MessageDetailsResponse> response) {
+                actual.set(response.body());
+                mCountDownLatch.countDown();
+            }
+
+            @Override
+            public void onFailure(Call<MessageDetailsResponse> call, Throwable t) {
+                throw new AssertionError();
+            }
+        });
+        setCountDownLatchTime();
+        MessageDetailsResponse messageDetailsResponse = actual.get();
+        assertMessageDetailsResponse(messageDetailsResponse);
     }
 
     private void setCountDownLatchTime() throws InterruptedException {
