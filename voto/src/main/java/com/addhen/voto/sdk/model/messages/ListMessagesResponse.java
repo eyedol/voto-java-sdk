@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class ListMessagesResponse extends BaseResponse {
 
-    /** The returned subscribers list **/
+    /** The returned message list **/
     public Data data;
 
     public static class Data {

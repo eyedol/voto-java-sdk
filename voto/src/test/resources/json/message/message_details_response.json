@@ -1,0 +1,77 @@
+{
+  "status": 200,
+  "code": 1000,
+  "data": {
+    "message": {
+      "id": "201712",
+      "title": "Test release 15 Sep 2014 ",
+      "has_sms": "1",
+      "has_voice": "1",
+      "created_at": "2014-09-15 16:20:48",
+      "updated_at": "2014-09-15 16:20:48",
+      "sms_content": [
+        {
+          "language_id": "201140",
+          "language_name": "Akan",
+          "sms_content": "Test release 15 Sep 2014 "
+        },
+        {
+          "language_id": "201872",
+          "language_name": "Mossi",
+          "sms_content": null
+        },
+        {
+          "language_id": "201873",
+          "language_name": "Hausa",
+          "sms_content": null
+        },
+        {
+          "language_id": "202266",
+          "language_name": "English",
+          "sms_content": null
+        },
+        {
+          "language_id": "202267",
+          "language_name": "Frafra",
+          "sms_content": null
+        }
+      ],
+      "audio_files": [
+        {
+          "language_id": "201140",
+          "language_name": "Akan",
+          "audio_file_id": "204312",
+          "audio_file_description": "Testing call to record (and also if calls get sent out at all)"
+        },
+        {
+          "language_id": "201872",
+          "language_name": "Mossi",
+          "audio_file_id": null,
+          "audio_file_description": null
+        },
+        {
+          "language_id": "201873",
+          "language_name": "Hausa",
+          "audio_file_id": null,
+          "audio_file_description": null
+        },
+        {
+          "language_id": "202266",
+          "language_name": "English",
+          "audio_file_id": null,
+          "audio_file_description": null
+        },
+        {
+          "language_id": "202267",
+          "language_name": "Frafra",
+          "audio_file_id": null,
+          "audio_file_description": null
+        }
+      ]
+    }
+  },
+  "message": "Message Details Fetched Successfully",
+  "more_info": "",
+  "pagination": null,
+  "url": "https://go.votomobile.org/api/v1/messages/201712"
+}
