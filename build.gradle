@@ -14,14 +14,12 @@ buildscript {
   }
 }
 
-
-task wrapper(type: Wrapper) {
-  description 'Creates the gradle wrapper.'
-  gradleVersion '3.0'
+ext {
+  sdkVersion = '0.4.0-SNAPSHOT'
 }
 
 allprojects {
-  version '0.4.0-SNAPSHOT'
+  version sdkVersion
   repositories {
     jcenter()
     mavenCentral()

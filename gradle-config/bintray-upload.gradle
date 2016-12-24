@@ -57,11 +57,6 @@ artifacts {
   archives sourcesJar
 }
 
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').exists()) {
-  properties.load(project.rootProject.file('local.properties').newDataInputStream())
-}
-
 // https://github.com/bintray/gradle-bintray-plugin
 bintray {
   user = System.getenv('BINTRAY_USER')
@@ -97,6 +92,17 @@ bintray {
         close = '1'
         //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
       }
+    }
+  }
+}
+
+task uploadSdkArtifacts(dependsOn: ['clean', 'bintrayUpload']) {
+  doLast {
+    if (project.rootProject.file('README.md').exists()) {
+      String readme = project.rootProject.file('README.md').getText('UTF-8')
+      readme = readme.replaceAll('(\\d+\\.\\d+\\.\\d+-SNAPSHOT|\\d+\\.\\d+\\.\\d+)',
+          sdkVersion.toString())
+      project.rootProject.file('README.md').write(readme, 'UTF-8')
     }
   }
 }

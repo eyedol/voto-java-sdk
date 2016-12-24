@@ -14,7 +14,7 @@ env:
 
 deploy:
   provider: script
-  script: ./gradlew clean bintrayUpload
+  script: ./gradlew uploadSdkArtifacts
   on:
     tags: true
 repo: eyedol/voto-java-sdk
