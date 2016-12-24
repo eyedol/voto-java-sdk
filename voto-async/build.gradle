@@ -1,20 +1,22 @@
 apply plugin: 'java'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 apply from: '../gradle-config/quality.gradle'
 apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 
 dependencies {
-    compile project(':voto')
-    testCompile files(project(':voto').sourceSets.test.output)
-    testCompile syncTestDependencies.junit
-    testCompile sdkTestDependencies.retrofitMock
+  compile project(':voto')
+  testCompile files(project(':voto').sourceSets.test.output)
+  testCompile syncTestDependencies.junit
+  testCompile sdkTestDependencies.retrofitMock
 }
 
 // Upload artifact to bintray repo
 ext {
-    artifact = 'voto-sdk-async'
-    blob = 'Provides access to the VOTO API asynchronously'
+  artifact = 'voto-sdk-async'
+  blob = 'Provides access to the VOTO API asynchronously'
 }
 apply from: '../gradle-config/bintray-upload.gradle'

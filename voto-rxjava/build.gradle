@@ -1,22 +1,24 @@
 apply plugin: 'java'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
 apply from: '../gradle-config/quality.gradle'
 apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
 dependencies {
-    def rxjavaDependencies = rootProject.ext.rxjavaDependencies
-    def rxjavaTestDependencies = rootProject.ext.rxjavaTestDependencies
-    compile project(':voto')
-    compile rxjavaDependencies.adapterRxjava
-    testCompile files(project(':voto').sourceSets.test.output)
-    testCompile rxjavaTestDependencies.junit
+  def rxjavaDependencies = rootProject.ext.rxjavaDependencies
+  def rxjavaTestDependencies = rootProject.ext.rxjavaTestDependencies
+  compile project(':voto')
+  compile rxjavaDependencies.adapterRxjava
+  testCompile files(project(':voto').sourceSets.test.output)
+  testCompile rxjavaTestDependencies.junit
 }
 
 // Upload artifact to bintray repo
 ext {
-    artifact = 'voto-sdk-rxjava'
-    blob = 'Uses RxJava for accessing the VOTO API'
+  artifact = 'voto-sdk-rxjava'
+  blob = 'Uses RxJava for accessing the VOTO API'
 }
 // Upload artifact to bintray repo
 apply from: '../gradle-config/bintray-upload.gradle'
