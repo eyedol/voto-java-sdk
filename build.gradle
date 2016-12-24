@@ -1,33 +1,35 @@
 apply from: 'gradle-config/dependencies.gradle'
 
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
 
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
-    }
+  dependencies {
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    // Needed to publish SNAPSHOTs to JFrog
+    classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.1.1'
+  }
 }
 
 
 task wrapper(type: Wrapper) {
-    description 'Creates the gradle wrapper.'
-    gradleVersion '3.0'
+  description 'Creates the gradle wrapper.'
+  gradleVersion '3.0'
 }
 
 allprojects {
-    version '0.3.0'
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+  version '0.4.0-SNAPSHOT'
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
 
-    buildscript {
-        repositories {
-            jcenter()
-        }
+  buildscript {
+    repositories {
+      jcenter()
     }
+  }
 }

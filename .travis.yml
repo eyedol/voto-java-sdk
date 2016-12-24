@@ -4,14 +4,32 @@ language: java
 jdk:
   - oraclejdk8
   - oraclejdk7
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+
+env:
+  global:
+    - secure: jw31403mnN+gKCNzEs+4l7NF5taQ2id8V5z6ZFWyY6fWbAqA3/+/CrV2XTgES2+7LWKrOodGkSPQAI9CuOPizGigjn0sCG2wcHdibQbdWhu+UpZik+n+C7+vpG2UVf+K3Cf7h2ucC6oy7fE0B5fiXeZp87IvD1TckUIuAj9Uiv/NYZ0AJUKq+xBSDnrDMFLm2M/SqhZ2374At16QOhjjZEQqeJvf4cuOtNks0RmJAwt2NQf/4eKTfLzf47LcL5EoT/BEwImWQmKXUpZyf0uJPQDpL+PGSSq6JLw7IkQ470Tr3NoRZX3R2mBWsg9DKnPyfG1KMmgQcEjAgKqeoGjSbBPKN+VEyKYbHZ7w/7peo/T0prGMOwbSS115KoEaORlKq9bNx/5eVkqCVD8GyZHbmTiJlc2H5DraUdyVNDk/ttOUUUpvPrybAPmXfaSgO81yAPCU+J2H8e7VCSrfWnBEe/BnssgbgC54IjzBgJt2P8UQuvKTwlSPYLq7pXFWVU0nRHx8Urof+AizcKxQoUSj9VgkbdJtHP5XlMfYGwDMKUAAmMjSzFw2BvFrYIrossC392f1jVWr4J+IqviEjmVoBXXcucByv5Ov2uodr/xacfNnFUtlDADn9euxmV5UewKkRXXEy7/SYEXqovXG8c8X71+6JjOXg/fNsgJTtLSwDns=
+    - secure: Uy8gpli+p6nJ2h+9Bc6QrUD4GXY7RmBvBW18uddh2EVXv68HCKYae1SPg5cjpkk43SKN1nEW9i7ux7zg4PdF2xwLdFzk2uPHBynlnlvWhfcezOsqTMOXMTdBIt1o6eF4wCltWpvABLN6Jxtxx7M9TFA+KXn/p9DCRxu3t+HEv0+5Wp0dIk+GhO36oey+2l31AuzoO49r4mgyHyFnK+MBqqVs2MpweC3cZiIQoCtyZLv/3ofDQkSz2rC48dwmYkv1EHo84omn26Lap3ZKMWHHQWfAJqWS0V7E8PrmFOfZ1EFbu+rKwteSWKGCu8hu866KQJZBMIRbmsBHPDiwK2VS9LhvIQDWpoSQX0o0nChxIL2Y5IAbSow4JZ96ry8Vx9Nk9M0TQ9nDWsyjEbvqkGBve9i++7FkPtnXPCVu8OmvA5OBnwKOQbX0o1N2rd6hCBxriSnnL99e6/oMHXsYPOKkrObmxf+g9vDt2vnPUaf3Na0whgk4DZn7cg5sFoIgAfwVcc3zH57p16B4GugXNNds64eSGU84fGodz96+6GHHDsnWXybruSPZT/V3JrWAiPqRpl8NP8kcAi6jG7AyVkb4ZA0fnMQKI06YPc4BRcpShYfqjTKWoLMpaUWs92lF9YKGsZdPleZ5Hld66qs9BiwsgMnEIxcvKfttUgewTsoOUNA=
+    - secure: nee26oR+9wiR+tVgM6ea+QQjYDSil0zyZmmK4jeUoI4yifyGFEhLQZrFXnBFkLg/aYPpW34i6vFg/MbZbv18mhYRviEyH5KpvNbcDAzKjxH9olVwGvwoNkbowcgxpwS0r05ykrseOGA/P+ZP78w2ZoysDxMSH01YX/tKVu9fNNertknP9UrkMeAnNKLbRAyeNscpNZGicSRj54LcEbz39W57eaWnh9MtxM+gRAUg6uvpVl9du+xAk1Lmk+4HO2zz9Elvii+z0zJ6gEg/1pv3PVQ/LpIKtyIMTK1Bav+MD6vuN088AXTuqn7UCnQTXKb/MTS96sw0yCtrAoR360QKsqf7poghhwn1A2PpstZ4cq9dr+Q9CRiBX8NJQpNc85zq+BH4ReQ0MOPJJbtn2/Mu82bnCAVhz6mKvhZLbf63FMw8S5T6n9V824UG4ODtiVo0OWC/JmfcoXhifdVDtYRLszcuulC6GgVRnYVp3tXSJgODbVhAEUX7W7S89qvZ1/qqSeP6/32MxbOqy+c7X8Z8h3b8d1YrGwF2n1YWuxewg1LjVm+3dEcQsCD5imO9gBjo0TJIjE2nxXy62MYiiFQo+zaFOeX90YRefeKXsVVkUmQrDrrf/cecp86JF4dZhkUDdlND1kXLRNkg2JjZmEYmZ1Yjjr2DujR65DGWegXaj6U=
+    - secure: gioBe3Cf5ThWLYS1I56xnngsDhbGgL21GH46WhhGbad7KP7ff4xddV8PhBuUqJ/do3KD90uEWXP6GFOpeU1mJeKB0kY6/eitc366Ittr7VkazFuNQZ+PY1CVCaefGoMLazzY/HcNldz2MmAYjx29Hlx4+eBtSMww5Qg5xWTIf7+ZiEgOSAnJhO1aWji3aCU1e1KM3VF/xz0nz9z5zEH6yqMnDOCTsyyIFHjouGk2tKjTBgLLvxl18ydWHgAqRrNsbxPxKZ11zc9AcadL7NTgy5+tTRagdnDWOywRtuYWz1bZLKx9wG86wGBX6wsYYQzDoOJ8UMhQiIPZFCZSc/evTs7z9p6l/cwXEGPKljse3KzrwOXOGBBVLDi9rChZI+h9M/qqS8nQi6VUGIC+ucgUyEmEigDRwgNJfx4nP4GrYG2sLtHLkP9HWADTbhlUP6fk2zot4wnMU7x3vIP0NZAkXt2lXufmb76e3pgf3iQ5R6qh+ipfPr8B/mSUCJZR7AGZJ/DzNut1t4yV/dYFumA/lhsjgeD4OP5ibpE8xC2Ufnm+n7YdIQ2/hbxLcSmM6rrXw4WSijxJvQfUDx6twjGOr88vp8lP2MXMeLjU63wamfeajl96yyR8zyUpwRNziw00MAOi1aDkpw17eh0UD88/d/7KfrPMf0JSlKPq7LwztCU=
+
+deploy:
+  provider: script
+  script: ./gradlew clean bintrayUpload
+  on:
+    tags: true
+repo: eyedol/voto-java-sdk
+
 script: ./gradlew clean build
 
 # Upload code coverage report to codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - "./deploy_snapshot.sh"
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
