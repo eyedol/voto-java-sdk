@@ -17,11 +17,11 @@
 apply plugin: 'jacoco'
 
 jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
-    }
+  reports {
+    xml.enabled true
+    csv.enabled false
+    html.destination "${buildDir}/jacocoHtml"
+  }
 }
 
 check.dependsOn jacocoTestReport

@@ -22,10 +22,9 @@ import com.google.gson.annotations.SerializedName;
  * @author Henry Addo
  */
 public enum Status {
-    /** 1 indicates active **/
-    @SerializedName("1")
-    YES,
-    /** 0 indicates inactive **/
-    @SerializedName("0")
-    NO;
+  /** 1 indicates active **/
+  @SerializedName("1")
+  YES, /** 0 indicates inactive **/
+  @SerializedName("0")
+  NO;
 }

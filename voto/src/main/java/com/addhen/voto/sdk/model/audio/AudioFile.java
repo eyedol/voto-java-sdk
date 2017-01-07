@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.audio;
 
 import com.addhen.voto.sdk.model.Model;
-
 import java.util.Date;
 
 /**
@@ -25,39 +24,44 @@ import java.util.Date;
  */
 public class AudioFile extends Model {
 
-    /** The description of the audio **/
-    public String description;
+  /** The description of the audio **/
+  public String description;
 
-    /** The language id of audio belongs to **/
-    public Long languageId;
+  /** The language id of audio belongs to **/
+  public Long languageId;
 
-    /** The length of the audio in seconds **/
-    public Integer lengthSeconds;
+  /** The length of the audio in seconds **/
+  public Integer lengthSeconds;
 
-    /** The date the audio file was created **/
-    public Date created;
+  /** The date the audio file was created **/
+  public Date created;
 
-    /** The date the audio file was modified **/
-    public Date modified;
+  /** The date the audio file was modified **/
+  public Date modified;
 
-    public AudioFile(Long id, String description, Long languageId, Integer lengthSeconds,
-            Date created, Date modified) {
-        this.id = id;
-        this.description = description;
-        this.languageId = languageId;
-        this.lengthSeconds = lengthSeconds;
-        this.created = created;
-        this.modified = modified;
-    }
+  public AudioFile(Long id, String description, Long languageId, Integer lengthSeconds,
+      Date created, Date modified) {
+    this.id = id;
+    this.description = description;
+    this.languageId = languageId;
+    this.lengthSeconds = lengthSeconds;
+    this.created = created;
+    this.modified = modified;
+  }
 
-    @Override
-    public String toString() {
-        return "AudioFile{"
-                + "description='" + description + '\''
-                + ", languageId=" + languageId
-                + ", lengthSeconds=" + lengthSeconds
-                + ", created=" + created
-                + ", modified=" + modified
-                + '}';
-    }
+  @Override public String toString() {
+    return "AudioFile{"
+        + "description='"
+        + description
+        + '\''
+        + ", languageId="
+        + languageId
+        + ", lengthSeconds="
+        + lengthSeconds
+        + ", created="
+        + created
+        + ", modified="
+        + modified
+        + '}';
+  }
 }

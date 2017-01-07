@@ -18,7 +18,6 @@ package com.addhen.voto.sdk.test.model.audio;
 
 import com.addhen.voto.sdk.model.audio.AudioFileExtension;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,39 +29,31 @@ import static org.junit.Assert.assertNotSame;
  */
 public class AudioFileExtensionTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldBeMp3Extension() {
-        assertEquals("mp3", AudioFileExtension.MP3.toString());
-    }
+  @Test public void shouldBeMp3Extension() {
+    assertEquals("mp3", AudioFileExtension.MP3.toString());
+  }
 
-    @Test
-    public void shouldBeWavExtension() {
-        assertEquals("wav", AudioFileExtension.WAV.toString());
-    }
+  @Test public void shouldBeWavExtension() {
+    assertEquals("wav", AudioFileExtension.WAV.toString());
+  }
 
-    @Test
-    public void shouldBeUlExtension() {
-        assertEquals("ul", AudioFileExtension.UL.toString());
-    }
+  @Test public void shouldBeUlExtension() {
+    assertEquals("ul", AudioFileExtension.UL.toString());
+  }
 
-    @Test
-    public void shouldNotBeWavExtension() {
-        assertNotSame("wave", AudioFileExtension.WAV.toString());
-    }
+  @Test public void shouldNotBeWavExtension() {
+    assertNotSame("wave", AudioFileExtension.WAV.toString());
+  }
 
-    @Test
-    public void shouldSetNameMp3() {
-        assertEquals(AudioFileExtension.MP3,
-                AudioFileExtension.valueOf(AudioFileExtension.MP3.name()));
-    }
+  @Test public void shouldSetNameMp3() {
+    assertEquals(AudioFileExtension.MP3, AudioFileExtension.valueOf(AudioFileExtension.MP3.name()));
+  }
 
-    @Test
-    public void shouldKnowSizeOfSupportEnumValues() {
-        assertEquals(3, AudioFileExtension.values().length);
-    }
+  @Test public void shouldKnowSizeOfSupportEnumValues() {
+    assertEquals(3, AudioFileExtension.values().length);
+  }
 }

@@ -18,7 +18,6 @@ package com.addhen.voto.sdk.test.model.audio;
 
 import com.addhen.voto.sdk.model.audio.AudioFileFormat;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,44 +29,36 @@ import static org.junit.Assert.assertNotSame;
  */
 public class AudioFileFormatTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldBeOggFormat() {
-        assertEquals("ogg", AudioFileFormat.OGG.toString());
-    }
+  @Test public void shouldBeOggFormat() {
+    assertEquals("ogg", AudioFileFormat.OGG.toString());
+  }
 
-    @Test
-    public void shouldBeOrignialFormat() {
-        assertEquals("original", AudioFileFormat.ORIGINAL.toString());
-    }
+  @Test public void shouldBeOrignialFormat() {
+    assertEquals("original", AudioFileFormat.ORIGINAL.toString());
+  }
 
-    @Test
-    public void shouldNotBeOggFormat() {
-        assertNotSame("ogg", AudioFileFormat.ORIGINAL.toString());
-    }
+  @Test public void shouldNotBeOggFormat() {
+    assertNotSame("ogg", AudioFileFormat.ORIGINAL.toString());
+  }
 
-    @Test
-    public void shouldNotBeOrignialFormat() {
-        assertNotSame("original", AudioFileFormat.OGG.toString());
-    }
+  @Test public void shouldNotBeOrignialFormat() {
+    assertNotSame("original", AudioFileFormat.OGG.toString());
+  }
 
-    @Test
-    public void shouldBeOGG() {
-        assertEquals(AudioFileFormat.OGG, AudioFileFormat.valueOf(AudioFileFormat.OGG.name()));
-    }
+  @Test public void shouldBeOGG() {
+    assertEquals(AudioFileFormat.OGG, AudioFileFormat.valueOf(AudioFileFormat.OGG.name()));
+  }
 
-    @Test
-    public void shouldBeOriginal() {
-        assertEquals(AudioFileFormat.ORIGINAL,
-                AudioFileFormat.valueOf(AudioFileFormat.ORIGINAL.name()));
-    }
+  @Test public void shouldBeOriginal() {
+    assertEquals(AudioFileFormat.ORIGINAL,
+        AudioFileFormat.valueOf(AudioFileFormat.ORIGINAL.name()));
+  }
 
-    @Test
-    public void shouldKnowSizeOfSupportedFormat() {
-        assertEquals(2, AudioFileFormat.values().length);
-    }
+  @Test public void shouldKnowSizeOfSupportedFormat() {
+    assertEquals(2, AudioFileFormat.values().length);
+  }
 }

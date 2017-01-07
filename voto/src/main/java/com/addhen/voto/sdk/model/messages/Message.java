@@ -16,13 +16,11 @@
 
 package com.addhen.voto.sdk.model.messages;
 
-import com.google.gson.annotations.SerializedName;
-
 import com.addhen.voto.sdk.model.Audio;
 import com.addhen.voto.sdk.model.Model;
 import com.addhen.voto.sdk.model.SmsContent;
 import com.addhen.voto.sdk.model.Status;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
@@ -31,52 +29,56 @@ import java.util.List;
  */
 public class Message extends Model {
 
-    /** The title of the message **/
-    public String title;
+  /** The title of the message **/
+  public String title;
 
-    /** Indicates whether the message has voice or not **/
-    public Status hasVoice;
+  /** Indicates whether the message has voice or not **/
+  public Status hasVoice;
 
-    /** Indicate whether the message has sms or not **/
-    public Status hasSms;
+  /** Indicate whether the message has sms or not **/
+  public Status hasSms;
 
-    /** The date the audio file was created **/
-    @SerializedName("created_at")
-    public Date created;
+  /** The date the audio file was created **/
+  @SerializedName("created_at") public Date created;
 
-    /** The date the audio file was modified **/
-    @SerializedName("updated_at")
-    public Date modified;
+  /** The date the audio file was modified **/
+  @SerializedName("updated_at") public Date modified;
 
-    /** The list of SMS content */
-    @SerializedName("sms_content")
-    public List<SmsContent> smsContents;
+  /** The list of SMS content */
+  @SerializedName("sms_content") public List<SmsContent> smsContents;
 
-    /** List audio files */
-    public List<Audio> audioFiles;
+  /** List audio files */
+  public List<Audio> audioFiles;
 
-    public Message(Long id, String title, Status hasVoice, Status hasSms, Date created,
-            Date modified, List<SmsContent> mSmsContents, List<Audio> audioFiles) {
-        this.id = id;
-        this.title = title;
-        this.hasSms = hasSms;
-        this.hasVoice = hasVoice;
-        this.created = created;
-        this.modified = modified;
-        this.smsContents = mSmsContents;
-        this.audioFiles = audioFiles;
-    }
+  public Message(Long id, String title, Status hasVoice, Status hasSms, Date created, Date modified,
+      List<SmsContent> mSmsContents, List<Audio> audioFiles) {
+    this.id = id;
+    this.title = title;
+    this.hasSms = hasSms;
+    this.hasVoice = hasVoice;
+    this.created = created;
+    this.modified = modified;
+    this.smsContents = mSmsContents;
+    this.audioFiles = audioFiles;
+  }
 
-    @Override
-    public String toString() {
-        return "Message{"
-                + "title='" + title + '\''
-                + ", hasVoice=" + hasVoice
-                + ", hasSms=" + hasSms
-                + ", created=" + created
-                + ", modified=" + modified
-                + ", smsContents=" + smsContents
-                + ", audioFiles=" + audioFiles
-                + '}';
-    }
+  @Override public String toString() {
+    return "Message{"
+        + "title='"
+        + title
+        + '\''
+        + ", hasVoice="
+        + hasVoice
+        + ", hasSms="
+        + hasSms
+        + ", created="
+        + created
+        + ", modified="
+        + modified
+        + ", smsContents="
+        + smsContents
+        + ", audioFiles="
+        + audioFiles
+        + '}';
+  }
 }

@@ -24,28 +24,27 @@ mainClassName = "com.addhen.voto.sdk.sample.Main"
  *
  * Workaround is to disable jsse.enableSNIExtension.
  *
- * Credits: http://javaresolutions.blogspot.com/2014/07/javaxnetsslsslprotocolexception.html
- */
+ * Credits: http://javaresolutions.blogspot.com/2014/07/javaxnetsslsslprotocolexception.html*/
 applicationDefaultJvmArgs = ["-Djsse.enableSNIExtension=false"]
 
 Properties properties = new Properties()
 if (project.rootProject.file('local.properties').exists()) {
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+  properties.load(project.rootProject.file('local.properties').newDataInputStream())
 }
 
 run {
 
-    if (properties.getProperty('votoApiKey') != null &&
-            !properties.getProperty('votoApiKey').isEmpty()) {
-        args properties.getProperty('votoApiKey')
-    } else {
-        args 'dummi_api'
-    }
+  if (properties.getProperty('votoApiKey') != null &&
+      !properties.getProperty('votoApiKey').isEmpty()) {
+    args properties.getProperty('votoApiKey')
+  } else {
+    args 'dummi_api'
+  }
 }
 
 dependencies {
-    compile project(':voto')
-    compile project(':voto-sync')
-    compile project(':voto-async')
-    compile project(':voto-rxjava')
+  compile project(':voto')
+  compile project(':voto-sync')
+  compile project(':voto-async')
+  compile project(':voto-rxjava')
 }

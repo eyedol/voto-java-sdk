@@ -23,26 +23,20 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class AudioFileDetailsResponse extends BaseResponse {
 
-    /** The returned subscribers list **/
-    public Data data;
+  /** The returned subscribers list **/
+  public Data data;
 
-    @Override
-    public String toString() {
-        return "AudioFileDetailsResponse{"
-                + "data=" + data
-                + '}';
+  @Override public String toString() {
+    return "AudioFileDetailsResponse{" + "data=" + data + '}';
+  }
+
+  public static class Data {
+
+    /** The audio file */
+    public AudioFile audioFile;
+
+    @Override public String toString() {
+      return "Data{" + "audioFile=" + audioFile + '}';
     }
-
-    public static class Data {
-
-        /** The audio file */
-        public AudioFile audioFile;
-
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "audioFile=" + audioFile
-                    + '}';
-        }
-    }
+  }
 }

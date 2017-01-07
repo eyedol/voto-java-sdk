@@ -18,7 +18,6 @@ package com.addhen.voto.sdk.test.model.subscribers;
 
 import com.addhen.voto.sdk.model.subscribers.Status;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,18 +28,15 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class StatusTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSetInActive() {
-        assertEquals(Status.INACTIVE, Status.valueOf(Status.INACTIVE.name()));
-    }
+  @Test public void shouldSetInActive() {
+    assertEquals(Status.INACTIVE, Status.valueOf(Status.INACTIVE.name()));
+  }
 
-    @Test
-    public void shouldSetActive() {
-        assertEquals(Status.ACTIVE, Status.valueOf(Status.ACTIVE.name()));
-    }
+  @Test public void shouldSetActive() {
+    assertEquals(Status.ACTIVE, Status.valueOf(Status.ACTIVE.name()));
+  }
 }

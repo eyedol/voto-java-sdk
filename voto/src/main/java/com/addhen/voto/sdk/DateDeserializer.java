@@ -20,7 +20,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,22 +32,23 @@ import java.util.Locale;
  */
 public class DateDeserializer implements JsonDeserializer<Date> {
 
-    private static final String[] DATE_FORMATS = new String[]{"yyyy-MM-dd", "yyyy-MM-dd h:mm:ss"};
+  private static final String[] DATE_FORMATS = new String[] { "yyyy-MM-dd", "yyyy-MM-dd h:mm:ss" };
 
-    @Override
-    public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        // Determine whether date has time as well
-        String[] dateTime = json.getAsString().trim().split(" ");
-        try {
-            if (dateTime.length > 1) {
-                return new SimpleDateFormat(DATE_FORMATS[1], Locale.US).parse(json.getAsString());
-            }
-            return new SimpleDateFormat(DATE_FORMATS[0], Locale.US).parse(json.getAsString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        throw new JsonParseException("Unparseable date: \"" + json.getAsString()
-                + "\". Supported formats: " + Arrays.toString(DATE_FORMATS));
+  @Override
+  public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
+    // Determine whether date has time as well
+    String[] dateTime = json.getAsString().trim().split(" ");
+    try {
+      if (dateTime.length > 1) {
+        return new SimpleDateFormat(DATE_FORMATS[1], Locale.US).parse(json.getAsString());
+      }
+      return new SimpleDateFormat(DATE_FORMATS[0], Locale.US).parse(json.getAsString());
+    } catch (ParseException e) {
+      e.printStackTrace();
     }
+    throw new JsonParseException(
+        "Unparseable date: \"" + json.getAsString() + "\". Supported formats: " + Arrays.toString(
+            DATE_FORMATS));
+  }
 }

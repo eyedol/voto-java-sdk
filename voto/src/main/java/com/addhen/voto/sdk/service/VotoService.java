@@ -35,9 +35,7 @@ import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
-
 import java.util.Map;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -57,85 +55,67 @@ import retrofit2.http.Streaming;
  */
 public interface VotoService {
 
-    /** Subscribers **/
-    @FormUrlEncoded
-    @POST(Constants.VotoEndpoints.SUBSCRIBERS)
-    Call<CreateSubscriberResponse> createSubscriber(
-            @Field("phone") String phone,
-            @FieldMap Map<String, String> optionalFields
-    );
+  /** Subscribers **/
+  @FormUrlEncoded @POST(Constants.VotoEndpoints.SUBSCRIBERS)
+  Call<CreateSubscriberResponse> createSubscriber(@Field("phone") String phone,
+      @FieldMap Map<String, String> optionalFields);
 
-    @FormUrlEncoded
-    @POST(Constants.VotoEndpoints.SUBSCRIBERS)
-    Call<CreateBulkSubscribersResponse> createBulkSubscribers(
-            @Field("phone_numbers") String phone,
-            @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @FormUrlEncoded @POST(Constants.VotoEndpoints.SUBSCRIBERS)
+  Call<CreateBulkSubscribersResponse> createBulkSubscribers(@Field("phone_numbers") String phone,
+      @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
+      @FieldMap Map<String, String> optionalFields);
 
-    @GET(Constants.VotoEndpoints.SUBSCRIBERS)
-    Call<ListSubscribersResponse> listSubscribers(@Query("limit") int limit);
+  @GET(Constants.VotoEndpoints.SUBSCRIBERS) Call<ListSubscribersResponse> listSubscribers(
+      @Query("limit") int limit);
 
-    @PUT(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
-            @FieldMap Map<String, String> optionalFields);
+  @PUT(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Call<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
+      @FieldMap Map<String, String> optionalFields);
 
-    @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Call<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
+  @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Call<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Call<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Call<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
 
-    // Audio files
-    @GET(Constants.VotoEndpoints.AUDIO_FILES)
-    Call<ListAudioFilesResponse> listAudioFiles();
+  // Audio files
+  @GET(Constants.VotoEndpoints.AUDIO_FILES) Call<ListAudioFilesResponse> listAudioFiles();
 
-    @DELETE(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    Call<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id);
+  @DELETE(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+  Call<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    Call<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+  Call<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id);
 
-    @POST(Constants.VotoEndpoints.AUDIO_FILES)
-    Call<UploadAudioFileResponse> uploadAudioFileContent(@Query("description") String description,
-            @Query("file_extension") AudioFileExtension format,
-            @QueryMap Map<String, String> optionalFields);
+  @POST(Constants.VotoEndpoints.AUDIO_FILES) Call<UploadAudioFileResponse> uploadAudioFileContent(
+      @Query("description") String description, @Query("file_extension") AudioFileExtension format,
+      @QueryMap Map<String, String> optionalFields);
 
-    @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    Call<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
-            @Query("file_extension") AudioFileExtension format,
-            @QueryMap Map<String, String> optionalFields);
+  @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+  Call<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+      @Query("file_extension") AudioFileExtension format,
+      @QueryMap Map<String, String> optionalFields);
 
-    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    @Streaming
-    Call<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format);
+  @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}") @Streaming
+  Call<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format);
 
-    // Messages
-    @GET(Constants.VotoEndpoints.MESSAGES)
-    Call<ListMessagesResponse> listMessages();
+  // Messages
+  @GET(Constants.VotoEndpoints.MESSAGES) Call<ListMessagesResponse> listMessages();
 
-    @FormUrlEncoded
-    @POST(Constants.VotoEndpoints.MESSAGES)
-    Call<CreateResponse> createMessage(
-            @Field("title") String title,
-            @Field("has_sms") Status hasSms,
-            @Field("has_voice") Status hasVoice,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @FormUrlEncoded @POST(Constants.VotoEndpoints.MESSAGES) Call<CreateResponse> createMessage(
+      @Field("title") String title, @Field("has_sms") Status hasSms,
+      @Field("has_voice") Status hasVoice, @FieldMap Map<String, String> optionalFields);
 
-    @PUT(Constants.VotoEndpoints.MESSAGES + "/{id}")
-    Call<CreateResponse> updateMessage(
-            @Path("id") Long id,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @PUT(Constants.VotoEndpoints.MESSAGES + "/{id}") Call<CreateResponse> updateMessage(
+      @Path("id") Long id, @FieldMap Map<String, String> optionalFields);
 
-    @DELETE(Constants.VotoEndpoints.MESSAGES + "/{id}")
-    Call<DeleteMessageResponse> deleteMessage(@Path("id") Long id);
+  @DELETE(Constants.VotoEndpoints.MESSAGES + "/{id}") Call<DeleteMessageResponse> deleteMessage(
+      @Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}/count")
-    Call<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
-            @QueryMap Map<String, String> optionalFields);
+  @GET(Constants.VotoEndpoints.MESSAGES + "/{id}/count")
+  Call<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
+      @QueryMap Map<String, String> optionalFields);
 
-    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}")
-    Call<MessageDetailsResponse> getMessageDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.MESSAGES + "/{id}") Call<MessageDetailsResponse> getMessageDetails(
+      @Path("id") Long id);
 }

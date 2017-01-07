@@ -18,7 +18,6 @@ package com.addhen.voto.sdk.test.model.subscribers;
 
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,34 +28,28 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class IfPhoneNumberExistsTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldBeSkip() {
-        assertEquals("skip", IfPhoneNumberExists.SKIP.toString());
-    }
+  @Test public void shouldBeSkip() {
+    assertEquals("skip", IfPhoneNumberExists.SKIP.toString());
+  }
 
-    @Test
-    public void shouldBeCreateDuplicate() {
-        assertEquals("create_duplicate", IfPhoneNumberExists.CREATE_DUPLICATE.toString());
-    }
+  @Test public void shouldBeCreateDuplicate() {
+    assertEquals("create_duplicate", IfPhoneNumberExists.CREATE_DUPLICATE.toString());
+  }
 
-    @Test
-    public void shouldBeAddToGroupOnly() {
-        assertEquals("add_to_group_only", IfPhoneNumberExists.ADD_TO_GROUP_ONLY.toString());
-    }
+  @Test public void shouldBeAddToGroupOnly() {
+    assertEquals("add_to_group_only", IfPhoneNumberExists.ADD_TO_GROUP_ONLY.toString());
+  }
 
-    @Test
-    public void shouldSetSkip() {
-        assertEquals(IfPhoneNumberExists.SKIP,
-                IfPhoneNumberExists.valueOf(IfPhoneNumberExists.SKIP.name()));
-    }
+  @Test public void shouldSetSkip() {
+    assertEquals(IfPhoneNumberExists.SKIP,
+        IfPhoneNumberExists.valueOf(IfPhoneNumberExists.SKIP.name()));
+  }
 
-    @Test
-    public void shouldKnowNumberOptions() {
-        assertEquals(3, IfPhoneNumberExists.values().length);
-    }
+  @Test public void shouldKnowNumberOptions() {
+    assertEquals(3, IfPhoneNumberExists.values().length);
+  }
 }

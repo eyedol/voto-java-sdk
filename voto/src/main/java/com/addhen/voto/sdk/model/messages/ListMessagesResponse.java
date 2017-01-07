@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.messages;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-
 import java.util.List;
 
 /**
@@ -27,19 +26,16 @@ import java.util.List;
  */
 public class ListMessagesResponse extends BaseResponse {
 
-    /** The returned message list **/
-    public Data data;
+  /** The returned message list **/
+  public Data data;
 
-    public static class Data {
+  public static class Data {
 
-        /** List of subscribers **/
-        public List<Message> messages;
+    /** List of subscribers **/
+    public List<Message> messages;
 
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "messages=" + messages
-                    + '}';
-        }
+    @Override public String toString() {
+      return "Data{" + "messages=" + messages + '}';
     }
+  }
 }

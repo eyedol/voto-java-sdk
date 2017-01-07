@@ -18,11 +18,9 @@ package com.addhen.voto.sdk.test.model.audio;
 
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -32,26 +30,20 @@ import static org.junit.Assert.assertEquals;
  */
 public class DeleteAudioFileResponseTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSuccessfullyDeleteAudioFile() throws IOException {
-        final DeleteAudioFileResponse response = mGsonDeserializer.deleteAudioFile();
-        assertNotNull(response);
-        assertEquals(200, (int) response.status);
-        assertEquals("Successfully deleted audio file", response.message);
-    }
+  @Test public void shouldSuccessfullyDeleteAudioFile() throws IOException {
+    final DeleteAudioFileResponse response = mGsonDeserializer.deleteAudioFile();
+    assertNotNull(response);
+    assertEquals(200, (int) response.status);
+    assertEquals("Successfully deleted audio file", response.message);
+  }
 
-    @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final DeleteAudioFileResponse response = mGsonDeserializer.deleteAudioFile();
-        final String toString = response.toString();
-        assertEquals(
-                "BaseResponse{status=200, message='Successfully deleted audio file'}",
-                toString
-        );
-    }
+  @Test public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+    final DeleteAudioFileResponse response = mGsonDeserializer.deleteAudioFile();
+    final String toString = response.toString();
+    assertEquals("BaseResponse{status=200, message='Successfully deleted audio file'}", toString);
+  }
 }

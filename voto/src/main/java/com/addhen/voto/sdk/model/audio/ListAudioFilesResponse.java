@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.audio;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-
 import java.util.List;
 
 /**
@@ -25,19 +24,16 @@ import java.util.List;
  */
 public class ListAudioFilesResponse extends BaseResponse {
 
-    /** The list of audio files */
-    public Data data;
+  /** The list of audio files */
+  public Data data;
 
-    public static class Data {
+  public static class Data {
 
-        /** List of audio files **/
-        public List<AudioFile> audioFiles;
+    /** List of audio files **/
+    public List<AudioFile> audioFiles;
 
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "audio=" + audioFiles
-                    + '}';
-        }
+    @Override public String toString() {
+      return "Data{" + "audio=" + audioFiles + '}';
     }
+  }
 }

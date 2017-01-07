@@ -21,9 +21,7 @@ import com.addhen.voto.sdk.model.messages.ListMessagesResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.rxjava.RxJavaVotoApiClient;
 import com.addhen.voto.sdk.sync.SyncVotoApiClient;
-
 import java.io.IOException;
-
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,72 +33,69 @@ import rx.functions.Action1;
  */
 public class Main {
 
-    private static String api_key;
+  private static String api_key;
 
-    public static void main(String args[]) {
-        api_key = args[0];
-        syncClient();
-        asyncClient();
-        rxJavaClient();
-        listMessagesSyncClient();
+  public static void main(String args[]) {
+    api_key = args[0];
+    syncClient();
+    asyncClient();
+    rxJavaClient();
+    listMessagesSyncClient();
+  }
+
+  private static void syncClient() {
+    SyncVotoApiClient syncVotoApiClient =
+        new SyncVotoApiClient.Builder(api_key).withLogLevel(HttpLoggingInterceptor.Level.BODY)
+            .build();
+    ListSubscribersResponse listSubscribersResponse = null;
+    try {
+      listSubscribersResponse = syncVotoApiClient.listSubscribers(10);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    private static void syncClient() {
-        SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder(api_key)
-                .withLogLevel(HttpLoggingInterceptor.Level.BODY)
-                .build();
-        ListSubscribersResponse listSubscribersResponse = null;
-        try {
-            listSubscribersResponse = syncVotoApiClient.listSubscribers(10);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    System.out.println(listSubscribersResponse);
+  }
 
+  private static void asyncClient() {
+    AsyncVotoApiClient asyncVotoApiClient =
+        new AsyncVotoApiClient.Builder(api_key).withLogLevel(HttpLoggingInterceptor.Level.BODY)
+            .build();
+    asyncVotoApiClient.listSubscribers(10, new Callback<ListSubscribersResponse>() {
+      @Override public void onResponse(Call<ListSubscribersResponse> call,
+          Response<ListSubscribersResponse> response) {
+        ListSubscribersResponse listSubscribersResponse = response.body();
         System.out.println(listSubscribersResponse);
+      }
+
+      @Override public void onFailure(Call<ListSubscribersResponse> call, Throwable t) {
+        t.printStackTrace();
+      }
+    });
+  }
+
+  private static void rxJavaClient() {
+    RxJavaVotoApiClient rxJavaVotoApiClient =
+        new RxJavaVotoApiClient.Builder(api_key).withLogLevel(HttpLoggingInterceptor.Level.BODY)
+            .build();
+    rxJavaVotoApiClient.listSubscribers(10).subscribe(new Action1<ListSubscribersResponse>() {
+      @Override public void call(ListSubscribersResponse listSubscribersResponse) {
+        System.out.println(listSubscribersResponse);
+      }
+    });
+  }
+
+  private static void listMessagesSyncClient() {
+    SyncVotoApiClient syncVotoApiClient =
+        new SyncVotoApiClient.Builder(api_key).withLogLevel(HttpLoggingInterceptor.Level.BODY)
+            .build();
+    ListMessagesResponse listMessagesResponse = null;
+    try {
+      listMessagesResponse = syncVotoApiClient.listMessages();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    private static void asyncClient() {
-        AsyncVotoApiClient asyncVotoApiClient = new AsyncVotoApiClient.Builder(api_key)
-                .withLogLevel(HttpLoggingInterceptor.Level.BODY)
-                .build();
-        asyncVotoApiClient.listSubscribers(10, new Callback<ListSubscribersResponse>() {
-            @Override
-            public void onResponse(Call<ListSubscribersResponse> call,
-                    Response<ListSubscribersResponse> response) {
-                ListSubscribersResponse listSubscribersResponse = response.body();
-                System.out.println(listSubscribersResponse);
-            }
-
-            @Override
-            public void onFailure(Call<ListSubscribersResponse> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
-    private static void rxJavaClient() {
-        RxJavaVotoApiClient rxJavaVotoApiClient = new RxJavaVotoApiClient.Builder(api_key)
-                .withLogLevel(HttpLoggingInterceptor.Level.BODY)
-                .build();
-        rxJavaVotoApiClient.listSubscribers(10).subscribe(new Action1<ListSubscribersResponse>() {
-            @Override
-            public void call(ListSubscribersResponse listSubscribersResponse) {
-                System.out.println(listSubscribersResponse);
-            }
-        });
-    }
-
-    private static void listMessagesSyncClient() {
-        SyncVotoApiClient syncVotoApiClient = new SyncVotoApiClient.Builder(api_key)
-                .withLogLevel(HttpLoggingInterceptor.Level.BODY)
-                .build();
-        ListMessagesResponse listMessagesResponse = null;
-        try {
-            listMessagesResponse = syncVotoApiClient.listMessages();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(listMessagesResponse);
-    }
+    System.out.println(listMessagesResponse);
+  }
 }

@@ -96,7 +96,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
         mSyncVotoApiClient.createSubscriber("0243555333889", null);
     assertNotNull(createSubscriberResponse);
     assertNotNull(createSubscriberResponse.data);
-    assertEquals(430l, (long) createSubscriberResponse.data.id);
+    assertEquals(430L, (long) createSubscriberResponse.data.id);
   }
 
   @Test public void shouldSuccessfullyCreateBulkSubscribers() throws IOException {
@@ -112,7 +112,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
 
   @Test public void shouldSuccessfullyDeleteSubscriber() throws IOException {
 
-    DeleteSubscriberResponse response = mSyncVotoApiClient.deleteSubscriber(1l);
+    DeleteSubscriberResponse response = mSyncVotoApiClient.deleteSubscriber(1L);
     assertNotNull(response);
     assertEquals(200, (int) response.status);
     assertEquals("Successfully deleted subscriber", response.message);
@@ -134,7 +134,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
     assertNotNull(response.data.subscribers);
     assertEquals(2, response.data.subscribers.size());
     assertNotNull(response.data.subscribers.get(0));
-    assertEquals(373648l, (long) response.data.subscribers.get(0).id);
+    assertEquals(373648L, (long) response.data.subscribers.get(0).id);
     assertEquals("0", response.data.subscribers.get(0).receiveSms);
     assertEquals("1", response.data.subscribers.get(0).receiveVoice);
     assertEquals("0", response.data.subscribers.get(0).receiveData);
@@ -143,11 +143,11 @@ public class SyncVotoApiClientTest extends BaseTestCase {
     assertEquals(Status.ACTIVE, response.data.subscribers.get(0).status);
     String date = BaseTestCase.formatShowingDate(response.data.subscribers.get(0).startDate);
     assertEquals("2014-09-10", date);
-    assertEquals(200247l, (long) response.data.subscribers.get(0).languageId);
+    assertEquals(200247L, (long) response.data.subscribers.get(0).languageId);
     assertEquals("0", response.data.subscribers.get(0).isTestSubscriber);
     assertEquals(
-        "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, 204137",
-        response.data.subscribers.get(0).groupIds);
+        "201031, 201409, 204128, 204129, 204130, 204131, 204132, 204133, 204134, 204135, 204136, "
+            + "204137", response.data.subscribers.get(0).groupIds);
     assertNotNull(response.data.subscribers.get(0).properties);
     assertEquals("Kodjo Antwi", response.data.subscribers.get(0).properties.name);
     assertEquals("Ejisu", response.data.subscribers.get(0).properties.location);
@@ -156,18 +156,18 @@ public class SyncVotoApiClientTest extends BaseTestCase {
 
   @Test public void shouldSuccessfullyModifySubscriber() throws IOException {
     CreateSubscriberResponse createSubscriberResponse =
-        mSyncVotoApiClient.modifySubscriberDetails(1l, null);
+        mSyncVotoApiClient.modifySubscriberDetails(1L, null);
     assertNotNull(createSubscriberResponse);
   }
 
   @Test public void shouldSuccessfullyListSubscriberDetails() throws IOException {
     SubscriberDetailsResponse createSubscriberResponse =
-        mSyncVotoApiClient.listSubscriberDetails(1l);
+        mSyncVotoApiClient.listSubscriberDetails(1L);
     assertNotNull(createSubscriberResponse);
   }
 
   @Test public void shouldSuccessfullyListAudioFileDetails() throws IOException {
-    AudioFileDetailsResponse response = mSyncVotoApiClient.listAudioFileDetails(1l);
+    AudioFileDetailsResponse response = mSyncVotoApiClient.listAudioFileDetails(1L);
     assertNotNull(response);
   }
 
@@ -179,7 +179,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
 
   @Test public void shouldSuccessfullyUpdateAudioFileContent() throws IOException {
     UploadAudioFileResponse response =
-        mSyncVotoApiClient.updateAudioFileContent(1l, AudioFileExtension.MP3, null);
+        mSyncVotoApiClient.updateAudioFileContent(1L, AudioFileExtension.MP3, null);
     assertNotNull(response);
   }
 
@@ -285,7 +285,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
   @Test public void shouldThrowExceptionWhenUpdateAudioFileContentFileExtensionIsNull()
       throws IOException {
     try {
-      mSyncVotoApiClient.updateAudioFileContent(1l, null, null);
+      mSyncVotoApiClient.updateAudioFileContent(1L, null, null);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals(FILE_EXTENSION_REQUIRED, e.getMessage());
@@ -294,7 +294,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
 
   @Test public void shouldThrowExceptionWhenDownloadFileFileFormatIsNotSet() throws IOException {
     try {
-      mSyncVotoApiClient.downloadAudioFile(1l, null);
+      mSyncVotoApiClient.downloadAudioFile(1L, null);
       fail();
     } catch (IllegalArgumentException e) {
       assertEquals(FILE_FORMAT_REQUIRED, e.getMessage());
@@ -311,13 +311,13 @@ public class SyncVotoApiClientTest extends BaseTestCase {
   }
 
   @Test public void shouldSuccessfullyDownloadAudioFile() throws IOException {
-    ResponseBody responseBody = mSyncVotoApiClient.downloadAudioFile(1l, AudioFileFormat.ORIGINAL);
+    ResponseBody responseBody = mSyncVotoApiClient.downloadAudioFile(1L, AudioFileFormat.ORIGINAL);
     assertNotNull(responseBody);
     assertEquals("AudioFile", responseBody.string());
   }
 
   @Test public void shouldSuccessfullyDeleteAudioFile() throws IOException {
-    DeleteAudioFileResponse audioFileResponse = mSyncVotoApiClient.deleteAudioFile(1l);
+    DeleteAudioFileResponse audioFileResponse = mSyncVotoApiClient.deleteAudioFile(1L);
     assertNotNull(audioFileResponse);
     assertEquals(200, (int) audioFileResponse.status);
     assertEquals("Successfully deleted audio file", audioFileResponse.message);
@@ -344,13 +344,13 @@ public class SyncVotoApiClientTest extends BaseTestCase {
   }
 
   @Test public void shouldSuccessfullyUpdateMessage() throws IOException {
-    CreateResponse createResponse = mSyncVotoApiClient.updateMessage(1l, null);
+    CreateResponse createResponse = mSyncVotoApiClient.updateMessage(1L, null);
     assertNotNull(createResponse);
     assertEquals(200, (int) createResponse.status);
   }
 
   @Test public void shouldSuccessfullyDeleteMessage() throws IOException {
-    DeleteMessageResponse deleteMessageResponse = mSyncVotoApiClient.deleteMessage(1l);
+    DeleteMessageResponse deleteMessageResponse = mSyncVotoApiClient.deleteMessage(1L);
     assertNotNull(deleteMessageResponse);
     assertEquals(200, (int) deleteMessageResponse.status);
     assertEquals("Successfully deleted message", deleteMessageResponse.message);
@@ -358,7 +358,7 @@ public class SyncVotoApiClientTest extends BaseTestCase {
 
   @Test public void shouldSuccessfullyGetMessageDeliveryLogCount() throws IOException {
     MessageDeliveryLogResponse messageDeliveryLogResponse =
-        mSyncVotoApiClient.getMessageDeliveryLog(1l, null);
+        mSyncVotoApiClient.getMessageDeliveryLog(1L, null);
     assertMessageDeliveryLogCountResponse(messageDeliveryLogResponse);
   }
 

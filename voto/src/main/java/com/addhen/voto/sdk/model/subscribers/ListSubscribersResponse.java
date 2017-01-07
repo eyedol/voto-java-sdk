@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.subscribers;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-
 import java.util.List;
 
 /**
@@ -27,30 +26,32 @@ import java.util.List;
  */
 public class ListSubscribersResponse extends BaseResponse {
 
-    /** The returned subscribers list **/
-    public Data data;
+  /** The returned subscribers list **/
+  public Data data;
 
-    @Override
-    public String toString() {
-        return "ListSubscribersResponse{"
-                + super.toString()
-                + "moreInfo='" + moreInfo + '\''
-                + ", url='" + url + '\''
-                + ", pagination=" + pagination
-                + ", data=" + data
-                + '}';
+  @Override public String toString() {
+    return "ListSubscribersResponse{"
+        + super.toString()
+        + "moreInfo='"
+        + moreInfo
+        + '\''
+        + ", url='"
+        + url
+        + '\''
+        + ", pagination="
+        + pagination
+        + ", data="
+        + data
+        + '}';
+  }
+
+  public static class Data {
+
+    /** List of subscribers **/
+    public List<Subscriber> subscribers;
+
+    @Override public String toString() {
+      return "Data{" + "subscribers=" + subscribers + '}';
     }
-
-    public static class Data {
-
-        /** List of subscribers **/
-        public List<Subscriber> subscribers;
-
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "subscribers=" + subscribers
-                    + '}';
-        }
-    }
+  }
 }

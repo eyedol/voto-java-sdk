@@ -6,22 +6,22 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 tasks.matching { it instanceof Test }.all {
-    testLogging.events = ["failed", "passed", "skipped"]
-    testLogging.showStandardStreams = true
+  testLogging.events = ["failed", "passed", "skipped"]
+  testLogging.showStandardStreams = true
 }
 
 dependencies {
-    def sdkDependencies = rootProject.ext.sdkDependencies
-    def sdkTestDependencies = rootProject.ext.sdkTestDependencies
+  def sdkDependencies = rootProject.ext.sdkDependencies
+  def sdkTestDependencies = rootProject.ext.sdkTestDependencies
 
-    compile(sdkDependencies.retrofit) {
-        exclude module: 'gson'
-    }
+  compile(sdkDependencies.retrofit) {
+    exclude module: 'gson'
+  }
 
-    compile sdkDependencies.converterGson
-    compile sdkDependencies.okhttp
-    compile sdkDependencies.okhttpUrlConnection
-    compile sdkDependencies.loggingInterceptor
-    testCompile sdkTestDependencies.junit
-    testCompile sdkTestDependencies.retrofitMock
+  compile sdkDependencies.converterGson
+  compile sdkDependencies.okhttp
+  compile sdkDependencies.okhttpUrlConnection
+  compile sdkDependencies.loggingInterceptor
+  testCompile sdkTestDependencies.junit
+  testCompile sdkTestDependencies.retrofitMock
 }

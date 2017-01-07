@@ -16,8 +16,6 @@
 
 package com.addhen.voto.sdk.test;
 
-import com.google.gson.Gson;
-
 import com.addhen.voto.sdk.model.CreateResponse;
 import com.addhen.voto.sdk.model.audio.AudioFileDetailsResponse;
 import com.addhen.voto.sdk.model.audio.DeleteAudioFileResponse;
@@ -32,7 +30,7 @@ import com.addhen.voto.sdk.model.subscribers.CreateSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
-
+import com.google.gson.Gson;
 import java.io.IOException;
 
 import static com.addhen.voto.sdk.test.TestHelper.getResource;
@@ -42,185 +40,181 @@ import static com.addhen.voto.sdk.test.TestHelper.getResource;
  */
 public final class GsonDeserializer {
 
-    private Gson mGson;
+  private Gson mGson;
 
-    public GsonDeserializer(Gson gson) {
-        mGson = gson;
+  public GsonDeserializer(Gson gson) {
+    mGson = gson;
+  }
+
+  public CreateSubscriberResponse deserializeCreateSubscriberResponse() {
+    String createResponseJson = null;
+    try {
+      createResponseJson = getResource("json/subscriber/create_subscriber_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return mGson.fromJson(createResponseJson, CreateSubscriberResponse.class);
+  }
+
+  public CreateBulkSubscribersResponse deserializeCreateBulkSubscriberResponse() {
+    String createBulkSubscribersResponse = null;
+    try {
+      createBulkSubscribersResponse =
+          getResource("json/subscriber/create_bulk_subscribers_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return mGson.fromJson(createBulkSubscribersResponse, CreateBulkSubscribersResponse.class);
+  }
+
+  public ListSubscribersResponse listSubscribers() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/subscriber/list_subscribers_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return mGson.fromJson(responseJson, ListSubscribersResponse.class);
+  }
+
+  public CreateSubscriberResponse modifySubscriberDetails() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/subscriber/modify_subscriber_details_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return mGson.fromJson(responseJson, CreateSubscriberResponse.class);
+  }
+
+  public SubscriberDetailsResponse listSubscriberDetails() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/subscriber/subscriber_details_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    public CreateSubscriberResponse deserializeCreateSubscriberResponse() {
-        String createResponseJson = null;
-        try {
-            createResponseJson = getResource(
-                    "json/subscriber/create_subscriber_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(createResponseJson, CreateSubscriberResponse.class);
+    return mGson.fromJson(responseJson, SubscriberDetailsResponse.class);
+  }
+
+  public DeleteSubscriberResponse deleteSubscriber() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/subscriber/delete_subscriber_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, DeleteSubscriberResponse.class);
+  }
 
-
-    public CreateBulkSubscribersResponse deserializeCreateBulkSubscriberResponse() {
-        String createBulkSubscribersResponse = null;
-        try {
-            createBulkSubscribersResponse = getResource(
-                    "json/subscriber/create_bulk_subscribers_response.json");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(createBulkSubscribersResponse, CreateBulkSubscribersResponse.class);
+  // Audio files
+  public ListAudioFilesResponse listAudioFiles() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/audio/list_audio_files_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, ListAudioFilesResponse.class);
+  }
 
-    public ListSubscribersResponse listSubscribers() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/list_subscribers_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, ListSubscribersResponse.class);
+  public DeleteAudioFileResponse deleteAudioFile() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/audio/delete_audio_file_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, DeleteAudioFileResponse.class);
+  }
 
-    public CreateSubscriberResponse modifySubscriberDetails() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/modify_subscriber_details_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, CreateSubscriberResponse.class);
+  public AudioFileDetailsResponse listAudioFileDetails() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/audio/audio_file_details_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, AudioFileDetailsResponse.class);
+  }
 
-    public SubscriberDetailsResponse listSubscriberDetails() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/subscriber_details_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return mGson.fromJson(responseJson, SubscriberDetailsResponse.class);
+  public UploadAudioFileResponse uploadAudioFileContent() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/audio/upload_audio_file_content_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+  }
 
-    public DeleteSubscriberResponse deleteSubscriber() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/subscriber/delete_subscriber_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, DeleteSubscriberResponse.class);
+  public UploadAudioFileResponse updateAudioFileContent() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/audio/update_audio_file_content_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+  }
 
-    // Audio files
-    public ListAudioFilesResponse listAudioFiles() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/audio/list_audio_files_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, ListAudioFilesResponse.class);
+  public CreateResponse createMessage() {
+    return createResponse("json/message/create_message_response.json");
+  }
+
+  public CreateResponse updateMessage() {
+    return createMessage();
+  }
+
+  public CreateResponse createResponse(String responseJson) {
+    String createResponse = null;
+    try {
+      createResponse = getResource(responseJson);
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(createResponse, CreateResponse.class);
+  }
 
-    public DeleteAudioFileResponse deleteAudioFile() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/audio/delete_audio_file_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, DeleteAudioFileResponse.class);
+  // Messages
+  public ListMessagesResponse listMessages() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/message/list_message_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, ListMessagesResponse.class);
+  }
 
-    public AudioFileDetailsResponse listAudioFileDetails() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/audio/audio_file_details_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, AudioFileDetailsResponse.class);
+  public DeleteMessageResponse deleteMessage() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/message/delete_message_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, DeleteMessageResponse.class);
+  }
 
-    public UploadAudioFileResponse uploadAudioFileContent() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/audio/upload_audio_file_content_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+  public MessageDeliveryLogResponse getMessageDeliveryLogCount() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/message/message_delivery_log_count.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+    return mGson.fromJson(responseJson, MessageDeliveryLogResponse.class);
+  }
 
-    public UploadAudioFileResponse updateAudioFileContent() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/audio/update_audio_file_content_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, UploadAudioFileResponse.class);
+  public MessageDetailsResponse getMessageDetails() {
+    String responseJson = null;
+    try {
+      responseJson = getResource("json/message/message_details_response.json");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-
-    public CreateResponse createMessage() {
-        return createResponse("json/message/create_message_response.json");
-    }
-
-    public CreateResponse updateMessage() {
-        return createMessage();
-    }
-
-    public CreateResponse createResponse(String responseJson) {
-        String createResponse = null;
-        try {
-            createResponse = getResource(responseJson);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(createResponse, CreateResponse.class);
-    }
-
-    // Messages
-    public ListMessagesResponse listMessages() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/message/list_message_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, ListMessagesResponse.class);
-    }
-
-    public DeleteMessageResponse deleteMessage() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/message/delete_message_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, DeleteMessageResponse.class);
-    }
-
-    public MessageDeliveryLogResponse getMessageDeliveryLogCount() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/message/message_delivery_log_count.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, MessageDeliveryLogResponse.class);
-    }
-
-    public MessageDetailsResponse getMessageDetails() {
-        String responseJson = null;
-        try {
-            responseJson = getResource("json/message/message_details_response.json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return mGson.fromJson(responseJson, MessageDetailsResponse.class);
-    }
+    return mGson.fromJson(responseJson, MessageDetailsResponse.class);
+  }
 }

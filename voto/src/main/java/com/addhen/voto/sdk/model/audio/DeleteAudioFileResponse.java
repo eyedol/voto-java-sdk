@@ -23,8 +23,7 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class DeleteAudioFileResponse extends BaseResponse {
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+  @Override public String toString() {
+    return super.toString();
+  }
 }

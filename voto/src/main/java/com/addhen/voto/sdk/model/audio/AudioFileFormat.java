@@ -22,21 +22,19 @@ import com.google.gson.annotations.SerializedName;
  * @author Henry Addo
  */
 public enum AudioFileFormat {
-    /** The original format **/
-    @SerializedName("original")
-    ORIGINAL("original"),
-    /** The OGG format **/
-    @SerializedName("ogg")
-    OGG("ogg");
+  /** The original format **/
+  @SerializedName("original")
+  ORIGINAL("original"), /** The OGG format **/
+  @SerializedName("ogg")
+  OGG("ogg");
 
-    private final String mValue;
+  private final String mValue;
 
-    AudioFileFormat(String value) {
-        mValue = value;
-    }
+  AudioFileFormat(String value) {
+    mValue = value;
+  }
 
-    @Override
-    public String toString() {
-        return mValue;
-    }
+  @Override public String toString() {
+    return mValue;
+  }
 }

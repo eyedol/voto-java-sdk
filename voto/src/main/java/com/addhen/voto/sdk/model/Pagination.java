@@ -23,19 +23,20 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Pagination {
 
-    /** The next URL **/
-    @SerializedName("nextURL")
-    public String nextURL;
+  /** The next URL **/
+  @SerializedName("nextURL") public String nextURL;
 
-    /** The previous URL **/
-    @SerializedName("previousURL")
-    public String previousURL;
+  /** The previous URL **/
+  @SerializedName("previousURL") public String previousURL;
 
-    @Override
-    public String toString() {
-        return "Pagination{"
-                + "nextURL='" + nextURL + '\''
-                + ", previousURL='" + previousURL + '\''
-                + '}';
-    }
+  @Override public String toString() {
+    return "Pagination{"
+        + "nextURL='"
+        + nextURL
+        + '\''
+        + ", previousURL='"
+        + previousURL
+        + '\''
+        + '}';
+  }
 }

@@ -24,29 +24,25 @@ package com.addhen.voto.sdk.model;
  */
 public abstract class BaseResponse {
 
-    /** The code from the API response **/
-    public Integer code;
+  /** The code from the API response **/
+  public Integer code;
 
-    /** More info **/
-    public String moreInfo;
+  /** More info **/
+  public String moreInfo;
 
-    /** The to fetch the URL **/
-    public String url;
+  /** The to fetch the URL **/
+  public String url;
 
-    /** The pagination property **/
-    public Pagination pagination;
+  /** The pagination property **/
+  public Pagination pagination;
 
-    /** The status code of the request **/
-    public Integer status;
+  /** The status code of the request **/
+  public Integer status;
 
-    /** Message from the API response **/
-    public String message;
+  /** Message from the API response **/
+  public String message;
 
-    @Override
-    public String toString() {
-        return "BaseResponse{"
-                + "status=" + status
-                + ", message='" + message + '\''
-                + '}';
-    }
+  @Override public String toString() {
+    return "BaseResponse{" + "status=" + status + ", message='" + message + '\'' + '}';
+  }
 }

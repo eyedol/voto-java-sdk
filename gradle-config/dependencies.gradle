@@ -1,40 +1,30 @@
 allprojects {
-    repositories {
-        jcenter()
-    }
+  repositories {
+    jcenter()
+  }
 }
 
 ext {
 
-    // Library version #s
-    retrofitVersion = '2.0.0'
-    okhttpVersion = '3.2.0'
+  // Library version #s
+  retrofitVersion = '2.0.0'
+  okhttpVersion = '3.2.0'
 
-    // Testing version #s
-    jUnitVersion = '4.12'
+  // Testing version #s
+  jUnitVersion = '4.12'
 
-    sdkDependencies = [
-            retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            converterGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            okhttp             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-            okhttpUrlConnection: "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}",
-            loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",
-    ]
+  sdkDependencies = [retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                     converterGson      : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+                     okhttp             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+                     okhttpUrlConnection: "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}",
+                     loggingInterceptor : "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}",]
 
-    sdkTestDependencies = [
-            junit       : "junit:junit:${jUnitVersion}",
-            retrofitMock: "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",
-    ]
+  sdkTestDependencies = [junit       : "junit:junit:${jUnitVersion}",
+                         retrofitMock: "com.squareup.retrofit2:retrofit-mock:${retrofitVersion}",]
 
-    rxjavaDependencies = [
-            adapterRxjava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
-    ]
+  rxjavaDependencies = [adapterRxjava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",]
 
-    rxjavaTestDependencies = [
-            junit: "junit:junit:${jUnitVersion}",
-    ]
+  rxjavaTestDependencies = [junit: "junit:junit:${jUnitVersion}",]
 
-    syncTestDependencies = [
-            junit: "junit:junit:${jUnitVersion}",
-    ]
+  syncTestDependencies = [junit: "junit:junit:${jUnitVersion}",]
 }

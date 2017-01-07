@@ -17,7 +17,6 @@
 package com.addhen.voto.sdk.model.subscribers;
 
 import com.addhen.voto.sdk.model.BaseResponse;
-
 import java.util.List;
 
 /**
@@ -27,14 +26,10 @@ import java.util.List;
  */
 public class CreateBulkSubscribersResponse extends BaseResponse {
 
-    /** The data returned as a result of creating a subscriber */
-    public List<Long> data;
+  /** The data returned as a result of creating a subscriber */
+  public List<Long> data;
 
-    @Override
-    public String toString() {
-        return "CreateBulkSubscribersResponse{"
-                + super.toString()
-                + "data=" + data
-                + '}';
-    }
+  @Override public String toString() {
+    return "CreateBulkSubscribersResponse{" + super.toString() + "data=" + data + '}';
+  }
 }

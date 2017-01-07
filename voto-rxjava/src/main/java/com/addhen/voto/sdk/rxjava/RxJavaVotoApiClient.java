@@ -37,9 +37,7 @@ import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.rxjava.service.RxJavaVotoService;
 import com.addhen.voto.sdk.util.StringUtils;
-
 import java.util.Map;
-
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -57,186 +55,178 @@ import static com.addhen.voto.sdk.Constants.ErrorMessage.PHONE_NUMBER_REQUIRED;
  */
 public class RxJavaVotoApiClient extends BaseVotoApiClient {
 
-    private RxJavaVotoService mRxJavaVotoService;
+  private RxJavaVotoService mRxJavaVotoService;
 
-    public RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
-        mRxJavaVotoService = rxJavaVotoService;
+  public RxJavaVotoApiClient(RxJavaVotoService rxJavaVotoService) {
+    mRxJavaVotoService = rxJavaVotoService;
+  }
+
+  public Observable<CreateSubscriberResponse> createSubscriber(String phone,
+      Map<String, String> optionalFields) {
+    if (StringUtils.isEmpty(phone)) {
+      throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
+    }
+    Observable<CreateSubscriberResponse> createSubscriber =
+        mRxJavaVotoService.createSubscriber(phone, optionalFields);
+    return createSubscriber;
+  }
+
+  public Observable<CreateBulkSubscribersResponse> createBulkSubscribers(String phoneNumbers,
+      IfPhoneNumberExists ifPhoneNumberExists, @QueryMap Map<String, String> optionalFields) {
+    if (StringUtils.isEmpty(phoneNumbers)) {
+      throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
     }
 
-    public Observable<CreateSubscriberResponse> createSubscriber(String phone,
-            Map<String, String> optionalFields) {
-        if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
-        }
-        Observable<CreateSubscriberResponse> createSubscriber = mRxJavaVotoService.createSubscriber(
-                phone,
-                optionalFields
-        );
-        return createSubscriber;
+    Observable<CreateBulkSubscribersResponse> createBulkSubscribers =
+        mRxJavaVotoService.createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
+    return createBulkSubscribers;
+  }
+
+  public Observable<ListSubscribersResponse> listSubscribers(int limit) {
+    if (limit > 0) {
+      this.limit = limit;
+    }
+    Observable<ListSubscribersResponse> listSubscribers =
+        mRxJavaVotoService.listSubscribers(this.limit);
+    return listSubscribers;
+  }
+
+  public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
+      Map<String, String> optionalFields) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<CreateBulkSubscribersResponse> createBulkSubscribers(String phoneNumbers,
-            IfPhoneNumberExists ifPhoneNumberExists,
-            @QueryMap Map<String, String> optionalFields) {
-        if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
-        }
+    Observable<CreateSubscriberResponse> modifySubscriber =
+        mRxJavaVotoService.modifySubscriberDetails(id, optionalFields);
+    return modifySubscriber;
+  }
 
-        Observable<CreateBulkSubscribersResponse> createBulkSubscribers = mRxJavaVotoService
-                .createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
-        return createBulkSubscribers;
+  public Observable<SubscriberDetailsResponse> listSubscriberDetails(Long id) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<ListSubscribersResponse> listSubscribers(int limit) {
-        if (limit > 0) {
-            this.limit = limit;
-        }
-        Observable<ListSubscribersResponse> listSubscribers = mRxJavaVotoService
-                .listSubscribers(this.limit);
-        return listSubscribers;
+    Observable<SubscriberDetailsResponse> response = mRxJavaVotoService.listSubscriberDetails(id);
+    return response;
+  }
+
+  public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<CreateSubscriberResponse> modifySubscriberDetails(Long id,
-            Map<String, String> optionalFields) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Observable<DeleteSubscriberResponse> deleteSubscriber = mRxJavaVotoService.deleteSubscriber(id);
+    return deleteSubscriber;
+  }
 
-        Observable<CreateSubscriberResponse> modifySubscriber = mRxJavaVotoService
-                .modifySubscriberDetails(id, optionalFields);
-        return modifySubscriber;
+  public Observable<ListAudioFilesResponse> listAudioFiles() {
+    Observable<ListAudioFilesResponse> observable = mRxJavaVotoService.listAudioFiles();
+    return observable;
+  }
+
+  public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<SubscriberDetailsResponse> listSubscriberDetails(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Observable<DeleteAudioFileResponse> response = mRxJavaVotoService.deleteAudioFile(id);
+    return response;
+  }
 
-        Observable<SubscriberDetailsResponse> response = mRxJavaVotoService
-                .listSubscriberDetails(id);
-        return response;
+  public Observable<UploadAudioFileResponse> uploadAudioFileContent(String description,
+      AudioFileExtension fileExtension, Map<String, String> optionalFields) {
+    if (StringUtils.isEmpty(description)) {
+      throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
     }
 
-    public Observable<DeleteSubscriberResponse> deleteSubscriber(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        Observable<DeleteSubscriberResponse> deleteSubscriber = mRxJavaVotoService
-                .deleteSubscriber(id);
-        return deleteSubscriber;
+    if (fileExtension == null) {
+      throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
     }
 
-    public Observable<ListAudioFilesResponse> listAudioFiles() {
-        Observable<ListAudioFilesResponse> observable = mRxJavaVotoService.listAudioFiles();
-        return observable;
+    Observable<UploadAudioFileResponse> observable =
+        mRxJavaVotoService.uploadAudioFileContent(description, fileExtension, optionalFields);
+    return observable;
+  }
+
+  public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<DeleteAudioFileResponse> deleteAudioFile(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Observable<AudioFileDetailsResponse> observable = mRxJavaVotoService.listAudioFileDetails(id);
+    return observable;
+  }
 
-        Observable<DeleteAudioFileResponse> response = mRxJavaVotoService.deleteAudioFile(id);
-        return response;
+  public Observable<UploadAudioFileResponse> updateAudioFileContent(Long id,
+      AudioFileExtension fileExtension, Map<String, String> optionalFields) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<UploadAudioFileResponse> uploadAudioFileContent(String description,
-            AudioFileExtension fileExtension, Map<String, String> optionalFields) {
-        if (StringUtils.isEmpty(description)) {
-            throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
-        }
-
-        if (fileExtension == null) {
-            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
-        }
-
-        Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
-                .uploadAudioFileContent(description, fileExtension, optionalFields);
-        return observable;
+    if (fileExtension == null) {
+      throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
     }
 
-    public Observable<AudioFileDetailsResponse> listAudioFileDetails(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Observable<UploadAudioFileResponse> observable =
+        mRxJavaVotoService.updateAudioFileContent(id, fileExtension, optionalFields);
+    return observable;
+  }
 
-        Observable<AudioFileDetailsResponse> observable = mRxJavaVotoService
-                .listAudioFileDetails(id);
-        return observable;
+  public Observable<ResponseBody> downloadAudioFile(Long id, AudioFileFormat format) {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public Observable<UploadAudioFileResponse> updateAudioFileContent(Long id,
-            AudioFileExtension fileExtension, Map<String, String> optionalFields) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        if (fileExtension == null) {
-            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
-        }
-
-        Observable<UploadAudioFileResponse> observable = mRxJavaVotoService
-                .updateAudioFileContent(id, fileExtension, optionalFields);
-        return observable;
+    if (format == null) {
+      throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
     }
 
-    public Observable<ResponseBody> downloadAudioFile(Long id, AudioFileFormat format) {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Observable<ResponseBody> observable = mRxJavaVotoService.downloadAudioFile(id, format);
+    return observable;
+  }
 
-        if (format == null) {
-            throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
-        }
+  // Messages
+  public Observable<ListMessagesResponse> listMessages() {
+    Observable<ListMessagesResponse> observable = mRxJavaVotoService.listMessages();
+    return observable;
+  }
 
-        Observable<ResponseBody> observable = mRxJavaVotoService.downloadAudioFile(id, format);
-        return observable;
+  public Observable<CreateResponse> createMessage(String title, Status hasSms, Status hasVoice,
+      Map<String, String> optionalFields) {
+    return mRxJavaVotoService.createMessage(title, hasSms, hasVoice, optionalFields);
+  }
+
+  public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
+    return mRxJavaVotoService.updateMessage(id, optionalFields);
+  }
+
+  public Observable<DeleteMessageResponse> deleteMessage(Long id) {
+    return mRxJavaVotoService.deleteMessage(id);
+  }
+
+  public Observable<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
+      Map<String, String> optionalFields) {
+    return mRxJavaVotoService.getMessageDeliveryLog(id, optionalFields);
+  }
+
+  public Observable<MessageDetailsResponse> getMessageDetails(Long id) {
+    return mRxJavaVotoService.getMessageDetails(id);
+  }
+
+  public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {
+
+    public Builder(String apiKey) {
+      super(apiKey);
     }
 
-    // Messages
-    public Observable<ListMessagesResponse> listMessages() {
-        Observable<ListMessagesResponse> observable = mRxJavaVotoService.listMessages();
-        return observable;
+    @Override public RxJavaVotoApiClient build() {
+      mRetrofitBuilder.client(mOkHttpClientBuilder.build());
+      mRetrofitBuilder.baseUrl(getBaseUrl());
+      mRetrofitBuilder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+      Retrofit retrofit = mRetrofitBuilder.build();
+      RxJavaVotoService rxJavaVotoService = retrofit.create(RxJavaVotoService.class);
+      return new RxJavaVotoApiClient(rxJavaVotoService);
     }
-
-    public Observable<CreateResponse> createMessage(String title, Status hasSms, Status hasVoice,
-            Map<String, String> optionalFields) {
-        return mRxJavaVotoService.createMessage(title, hasSms, hasVoice, optionalFields);
-
-    }
-
-    public Observable<CreateResponse> updateMessage(Long id, Map<String, String> optionalFields) {
-        return mRxJavaVotoService.updateMessage(id, optionalFields);
-    }
-
-    public Observable<DeleteMessageResponse> deleteMessage(Long id) {
-        return mRxJavaVotoService.deleteMessage(id);
-    }
-
-    public Observable<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
-            Map<String, String> optionalFields) {
-        return mRxJavaVotoService.getMessageDeliveryLog(id, optionalFields);
-    }
-
-    public Observable<MessageDetailsResponse> getMessageDetails(Long id) {
-        return mRxJavaVotoService.getMessageDetails(id);
-    }
-
-    public static class Builder extends BaseApiBuilder<Builder, RxJavaVotoApiClient> {
-
-        public Builder(String apiKey) {
-            super(apiKey);
-        }
-
-        @Override
-        public RxJavaVotoApiClient build() {
-            mRetrofitBuilder.client(mOkHttpClientBuilder.build());
-            mRetrofitBuilder.baseUrl(getBaseUrl());
-            mRetrofitBuilder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
-            Retrofit retrofit = mRetrofitBuilder.build();
-            RxJavaVotoService rxJavaVotoService = retrofit.create(RxJavaVotoService.class);
-            return new RxJavaVotoApiClient(rxJavaVotoService);
-        }
-    }
+  }
 }

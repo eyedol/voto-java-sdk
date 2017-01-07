@@ -19,11 +19,9 @@ package com.addhen.voto.sdk.test.model.audio;
 import com.addhen.voto.sdk.model.audio.UploadAudioFileResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.util.StringUtils;
-
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -34,36 +32,32 @@ import static org.junit.Assert.assertNotNull;
  */
 public class UploadAudioFileResponseTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSuccessfullyDeserializeUploadAudioFileResponse() throws IOException {
-        final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
-                .uploadAudioFileContent();
-        assertNotNull(uploadAudioFileResponse);
-        assertEquals(200, (int) uploadAudioFileResponse.status);
-        assertEquals("Audio File Uploaded", uploadAudioFileResponse.message);
-        assertNotNull(uploadAudioFileResponse.data);
-        assertEquals(122, (long) uploadAudioFileResponse.data.id);
-    }
+  @Test public void shouldSuccessfullyDeserializeUploadAudioFileResponse() throws IOException {
+    final UploadAudioFileResponse uploadAudioFileResponse =
+        mGsonDeserializer.uploadAudioFileContent();
+    assertNotNull(uploadAudioFileResponse);
+    assertEquals(200, (int) uploadAudioFileResponse.status);
+    assertEquals("Audio File Uploaded", uploadAudioFileResponse.message);
+    assertNotNull(uploadAudioFileResponse.data);
+    assertEquals(122, (long) uploadAudioFileResponse.data.id);
+  }
 
-    @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
-                .uploadAudioFileContent();
-        final String toString = uploadAudioFileResponse.toString();
-        assertFalse(StringUtils.isEmpty(toString));
-    }
+  @Test public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+    final UploadAudioFileResponse uploadAudioFileResponse =
+        mGsonDeserializer.uploadAudioFileContent();
+    final String toString = uploadAudioFileResponse.toString();
+    assertFalse(StringUtils.isEmpty(toString));
+  }
 
-    @Test
-    public void shouldTestDataToStringToMakeSureItsNotEmpty() throws Exception {
-        final UploadAudioFileResponse uploadAudioFileResponse = mGsonDeserializer
-                .uploadAudioFileContent();
-        assertNotNull(uploadAudioFileResponse.data);
-        final String toString = uploadAudioFileResponse.data.toString();
-        assertFalse(StringUtils.isEmpty(toString));
-    }
+  @Test public void shouldTestDataToStringToMakeSureItsNotEmpty() throws Exception {
+    final UploadAudioFileResponse uploadAudioFileResponse =
+        mGsonDeserializer.uploadAudioFileContent();
+    assertNotNull(uploadAudioFileResponse.data);
+    final String toString = uploadAudioFileResponse.data.toString();
+    assertFalse(StringUtils.isEmpty(toString));
+  }
 }

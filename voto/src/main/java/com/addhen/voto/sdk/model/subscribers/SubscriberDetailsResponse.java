@@ -25,27 +25,20 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class SubscriberDetailsResponse extends BaseResponse {
 
-    /** The returned subscribers list **/
-    public Data data;
+  /** The returned subscribers list **/
+  public Data data;
 
-    @Override
-    public String toString() {
-        return "SubscriberDetailsResponse{"
-                + super.toString()
-                + "data=" + data
-                + '}';
+  @Override public String toString() {
+    return "SubscriberDetailsResponse{" + super.toString() + "data=" + data + '}';
+  }
+
+  public static class Data {
+
+    /** List of subscribers **/
+    public Subscriber subscriber;
+
+    @Override public String toString() {
+      return "Data{" + "subscriber=" + subscriber + '}';
     }
-
-    public static class Data {
-
-        /** List of subscribers **/
-        public Subscriber subscriber;
-
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "subscriber=" + subscriber
-                    + '}';
-        }
-    }
+  }
 }

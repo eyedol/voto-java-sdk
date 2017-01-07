@@ -22,24 +22,21 @@ import com.google.gson.annotations.SerializedName;
  * @author Henry Addo
  */
 public enum AudioFileExtension {
-    /** MP3 extension **/
-    @SerializedName("mp3")
-    MP3("mp3"),
-    /** Wav extension **/
-    @SerializedName("wav")
-    WAV("wav"),
-    /** Ul extension **/
-    @SerializedName("ul")
-    UL("ul");
+  /** MP3 extension **/
+  @SerializedName("mp3")
+  MP3("mp3"), /** Wav extension **/
+  @SerializedName("wav")
+  WAV("wav"), /** Ul extension **/
+  @SerializedName("ul")
+  UL("ul");
 
-    private final String mValue;
+  private final String mValue;
 
-    AudioFileExtension(String value) {
-        mValue = value;
-    }
+  AudioFileExtension(String value) {
+    mValue = value;
+  }
 
-    @Override
-    public String toString() {
-        return mValue;
-    }
+  @Override public String toString() {
+    return mValue;
+  }
 }

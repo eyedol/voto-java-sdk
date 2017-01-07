@@ -21,9 +21,9 @@ package com.addhen.voto.sdk;
  */
 public abstract class BaseVotoApiClient {
 
-    protected int limit = Constants.PAGINATION_LIMIT;
+  protected int limit = Constants.PAGINATION_LIMIT;
 
-    public int getLimit() {
-        return limit;
-    }
+  public int getLimit() {
+    return limit;
+  }
 }

@@ -18,11 +18,9 @@ package com.addhen.voto.sdk.test.model.subscribers;
 
 import com.addhen.voto.sdk.model.subscribers.CreateBulkSubscribersResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -32,30 +30,25 @@ import static org.junit.Assert.assertEquals;
  */
 public class CreateBulkSubscribersResponseTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSuccessfullyDeserializeCreateSubscriberResponse() throws IOException {
-        final CreateBulkSubscribersResponse response = mGsonDeserializer
-                .deserializeCreateBulkSubscriberResponse();
-        assertNotNull(response);
-        assertEquals(200, (int) response.status);
-        assertEquals("Subscriber(s) Created Successfully", response.message);
-        assertEquals(5, response.data.size());
-        assertEquals(181, (long) response.data.get(0));
-    }
+  @Test public void shouldSuccessfullyDeserializeCreateSubscriberResponse() throws IOException {
+    final CreateBulkSubscribersResponse response =
+        mGsonDeserializer.deserializeCreateBulkSubscriberResponse();
+    assertNotNull(response);
+    assertEquals(200, (int) response.status);
+    assertEquals("Subscriber(s) Created Successfully", response.message);
+    assertEquals(5, response.data.size());
+    assertEquals(181, (long) response.data.get(0));
+  }
 
-    @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final CreateBulkSubscribersResponse response = mGsonDeserializer
-                .deserializeCreateBulkSubscriberResponse();
-        final String toString = response.toString();
-        assertEquals(
-                "CreateBulkSubscribersResponse{BaseResponse{status=200, message='Subscriber(s) Created Successfully'}data=[181, 182, 183, 184, 185]}",
-                toString
-        );
-    }
+  @Test public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+    final CreateBulkSubscribersResponse response =
+        mGsonDeserializer.deserializeCreateBulkSubscriberResponse();
+    final String toString = response.toString();
+    assertEquals("CreateBulkSubscribersResponse{BaseResponse{status=200, message='Subscriber(s) "
+        + "Created Successfully'}data=[181, 182, 183, 184, 185]}", toString);
+  }
 }

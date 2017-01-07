@@ -16,12 +16,9 @@
 
 package com.addhen.voto.sdk.model.subscribers;
 
-import com.google.gson.annotations.SerializedName;
-
 import com.addhen.voto.sdk.model.Model;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
-
 
 /**
  * A subscriber model
@@ -30,94 +27,115 @@ import java.util.Date;
  */
 public class Subscriber extends Model {
 
-    /** Whether the subscriber received the SMS. 1 for success, 0 for failure **/
-    public String receiveSms;
+  /** Whether the subscriber received the SMS. 1 for success, 0 for failure **/
+  public String receiveSms;
 
-    /** Whether the subscriber received the voice. 1 for success, 0 for fialure **/
-    public String receiveVoice;
+  /** Whether the subscriber received the voice. 1 for success, 0 for fialure **/
+  public String receiveVoice;
 
-    /** The received data **/
-    public String receiveData;
+  /** The received data **/
+  public String receiveData;
 
-    /** The received Ussd **/
-    public String receiveUssd;
+  /** The received Ussd **/
+  public String receiveUssd;
 
-    /** The phone number of the subscriber **/
-    public String phone;
+  /** The phone number of the subscriber **/
+  public String phone;
 
-    /** The subscribers start date **/
-    public Date startDate;
+  /** The subscribers start date **/
+  public Date startDate;
 
-    /** Determines if it's a test subscriber **/
-    public String isTestSubscriber;
+  /** Determines if it's a test subscriber **/
+  public String isTestSubscriber;
 
-    /** The group IDs of the subscribers. This is CSV **/
-    public String groupIds;
+  /** The group IDs of the subscribers. This is CSV **/
+  public String groupIds;
 
-    /** The active status of the subscriber **/
-    @SerializedName("active")
-    public Status status;
+  /** The active status of the subscriber **/
+  @SerializedName("active") public Status status;
 
-    /** The language id the subscriber speaks or interested in **/
-    public Long languageId;
+  /** The language id the subscriber speaks or interested in **/
+  public Long languageId;
 
-    /** The custom properties of the subscriber **/
-    public Properties properties;
+  /** The custom properties of the subscriber **/
+  public Properties properties;
 
-    public Subscriber(Long id, String receiveSMS, String receiveVoice, String receiveData,
-            String receiveUssd,
-            String phone, Date startDate, String isTestSubscriber, String groupIds, Status status,
-            Long languageId, Properties properties) {
-        this.id = id;
-        this.receiveSms = receiveSMS;
-        this.receiveVoice = receiveVoice;
-        this.receiveData = receiveData;
-        this.receiveUssd = receiveUssd;
-        this.phone = phone;
-        this.startDate = startDate;
-        this.isTestSubscriber = isTestSubscriber;
-        this.groupIds = groupIds;
-        this.status = status;
-        this.languageId = languageId;
-        this.properties = properties;
+  public Subscriber(Long id, String receiveSMS, String receiveVoice, String receiveData,
+      String receiveUssd, String phone, Date startDate, String isTestSubscriber, String groupIds,
+      Status status, Long languageId, Properties properties) {
+    this.id = id;
+    this.receiveSms = receiveSMS;
+    this.receiveVoice = receiveVoice;
+    this.receiveData = receiveData;
+    this.receiveUssd = receiveUssd;
+    this.phone = phone;
+    this.startDate = startDate;
+    this.isTestSubscriber = isTestSubscriber;
+    this.groupIds = groupIds;
+    this.status = status;
+    this.languageId = languageId;
+    this.properties = properties;
+  }
+
+  @Override public String toString() {
+    return "Subscriber{"
+        + "id="
+        + super.id
+        + ", receiveSms='"
+        + receiveSms
+        + '\''
+        + ", receiveVoice='"
+        + receiveVoice
+        + '\''
+        + ", receiveData='"
+        + receiveData
+        + '\''
+        + ", receiveUssd='"
+        + receiveUssd
+        + '\''
+        + ", phone='"
+        + phone
+        + '\''
+        + ", startDate="
+        + startDate
+        + ", isTestSubscriber='"
+        + isTestSubscriber
+        + '\''
+        + ", groupIds='"
+        + groupIds
+        + '\''
+        + ", status="
+        + status
+        + ", languageId="
+        + languageId
+        + ", properties="
+        + properties
+        + '}';
+  }
+
+  public static class Properties {
+
+    /** The name property **/
+    public String name;
+
+    /** The location property **/
+    public String location;
+
+    /** The comment property **/
+    public String comments;
+
+    @Override public String toString() {
+      return "Properties{"
+          + "name='"
+          + name
+          + '\''
+          + ", location='"
+          + location
+          + '\''
+          + ", comments='"
+          + comments
+          + '\''
+          + '}';
     }
-
-    @Override
-    public String toString() {
-        return "Subscriber{"
-                + "id=" + super.id
-                + ", receiveSms='" + receiveSms + '\''
-                + ", receiveVoice='" + receiveVoice + '\''
-                + ", receiveData='" + receiveData + '\''
-                + ", receiveUssd='" + receiveUssd + '\''
-                + ", phone='" + phone + '\''
-                + ", startDate=" + startDate
-                + ", isTestSubscriber='" + isTestSubscriber + '\''
-                + ", groupIds='" + groupIds + '\''
-                + ", status=" + status
-                + ", languageId=" + languageId
-                + ", properties=" + properties
-                + '}';
-    }
-
-    public static class Properties {
-
-        /** The name property **/
-        public String name;
-
-        /** The location property **/
-        public String location;
-
-        /** The comment property **/
-        public String comments;
-
-        @Override
-        public String toString() {
-            return "Properties{"
-                    + "name='" + name + '\''
-                    + ", location='" + location + '\''
-                    + ", comments='" + comments + '\''
-                    + '}';
-        }
-    }
+  }
 }

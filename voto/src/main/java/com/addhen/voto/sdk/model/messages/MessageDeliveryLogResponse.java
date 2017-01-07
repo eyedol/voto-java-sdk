@@ -8,6 +8,6 @@ import com.addhen.voto.sdk.model.deliverylogs.DeliveryLog;
  */
 public class MessageDeliveryLogResponse extends BaseResponse {
 
-    /** The returned subscribers list **/
-    public DeliveryLog data;
+  /** The returned subscribers list **/
+  public DeliveryLog data;
 }

@@ -7,19 +7,16 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class MessageDetailsResponse extends BaseResponse {
 
-    /** The returned message **/
-    public Data data;
+  /** The returned message **/
+  public Data data;
 
-    public static class Data {
+  public static class Data {
 
-        /** List of messages **/
-        public Message message;
+    /** List of messages **/
+    public Message message;
 
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "message=" + message
-                    + '}';
-        }
+    @Override public String toString() {
+      return "Data{" + "message=" + message + '}';
     }
+  }
 }

@@ -17,9 +17,7 @@
 package com.addhen.voto.sdk;
 
 import com.addhen.voto.sdk.util.StringUtils;
-
 import java.io.IOException;
-
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -29,20 +27,18 @@ import okhttp3.Response;
  */
 public class ApiKeyInterceptor implements Interceptor {
 
-    private final String apiKey;
+  private final String apiKey;
 
-    public ApiKeyInterceptor(String apiKey) {
-        this.apiKey = apiKey;
+  public ApiKeyInterceptor(String apiKey) {
+    this.apiKey = apiKey;
+  }
+
+  @Override public Response intercept(Chain chain) throws IOException {
+    Request.Builder builder = chain.request().newBuilder();
+    builder.header("Accept", "application/json");
+    if (!StringUtils.isEmpty(apiKey)) {
+      builder.header("api_key", apiKey);
     }
-
-
-    @Override
-    public Response intercept(Chain chain) throws IOException {
-        Request.Builder builder = chain.request().newBuilder();
-        builder.header("Accept", "application/json");
-        if (!StringUtils.isEmpty(apiKey)) {
-            builder.header("api_key", apiKey);
-        }
-        return chain.proceed(builder.build());
-    }
+    return chain.proceed(builder.build());
+  }
 }

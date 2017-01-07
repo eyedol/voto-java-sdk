@@ -18,11 +18,9 @@ package com.addhen.voto.sdk.test.model;
 
 import com.addhen.voto.sdk.model.CreateResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -32,29 +30,24 @@ import static org.junit.Assert.assertEquals;
  */
 public class CreateResponseTest extends BaseTestCase {
 
-    private static final String RESPONSE_PATH = "json/message/create_message_response.json";
+  private static final String RESPONSE_PATH = "json/message/create_message_response.json";
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSuccessfullyDeserializeCreateResponse() throws IOException {
-        final CreateResponse createResponse = mGsonDeserializer.createResponse(RESPONSE_PATH);
-        assertNotNull(createResponse);
-        assertNotNull(createResponse);
-        assertNotNull(createResponse.data);
-        assertEquals(112l, (long) createResponse.data.id);
-    }
+  @Test public void shouldSuccessfullyDeserializeCreateResponse() throws IOException {
+    final CreateResponse createResponse = mGsonDeserializer.createResponse(RESPONSE_PATH);
+    assertNotNull(createResponse);
+    assertNotNull(createResponse);
+    assertNotNull(createResponse.data);
+    assertEquals(112L, (long) createResponse.data.id);
+  }
 
-    @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final CreateResponse createResponse = mGsonDeserializer.createResponse(RESPONSE_PATH);
-        final String toString = createResponse.toString();
-        assertEquals(
-                "CreateResponse{BaseResponse{status=200, message='Message Created Successfully'}data=Data{id=112}}",
-                toString
-        );
-    }
+  @Test public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+    final CreateResponse createResponse = mGsonDeserializer.createResponse(RESPONSE_PATH);
+    final String toString = createResponse.toString();
+    assertEquals("CreateResponse{BaseResponse{status=200, message='Message Created Successfully'}"
+        + "data=Data{id=112}}", toString);
+  }
 }

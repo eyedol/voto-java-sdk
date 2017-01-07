@@ -25,28 +25,21 @@ import com.addhen.voto.sdk.model.BaseResponse;
  */
 public class CreateSubscriberResponse extends BaseResponse {
 
-    /** The data returned as a result of creating a subscriber */
-    public Data data;
+  /** The data returned as a result of creating a subscriber */
+  public Data data;
 
-    @Override
-    public String toString() {
-        return "CreateSubscriberResponse{"
-                + super.toString()
-                + "data=" + data
-                + '}';
+  @Override public String toString() {
+    return "CreateSubscriberResponse{" + super.toString() + "data=" + data + '}';
+  }
+
+  /** The data response */
+  public static class Data {
+
+    /** The id of the newly created subscriber **/
+    public Long id;
+
+    @Override public String toString() {
+      return "Data{" + "id=" + id + '}';
     }
-
-    /** The data response */
-    public static class Data {
-
-        /** The id of the newly created subscriber **/
-        public Long id;
-
-        @Override
-        public String toString() {
-            return "Data{"
-                    + "id=" + id
-                    + '}';
-        }
-    }
+  }
 }

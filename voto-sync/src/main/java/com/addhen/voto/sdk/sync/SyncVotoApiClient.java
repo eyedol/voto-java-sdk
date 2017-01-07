@@ -37,10 +37,8 @@ import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
 import com.addhen.voto.sdk.service.VotoService;
 import com.addhen.voto.sdk.util.StringUtils;
-
 import java.io.IOException;
 import java.util.Map;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -57,192 +55,184 @@ import static com.addhen.voto.sdk.Constants.ErrorMessage.PHONE_NUMBER_REQUIRED;
  */
 public class SyncVotoApiClient extends BaseVotoApiClient {
 
-    private VotoService mSyncVotoService;
+  private VotoService mSyncVotoService;
 
-    public SyncVotoApiClient(VotoService syncVotoService) {
-        mSyncVotoService = syncVotoService;
+  public SyncVotoApiClient(VotoService syncVotoService) {
+    mSyncVotoService = syncVotoService;
+  }
+
+  public CreateSubscriberResponse createSubscriber(String phone, Map<String, String> optionalFields)
+      throws IOException {
+    if (StringUtils.isEmpty(phone)) {
+      throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
+    }
+    Call<CreateSubscriberResponse> createSubscriber =
+        mSyncVotoService.createSubscriber(phone, optionalFields);
+    return createSubscriber.execute().body();
+  }
+
+  public CreateBulkSubscribersResponse createBulkSubscribers(String phoneNumbers,
+      IfPhoneNumberExists ifPhoneNumberExists, @QueryMap Map<String, String> optionalFields)
+      throws IOException {
+    if (StringUtils.isEmpty(phoneNumbers)) {
+      throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
     }
 
-    public CreateSubscriberResponse createSubscriber(String phone,
-            Map<String, String> optionalFields) throws IOException {
-        if (StringUtils.isEmpty(phone)) {
-            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
-        }
-        Call<CreateSubscriberResponse> createSubscriber = mSyncVotoService.createSubscriber(
-                phone,
-                optionalFields
-        );
-        return createSubscriber.execute().body();
+    Call<CreateBulkSubscribersResponse> createBulkSubscribers =
+        mSyncVotoService.createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
+    return createBulkSubscribers.execute().body();
+  }
+
+  public ListSubscribersResponse listSubscribers(int limit) throws IOException {
+    if (limit > 0) {
+      this.limit = limit;
+    }
+    Call<ListSubscribersResponse> listSubscribers = mSyncVotoService.listSubscribers(limit);
+    return listSubscribers.execute().body();
+  }
+
+  public CreateSubscriberResponse modifySubscriberDetails(Long id,
+      Map<String, String> optionalFields) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public CreateBulkSubscribersResponse createBulkSubscribers(String phoneNumbers,
-            IfPhoneNumberExists ifPhoneNumberExists,
-            @QueryMap Map<String, String> optionalFields) throws IOException {
-        if (StringUtils.isEmpty(phoneNumbers)) {
-            throw new IllegalArgumentException(PHONE_NUMBER_REQUIRED);
-        }
+    Call<CreateSubscriberResponse> modifySubscriber =
+        mSyncVotoService.modifySubscriberDetails(id, optionalFields);
+    return modifySubscriber.execute().body();
+  }
 
-        Call<CreateBulkSubscribersResponse> createBulkSubscribers = mSyncVotoService
-                .createBulkSubscribers(phoneNumbers, ifPhoneNumberExists, optionalFields);
-        return createBulkSubscribers.execute().body();
+  public DeleteSubscriberResponse deleteSubscriber(Long id) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public ListSubscribersResponse listSubscribers(int limit) throws IOException {
-        if (limit > 0) {
-            this.limit = limit;
-        }
-        Call<ListSubscribersResponse> listSubscribers = mSyncVotoService
-                .listSubscribers(limit);
-        return listSubscribers.execute().body();
+    Call<DeleteSubscriberResponse> deleteSubscriber = mSyncVotoService.deleteSubscriber(id);
+    return deleteSubscriber.execute().body();
+  }
+
+  public UploadAudioFileResponse uploadAudioFileContent(String description,
+      AudioFileExtension fileExtension, Map<String, String> optionalFields) throws IOException {
+    if (StringUtils.isEmpty(description)) {
+      throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
     }
 
-    public CreateSubscriberResponse modifySubscriberDetails(Long id,
-            Map<String, String> optionalFields) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        Call<CreateSubscriberResponse> modifySubscriber = mSyncVotoService
-                .modifySubscriberDetails(id, optionalFields);
-        return modifySubscriber.execute().body();
+    if (fileExtension == null) {
+      throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
     }
 
-    public DeleteSubscriberResponse deleteSubscriber(Long id) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
+    Call<UploadAudioFileResponse> call =
+        mSyncVotoService.uploadAudioFileContent(description, fileExtension, optionalFields);
+    return call.execute().body();
+  }
 
-        Call<DeleteSubscriberResponse> deleteSubscriber = mSyncVotoService
-                .deleteSubscriber(id);
-        return deleteSubscriber.execute().body();
+  public SubscriberDetailsResponse listSubscriberDetails(Long id) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public UploadAudioFileResponse uploadAudioFileContent(String description,
-            AudioFileExtension fileExtension, Map<String, String> optionalFields)
-            throws IOException {
-        if (StringUtils.isEmpty(description)) {
-            throw new IllegalArgumentException(DESCRIPTION_REQUIRED);
-        }
+    Call<SubscriberDetailsResponse> call = mSyncVotoService.listSubscriberDetails(id);
+    return call.execute().body();
+  }
 
-        if (fileExtension == null) {
-            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
-        }
+  // Audio files
+  public AudioFileDetailsResponse listAudioFileDetails(Long id) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
+    }
+    Call<AudioFileDetailsResponse> call = mSyncVotoService.listAudioFileDetails(id);
+    return call.execute().body();
+  }
 
-        Call<UploadAudioFileResponse> call = mSyncVotoService
-                .uploadAudioFileContent(description, fileExtension, optionalFields);
-        return call.execute().body();
+  public ListAudioFilesResponse listAudioFiles() throws IOException {
+    Call<ListAudioFilesResponse> call = mSyncVotoService.listAudioFiles();
+    return call.execute().body();
+  }
+
+  public DeleteAudioFileResponse deleteAudioFile(Long id) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
+    }
+    Call<DeleteAudioFileResponse> call = mSyncVotoService.deleteAudioFile(id);
+    return call.execute().body();
+  }
+
+  public UploadAudioFileResponse updateAudioFileContent(Long id, AudioFileExtension fileExtension,
+      Map<String, String> optionalFields) throws IOException {
+
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public SubscriberDetailsResponse listSubscriberDetails(Long id) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        Call<SubscriberDetailsResponse> call = mSyncVotoService.listSubscriberDetails(id);
-        return call.execute().body();
+    if (fileExtension == null) {
+      throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
     }
 
-    // Audio files
-    public AudioFileDetailsResponse listAudioFileDetails(Long id) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-        Call<AudioFileDetailsResponse> call = mSyncVotoService.listAudioFileDetails(id);
-        return call.execute().body();
+    Call<UploadAudioFileResponse> call =
+        mSyncVotoService.updateAudioFileContent(id, fileExtension, optionalFields);
+    return call.execute().body();
+  }
+
+  public ResponseBody downloadAudioFile(Long id, AudioFileFormat format) throws IOException {
+    if (id == null) {
+      throw new IllegalArgumentException(ID_REQUIRED);
     }
 
-    public ListAudioFilesResponse listAudioFiles() throws IOException {
-        Call<ListAudioFilesResponse> call = mSyncVotoService.listAudioFiles();
-        return call.execute().body();
+    if (format == null) {
+      throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
     }
 
-    public DeleteAudioFileResponse deleteAudioFile(Long id) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-        Call<DeleteAudioFileResponse> call = mSyncVotoService.deleteAudioFile(id);
-        return call.execute().body();
+    Call<ResponseBody> call = mSyncVotoService.downloadAudioFile(id, format);
+    return call.execute().body();
+  }
+
+  // Messages
+  public ListMessagesResponse listMessages() throws IOException {
+    Call<ListMessagesResponse> listMessages = mSyncVotoService.listMessages();
+    return listMessages.execute().body();
+  }
+
+  public CreateResponse createMessage(String title, Status hasSms, Status hasVoice,
+      Map<String, String> optionalFields) throws IOException {
+    Call<CreateResponse> call =
+        mSyncVotoService.createMessage(title, hasSms, hasVoice, optionalFields);
+    return call.execute().body();
+  }
+
+  public CreateResponse updateMessage(Long id, Map<String, String> optionalFields)
+      throws IOException {
+    Call<CreateResponse> call = mSyncVotoService.updateMessage(id, optionalFields);
+    return call.execute().body();
+  }
+
+  public DeleteMessageResponse deleteMessage(Long id) throws IOException {
+    Call<DeleteMessageResponse> call = mSyncVotoService.deleteMessage(id);
+    return call.execute().body();
+  }
+
+  public MessageDeliveryLogResponse getMessageDeliveryLog(Long id,
+      Map<String, String> optionalFields) throws IOException {
+    Call<MessageDeliveryLogResponse> call =
+        mSyncVotoService.getMessageDeliveryLog(id, optionalFields);
+    return call.execute().body();
+  }
+
+  public MessageDetailsResponse getMessageDetails(Long id) throws IOException {
+    Call<MessageDetailsResponse> call = mSyncVotoService.getMessageDetails(id);
+    return call.execute().body();
+  }
+
+  public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {
+
+    public Builder(String apiKey) {
+      super(apiKey);
     }
 
-    public UploadAudioFileResponse updateAudioFileContent(Long id,
-            AudioFileExtension fileExtension, Map<String, String> optionalFields)
-            throws IOException {
-
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        if (fileExtension == null) {
-            throw new IllegalArgumentException(FILE_EXTENSION_REQUIRED);
-        }
-
-        Call<UploadAudioFileResponse> call = mSyncVotoService
-                .updateAudioFileContent(id, fileExtension, optionalFields);
-        return call.execute().body();
+    @Override public SyncVotoApiClient build() {
+      initDefaultRetrofit();
+      Retrofit retrofit = mRetrofitBuilder.build();
+      VotoService votoService = retrofit.create(VotoService.class);
+      return new SyncVotoApiClient(votoService);
     }
-
-    public ResponseBody downloadAudioFile(Long id, AudioFileFormat format) throws IOException {
-        if (id == null) {
-            throw new IllegalArgumentException(ID_REQUIRED);
-        }
-
-        if (format == null) {
-            throw new IllegalArgumentException(FILE_FORMAT_REQUIRED);
-        }
-
-        Call<ResponseBody> call = mSyncVotoService.downloadAudioFile(id, format);
-        return call.execute().body();
-    }
-
-    // Messages
-    public ListMessagesResponse listMessages() throws IOException {
-        Call<ListMessagesResponse> listMessages = mSyncVotoService.listMessages();
-        return listMessages.execute().body();
-    }
-
-    public CreateResponse createMessage(String title, Status hasSms, Status hasVoice,
-            Map<String, String> optionalFields)
-            throws IOException {
-        Call<CreateResponse> call = mSyncVotoService
-                .createMessage(title, hasSms, hasVoice, optionalFields);
-        return call.execute().body();
-    }
-
-    public CreateResponse updateMessage(Long id, Map<String, String> optionalFields)
-            throws IOException {
-        Call<CreateResponse> call = mSyncVotoService.updateMessage(id, optionalFields);
-        return call.execute().body();
-    }
-
-    public DeleteMessageResponse deleteMessage(Long id) throws IOException {
-        Call<DeleteMessageResponse> call = mSyncVotoService.deleteMessage(id);
-        return call.execute().body();
-    }
-
-    public MessageDeliveryLogResponse getMessageDeliveryLog(Long id,
-            Map<String, String> optionalFields) throws IOException {
-        Call<MessageDeliveryLogResponse> call = mSyncVotoService
-                .getMessageDeliveryLog(id, optionalFields);
-        return call.execute().body();
-    }
-
-    public MessageDetailsResponse getMessageDetails(Long id) throws IOException {
-        Call<MessageDetailsResponse> call = mSyncVotoService.getMessageDetails(id);
-        return call.execute().body();
-    }
-
-    public static class Builder extends BaseApiBuilder<Builder, SyncVotoApiClient> {
-
-        public Builder(String apiKey) {
-            super(apiKey);
-        }
-
-        @Override
-        public SyncVotoApiClient build() {
-            initDefaultRetrofit();
-            Retrofit retrofit = mRetrofitBuilder.build();
-            VotoService votoService = retrofit.create(VotoService.class);
-            return new SyncVotoApiClient(votoService);
-        }
-    }
+  }
 }

@@ -18,11 +18,9 @@ package com.addhen.voto.sdk.test.model.subscribers;
 
 import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.test.BaseTestCase;
-
+import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -32,26 +30,20 @@ import static org.junit.Assert.assertEquals;
  */
 public class DeleteSubscriberResponseTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldSuccessfullyDeleteSubscriber() throws IOException {
-        final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
-        assertNotNull(response);
-        assertEquals(200, (int) response.status);
-        assertEquals("Successfully deleted subscriber", response.message);
-    }
+  @Test public void shouldSuccessfullyDeleteSubscriber() throws IOException {
+    final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
+    assertNotNull(response);
+    assertEquals(200, (int) response.status);
+    assertEquals("Successfully deleted subscriber", response.message);
+  }
 
-    @Test
-    public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
-        final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
-        final String toString = response.toString();
-        assertEquals(
-                "BaseResponse{status=200, message='Successfully deleted subscriber'}",
-                toString
-        );
-    }
+  @Test public void shouldTestToStringToMakeSureItsNotEmpty() throws Exception {
+    final DeleteSubscriberResponse response = mGsonDeserializer.deleteSubscriber();
+    final String toString = response.toString();
+    assertEquals("BaseResponse{status=200, message='Successfully deleted subscriber'}", toString);
+  }
 }

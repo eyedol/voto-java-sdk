@@ -21,30 +21,30 @@ package com.addhen.voto.sdk.util;
  */
 public final class StringUtils {
 
-    private StringUtils() {
-        // No instantiation allowed
-    }
+  private StringUtils() {
+    // No instantiation allowed
+  }
 
-    /**
-     * Returns whether the given String contains only digits.
-     */
-    public static boolean isDigitsOnly(String str) {
-        final int len = str.length();
-        for (int i = 0; i < len; i++) {
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
+  /**
+   * Returns whether the given String contains only digits.
+   */
+  public static boolean isDigitsOnly(String str) {
+    final int len = str.length();
+    for (int i = 0; i < len; i++) {
+      if (!Character.isDigit(str.charAt(i))) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    /**
-     * Returns true if the string is null or 0-length.
-     *
-     * @param str the string to be examined
-     * @return true if str is null or zero length
-     */
-    public static boolean isEmpty(String str) {
-        return (str == null || str.length() == 0);
-    }
+  /**
+   * Returns true if the string is null or 0-length.
+   *
+   * @param str the string to be examined
+   * @return true if str is null or zero length
+   */
+  public static boolean isEmpty(String str) {
+    return (str == null || str.length() == 0);
+  }
 }

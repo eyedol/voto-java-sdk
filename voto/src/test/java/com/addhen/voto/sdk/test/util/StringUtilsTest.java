@@ -18,7 +18,6 @@ package com.addhen.voto.sdk.test.util;
 
 import com.addhen.voto.sdk.test.BaseTestCase;
 import com.addhen.voto.sdk.util.StringUtils;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,33 +29,27 @@ import static org.junit.Assert.assertTrue;
  */
 public class StringUtilsTest extends BaseTestCase {
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-    }
+  @Before public void setUp() throws Exception {
+    super.setUp();
+  }
 
-    @Test
-    public void shouldBeDigitsOnly() {
-        assertTrue(StringUtils.isDigitsOnly("02456"));
-    }
+  @Test public void shouldBeDigitsOnly() {
+    assertTrue(StringUtils.isDigitsOnly("02456"));
+  }
 
-    @Test
-    public void shouldBeNonDigitsOnly() {
-        assertFalse(StringUtils.isDigitsOnly("0239str303"));
-    }
+  @Test public void shouldBeNonDigitsOnly() {
+    assertFalse(StringUtils.isDigitsOnly("0239str303"));
+  }
 
-    @Test
-    public void shouldBeEmptyString() {
-        assertTrue(StringUtils.isEmpty(""));
-    }
+  @Test public void shouldBeEmptyString() {
+    assertTrue(StringUtils.isEmpty(""));
+  }
 
-    @Test
-    public void shouldBeEmptyWhenNull() {
-        assertTrue(StringUtils.isEmpty(null));
-    }
+  @Test public void shouldBeEmptyWhenNull() {
+    assertTrue(StringUtils.isEmpty(null));
+  }
 
-    @Test
-    public void shouldNotBeEmpty() {
-        assertFalse(StringUtils.isEmpty("hello world"));
-    }
+  @Test public void shouldNotBeEmpty() {
+    assertFalse(StringUtils.isEmpty("hello world"));
+  }
 }

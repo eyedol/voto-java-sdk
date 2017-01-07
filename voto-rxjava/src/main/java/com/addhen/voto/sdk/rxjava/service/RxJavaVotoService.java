@@ -35,9 +35,7 @@ import com.addhen.voto.sdk.model.subscribers.DeleteSubscriberResponse;
 import com.addhen.voto.sdk.model.subscribers.IfPhoneNumberExists;
 import com.addhen.voto.sdk.model.subscribers.ListSubscribersResponse;
 import com.addhen.voto.sdk.model.subscribers.SubscriberDetailsResponse;
-
 import java.util.Map;
-
 import okhttp3.ResponseBody;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -59,90 +57,70 @@ import static com.addhen.voto.sdk.Constants.VotoEndpoints;
  */
 public interface RxJavaVotoService {
 
-    /** Subscribers **/
-    @FormUrlEncoded
-    @POST(VotoEndpoints.SUBSCRIBERS)
-    Observable<CreateSubscriberResponse> createSubscriber(
-            @Field("phone") String phone,
-            @FieldMap Map<String, String> optionalFields
-    );
+  /** Subscribers **/
+  @FormUrlEncoded @POST(VotoEndpoints.SUBSCRIBERS)
+  Observable<CreateSubscriberResponse> createSubscriber(@Field("phone") String phone,
+      @FieldMap Map<String, String> optionalFields);
 
-    @FormUrlEncoded
-    @POST(VotoEndpoints.SUBSCRIBERS)
-    Observable<CreateBulkSubscribersResponse> createBulkSubscribers(
-            @Field("phone_numbers") String phone,
-            @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @FormUrlEncoded @POST(VotoEndpoints.SUBSCRIBERS)
+  Observable<CreateBulkSubscribersResponse> createBulkSubscribers(
+      @Field("phone_numbers") String phone,
+      @Field("if_phone_number_exists") IfPhoneNumberExists ifPhoneNumberExists,
+      @FieldMap Map<String, String> optionalFields);
 
-    @GET(VotoEndpoints.SUBSCRIBERS)
-    Observable<ListSubscribersResponse> listSubscribers(
-            @Query("limit") int limit
-    );
+  @GET(VotoEndpoints.SUBSCRIBERS) Observable<ListSubscribersResponse> listSubscribers(
+      @Query("limit") int limit);
 
-    @PUT(VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Observable<CreateSubscriberResponse> modifySubscriberDetails(
-            @Path("id") Long id,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @PUT(VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Observable<CreateSubscriberResponse> modifySubscriberDetails(@Path("id") Long id,
+      @FieldMap Map<String, String> optionalFields);
 
-    @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
+  @DELETE(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Observable<DeleteSubscriberResponse> deleteSubscriber(@Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
-    Observable<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.SUBSCRIBERS + "/{id}")
+  Observable<SubscriberDetailsResponse> listSubscriberDetails(@Path("id") Long id);
 
-    // Audio files
-    @GET(Constants.VotoEndpoints.AUDIO_FILES)
-    Observable<ListAudioFilesResponse> listAudioFiles();
+  // Audio files
+  @GET(Constants.VotoEndpoints.AUDIO_FILES) Observable<ListAudioFilesResponse> listAudioFiles();
 
-    @DELETE(VotoEndpoints.AUDIO_FILES + "/{id}")
-    Observable<DeleteAudioFileResponse> deleteAudioFile(@Path("id") Long id);
+  @DELETE(VotoEndpoints.AUDIO_FILES + "/{id}") Observable<DeleteAudioFileResponse> deleteAudioFile(
+      @Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    Observable<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+  Observable<AudioFileDetailsResponse> listAudioFileDetails(@Path("id") Long id);
 
-    @POST(Constants.VotoEndpoints.AUDIO_FILES)
-    Observable<UploadAudioFileResponse> uploadAudioFileContent(
-            @Query("description") String description,
-            @Query("file_extension") AudioFileExtension fileExtension,
-            @QueryMap Map<String, String> optionalFields);
+  @POST(Constants.VotoEndpoints.AUDIO_FILES)
+  Observable<UploadAudioFileResponse> uploadAudioFileContent(
+      @Query("description") String description,
+      @Query("file_extension") AudioFileExtension fileExtension,
+      @QueryMap Map<String, String> optionalFields);
 
-    @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    Observable<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
-            @Query("file_extension") AudioFileExtension format,
-            @QueryMap Map<String, String> optionalFields);
+  @PUT(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
+  Observable<UploadAudioFileResponse> updateAudioFileContent(@Path("id") Long id,
+      @Query("file_extension") AudioFileExtension format,
+      @QueryMap Map<String, String> optionalFields);
 
-    @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}")
-    @Streaming
-    Observable<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format);
+  @GET(Constants.VotoEndpoints.AUDIO_FILES + "/{id}") @Streaming
+  Observable<ResponseBody> downloadAudioFile(@Path("id") Long id, AudioFileFormat format);
 
-    // Messages
-    @GET(Constants.VotoEndpoints.MESSAGES)
-    Observable<ListMessagesResponse> listMessages();
+  // Messages
+  @GET(Constants.VotoEndpoints.MESSAGES) Observable<ListMessagesResponse> listMessages();
 
-    @FormUrlEncoded
-    @POST(Constants.VotoEndpoints.MESSAGES)
-    Observable<CreateResponse> createMessage(
-            @Field("title") String title,
-            @Field("has_sms") Status hasSms,
-            @Field("has_voice") Status hasVoice,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @FormUrlEncoded @POST(Constants.VotoEndpoints.MESSAGES) Observable<CreateResponse> createMessage(
+      @Field("title") String title, @Field("has_sms") Status hasSms,
+      @Field("has_voice") Status hasVoice, @FieldMap Map<String, String> optionalFields);
 
-    @PUT(VotoEndpoints.MESSAGES + "/{id}")
-    Observable<CreateResponse> updateMessage(
-            @Path("id") Long id,
-            @FieldMap Map<String, String> optionalFields
-    );
+  @PUT(VotoEndpoints.MESSAGES + "/{id}") Observable<CreateResponse> updateMessage(
+      @Path("id") Long id, @FieldMap Map<String, String> optionalFields);
 
-    @DELETE(VotoEndpoints.MESSAGES + "/{id}")
-    Observable<DeleteMessageResponse> deleteMessage(@Path("id") Long id);
+  @DELETE(VotoEndpoints.MESSAGES + "/{id}") Observable<DeleteMessageResponse> deleteMessage(
+      @Path("id") Long id);
 
-    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}/count")
-    Observable<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
-            @QueryMap Map<String, String> optionalFields);
+  @GET(Constants.VotoEndpoints.MESSAGES + "/{id}/count")
+  Observable<MessageDeliveryLogResponse> getMessageDeliveryLog(Long id,
+      @QueryMap Map<String, String> optionalFields);
 
-    @GET(Constants.VotoEndpoints.MESSAGES + "/{id}")
-    Observable<MessageDetailsResponse> getMessageDetails(@Path("id") Long id);
+  @GET(Constants.VotoEndpoints.MESSAGES + "/{id}")
+  Observable<MessageDetailsResponse> getMessageDetails(@Path("id") Long id);
 }

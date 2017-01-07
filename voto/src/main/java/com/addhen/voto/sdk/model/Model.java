@@ -23,6 +23,6 @@ package com.addhen.voto.sdk.model;
  */
 public abstract class Model {
 
-    /** The model's ID **/
-    public Long id;
+  /** The model's ID **/
+  public Long id;
 }

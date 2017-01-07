@@ -21,47 +21,47 @@ package com.addhen.voto.sdk;
  */
 public final class Constants {
 
-    /** Default pagination limit value **/
-    public static final int PAGINATION_LIMIT = 10;
+  /** Default pagination limit value **/
+  public static final int PAGINATION_LIMIT = 10;
 
-    private Constants() {
-        // No instantiation is allowed
-    }
+  private Constants() {
+    // No instantiation is allowed
+  }
 
-    public static class ErrorMessage {
+  public static class ErrorMessage {
 
-        /** Error message for ID **/
-        public static final String ID_REQUIRED = "id cannot be null.";
+    /** Error message for ID **/
+    public static final String ID_REQUIRED = "id cannot be null.";
 
-        /** Error message for file extension **/
-        public static final String FILE_EXTENSION_REQUIRED = "fileExtension is required.";
+    /** Error message for file extension **/
+    public static final String FILE_EXTENSION_REQUIRED = "fileExtension is required.";
 
-        /** Error message for file format **/
-        public static final String FILE_FORMAT_REQUIRED = "format is required.";
+    /** Error message for file format **/
+    public static final String FILE_FORMAT_REQUIRED = "format is required.";
 
-        /** Error message for description **/
-        public static final String DESCRIPTION_REQUIRED = "description is required.";
+    /** Error message for description **/
+    public static final String DESCRIPTION_REQUIRED = "description is required.";
 
-        /** Error message for phone number **/
-        public static final String PHONE_NUMBER_REQUIRED
-                = "phone is required and shouldn't be null or empty.";
-    }
+    /** Error message for phone number **/
+    public static final String PHONE_NUMBER_REQUIRED =
+        "phone is required and shouldn't be null or empty.";
+  }
 
-    public static class VotoEndpoints {
+  public static class VotoEndpoints {
 
-        /** The default voto api endpoint **/
-        public static final String VOTO_API_ENDPOINT = " https://go.votomobile.org/api/";
+    /** The default voto api endpoint **/
+    public static final String VOTO_API_ENDPOINT = " https://go.votomobile.org/api/";
 
-        /** The version number of the API endpoint **/
-        public static final String VOTO_API_ENDPOINT_VERSION = "v1";
+    /** The version number of the API endpoint **/
+    public static final String VOTO_API_ENDPOINT_VERSION = "v1";
 
-        /** The subscribers endpoint **/
-        public static final String SUBSCRIBERS = "subscribers";
+    /** The subscribers endpoint **/
+    public static final String SUBSCRIBERS = "subscribers";
 
-        /** Audio files endpoint **/
-        public static final String AUDIO_FILES = "audio_files";
+    /** Audio files endpoint **/
+    public static final String AUDIO_FILES = "audio_files";
 
-        /** Messages endpoint **/
-        public static final String MESSAGES = "messages";
-    }
+    /** Messages endpoint **/
+    public static final String MESSAGES = "messages";
+  }
 }
