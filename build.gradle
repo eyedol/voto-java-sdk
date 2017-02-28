@@ -1,33 +1,33 @@
 apply from: 'gradle-config/dependencies.gradle'
 
 buildscript {
-  repositories {
-    jcenter()
-    mavenCentral()
-  }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 
-  dependencies {
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-    // Needed to publish SNAPSHOTs to JFrog
-    classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.1.1'
-  }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        // Needed to publish SNAPSHOTs to JFrog
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.4.13'
+    }
 }
 
 ext {
-  sdkVersion = '0.4.0-SNAPSHOT'
+    sdkVersion = '0.4.0-SNAPSHOT'
 }
 
 allprojects {
-  version sdkVersion
-  repositories {
-    jcenter()
-    mavenCentral()
-  }
-
-  buildscript {
+    version sdkVersion
     repositories {
-      jcenter()
+        jcenter()
+        mavenCentral()
     }
-  }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
 }
