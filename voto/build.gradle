@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply from: '../gradle-config/quality.gradle'
 apply from: '../gradle-config/jacoco-codecoverage.gradle'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 tasks.matching { it instanceof Test }.all {
   testLogging.events = ["failed", "passed", "skipped"]
