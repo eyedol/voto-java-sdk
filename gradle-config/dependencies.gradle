@@ -8,7 +8,7 @@ ext {
 
   // Library version #s
   retrofitVersion = '2.12.0'
-  okhttpVersion = '4.12.0'
+  okhttpVersion = '5.1.0'
 
   // Testing version #s
   jUnitVersion = '4.13.2'
